@@ -1,0 +1,131 @@
+# Root .gitignore for Checkmate project
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+backend/.env
+backend/.env.local
+
+# Virtual environments
+venv/
+.venv/
+backend/venv/
+backend/.venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Dependency directories
+node_modules/
+CheckmateMobile/node_modules/
+
+# React Native specific
+CheckmateMobile/android/build/
+CheckmateMobile/android/.gradle/
+CheckmateMobile/android/app/build/
+CheckmateMobile/ios/build/
+CheckmateMobile/ios/Pods/
+CheckmateMobile/.metro-health-check*
+CheckmateMobile/metro-cache/
+
+# Android
+*.apk
+*.ap_
+*.dex
+*.class
+local.properties
+.gradle/
+gradle.properties
+proguard/
+*.keystore
+!debug.keystore
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# temporary files
+.tmp/
+temp/
+
+# Build outputs
+dist/
+build/
+
+# Local configuration
+local.properties
+
+# Project specific
+*.db
+*.sqlite
+*.sqlite3
