@@ -1,119 +1,98 @@
-Check if an AVD or physical device is connected.
+Backend setup — Checkmate
 
-# Checkmate Setup Guide
+This file contains only the backend setup steps for the Checkmate FastAPI service.
 
 ## Prerequisites
+- Python 3.10+ installed and on your PATH
+- An OpenAI API key (add it to `.env` or set it in your session)
 
-Before running the project, make sure you have:
+## Quick backend setup (PowerShell)
 
-### 1. Backend Prerequisites
-- Python 3.8+ installed
-- OpenAI API key
+1. Open PowerShell and change to the backend folder:
 
-### 2. React Native Prerequisites
-- Node.js 16+ installed
-- Android Studio with Android SDK
-- Java Development Kit (JDK) 17
+```powershell
+cd backend
+```
 
-## Setup Instructions
+2. Create a virtual environment (if you haven't yet):
 
-### Backend Setup
+```powershell
+python -m venv venv
+```
 
-1. Navigate to backend directory:
-   ```bash
-   cd backend
-   ```
+3. Activate the virtual environment (PowerShell):
 
-2. Create and activate virtual environment:
-   ```bash
-   python -m venv venv
-   venv\Scripts\activate  # Windows
-   ```
+```powershell
+.\venv\Scripts\Activate.ps1
+```
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+If activation fails due to execution policy restrictions, allow it for the current session and retry:
 
-4. Copy environment file and add your OpenAI API key:
-   ```bash
-   copy .env.example .env
-   # Edit .env file and add: OPENAI_API_KEY=your_actual_api_key_here
-   ```
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+.\venv\Scripts\Activate.ps1
+```
 
-5. Start the backend server:
-   ```bash
-   .\start_server.bat
-   ```
-   Or manually:
-   ```bash
-   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-   ```
+4. Install Python dependencies:
 
-The backend will be available at: http://localhost:8000
+```powershell
+pip install -r requirements.txt
+```
 
-### Android Studio Setup
+5. Provide your OpenAI API key.
 
-1. Download and install Android Studio from: https://developer.android.com/studio
-2. Open Android Studio and install:
-   - Android SDK Platform 33 (or latest)
-   - Android SDK Build-Tools
-   - Android Virtual Device (AVD) - create an emulator
-3. Set up environment variables:
-   - ANDROID_HOME: Path to your Android SDK (usually `C:\Users\[username]\AppData\Local\Android\Sdk`)
-   - Add to PATH: `%ANDROID_HOME%\platform-tools` and `%ANDROID_HOME%\tools`
+- Option A — copy the example `.env` and edit it:
 
-### React Native Setup
+```powershell
+Copy-Item .env.example .env
+# open backend\.env in an editor and set OPENAI_API_KEY=sk-...
+```
 
-1. Navigate to mobile app directory:
-   ```bash
-   cd CheckmateMobile
-   ```
+- Option B — set the key for your current PowerShell session (temporary):
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+```powershell
+$env:OPENAI_API_KEY = 'sk-...'
+```
 
-3. Start Metro bundler:
-   ```bash
-   npx react-native start
-   ```
+6. Start the development server:
 
-4. In a new terminal, run on Android:
-   ```bash
-   npx react-native run-android
-   ```
+```powershell
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
 
-## Quick Start Scripts
+Or, from a CMD prompt you can use the provided script:
 
-### Start Backend
-Run `backend/start_server.bat`
+```cmd
+start_server.bat
+```
 
-### Start React Native
-1. Run `CheckmateMobile/start_metro.bat`
-2. Run `CheckmateMobile/run_android.bat`
+The API will be available at: http://localhost:8000
+The fact-check endpoint is: http://localhost:8000/api/v1/fact-check
 
-## Testing the App
+## Quick smoke test
+With the server running, run:
 
-1. Make sure backend is running on port 8000
-2. Start the React Native app on Android emulator
-3. Enter a claim to fact-check in the app
-4. The app will communicate with the backend to get AI-powered fact-check results
+```powershell
+python test_backend.py
+```
 
-## Troubleshooting
+The script will call the root endpoint and the `/api/v1/fact-check` endpoint and print a short result.
 
-### Android SDK Not Found
-- Install Android Studio
-- Set ANDROID_HOME environment variable
-- Restart your terminal/command prompt
+## Git hygiene (important)
+- Do NOT commit your `.env` or the `venv` directory. If these were accidentally tracked, remove them and update `.gitignore`:
 
-### Backend Connection Issues
-- Ensure backend is running on http://localhost:8000
-- Check if Windows Firewall is blocking the connection
-- Verify the API endpoint in `CheckmateMobile/src/services/api.ts`
+```powershell
+# from the repository root
+echo "backend/venv/" >> .gitignore
+echo "backend/.env" >> .gitignore
+git rm -r --cached backend/venv/
+git rm --cached backend/.env
+git add .gitignore
+git commit -m "chore: ignore backend venv and .env"
+```
 
-### OpenAI API Issues
-- Verify your OpenAI API key is correct in backend/.env
-- Ensure you have sufficient OpenAI credits
-- Check OpenAI API status at https://status.openai.com
+## Notes & troubleshooting
+- If you get OpenAI authentication errors, confirm `OPENAI_API_KEY` is set in `.env` or the environment and that the key has the required model access.
+- If your editor (e.g., VS Code) shows unresolved imports, ensure the workspace interpreter is set to `backend/venv` so linters resolve installed packages.
+- The backend service expects the LLM to return JSON; malformed LLM responses are handled with a safe fallback (`Inconclusive`, confidence 0.5).
+
