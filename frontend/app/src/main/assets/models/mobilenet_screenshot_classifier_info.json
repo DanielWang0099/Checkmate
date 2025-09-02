@@ -1,0 +1,68 @@
+{
+  "model_name": "mobilenet_screenshot_classifier",
+  "model_type": "image_classification",
+  "architecture": "MobileNetV2",
+  "task": "binary_classification",
+  "classes": [
+    "no_image",
+    "has_image"
+  ],
+  "input_specification": {
+    "shape": [
+      1,
+      224,
+      224,
+      3
+    ],
+    "dtype": "float32",
+    "format": "RGB",
+    "preprocessing": {
+      "resize_to": [
+        224,
+        224
+      ],
+      "interpolation": "LANCZOS4",
+      "normalization": "mobilenet_v2_preprocess",
+      "range": "[-1.0, 1.0]",
+      "mean": [
+        127.5,
+        127.5,
+        127.5
+      ],
+      "std": [
+        127.5,
+        127.5,
+        127.5
+      ]
+    }
+  },
+  "output_specification": {
+    "shape": [
+      1,
+      2
+    ],
+    "dtype": "float32",
+    "format": "probabilities",
+    "classes": {
+      "0": "no_image",
+      "1": "has_image"
+    }
+  },
+  "android_integration": {
+    "tensorflow_lite_version": "2.13.0",
+    "recommended_delegate": "GPU",
+    "fallback_delegate": "CPU",
+    "expected_inference_time_ms": "< 50ms",
+    "memory_usage_mb": "< 100MB"
+  },
+  "kotlin_usage_example": {
+    "preprocessing": "Bitmap.createScaledBitmap(bitmap, 224, 224, true)",
+    "input_conversion": "convertBitmapToFloatArray(bitmap)",
+    "output_interpretation": "argmax(output) -> 0=no_image, 1=has_image"
+  },
+  "performance_metrics": {
+    "model_size_kb": 4686.78,
+    "quantization": "float16",
+    "framework": "tensorflow_lite"
+  }
+}
