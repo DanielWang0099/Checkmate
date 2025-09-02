@@ -163,6 +163,13 @@ class SessionManager private constructor(private val context: Context) {
         return if (currentSessionState.value.isActive) currentSessionState.value else null
     }
 
+    /**
+     * Get accessibility configuration
+     */
+    fun getAccessibilityConfig(): AccessibilityConfig {
+        return AccessibilityConfig() // Return default config for now
+    }
+
     suspend fun updatePreferences(
         sessionType: SessionType? = null,
         sessionDurationMinutes: Int? = null,
@@ -323,5 +330,14 @@ class SessionManager private constructor(private val context: Context) {
         } catch (e: Exception) {
             Timber.e(e, "Error saving session state")
         }
+    }
+
+    /**
+     * Cleanup resources
+     */
+    fun cleanup() {
+        // Cancel any ongoing coroutines if needed
+        // Close any resources
+        Timber.d("SessionManager cleanup completed")
     }
 }

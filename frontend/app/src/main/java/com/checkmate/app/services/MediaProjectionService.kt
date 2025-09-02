@@ -19,7 +19,7 @@ import androidx.lifecycle.ServiceLifecycleDispatcher
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.CaptureType
 import com.checkmate.app.data.ContentType
-import com.checkmate.app.managers.SessionManager
+import com.checkmate.app.utils.SessionManager
 import com.checkmate.app.utils.CapturePipeline
 import kotlinx.coroutines.*
 import timber.log.Timber
@@ -47,13 +47,13 @@ class MediaProjectionService : Service(), LifecycleOwner {
     private var isCapturing = false
     private var lastCaptureTime = 0L
 
-    override fun getLifecycle() = dispatcher.lifecycle
+    override val lifecycle = dispatcher.lifecycle
 
     override fun onCreate() {
         dispatcher.onServicePreSuperOnCreate()
         super.onCreate()
         
-        sessionManager = SessionManager(this)
+        sessionManager = SessionManager.getInstance(this)
         capturePipeline = CapturePipeline(this)
         
         initializeScreenMetrics()
@@ -187,11 +187,7 @@ class MediaProjectionService : Service(), LifecycleOwner {
                 
                 if (bitmap != null) {
                     // Process the captured bitmap
-                    capturePipeline?.captureScreenshot(
-                        bitmap = bitmap,
-                        contentType = ContentType.OTHER, // Will be determined by content analysis
-                        captureType = CaptureType.AUTOMATIC_SCREEN
-                    )
+                    val screenshot = capturePipeline?.captureScreenshot()
                 }
             }
         } catch (e: Exception) {

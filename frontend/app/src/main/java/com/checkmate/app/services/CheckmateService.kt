@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.checkmate.app.CheckmateApplication
 import com.checkmate.app.R
 import com.checkmate.app.data.AppConfig
-import com.checkmate.app.managers.SessionManager
+import com.checkmate.app.utils.SessionManager
 import com.checkmate.app.utils.CapturePipeline
 import com.checkmate.app.utils.NetworkManager
 import kotlinx.coroutines.*

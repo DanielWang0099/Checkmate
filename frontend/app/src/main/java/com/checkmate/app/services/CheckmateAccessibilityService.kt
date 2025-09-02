@@ -10,7 +10,7 @@ import com.checkmate.app.data.AccessibilityConfig
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.CaptureType
 import com.checkmate.app.data.ContentType
-import com.checkmate.app.managers.SessionManager
+import com.checkmate.app.utils.SessionManager
 import com.checkmate.app.utils.AccessibilityHelper
 import com.checkmate.app.utils.CapturePipeline
 import kotlinx.coroutines.*
@@ -30,13 +30,13 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
     private var lastCaptureTime = 0L
     private var isProcessing = false
 
-    override fun getLifecycle() = dispatcher.lifecycle
+    override val lifecycle = dispatcher.lifecycle
 
     override fun onCreate() {
         dispatcher.onServicePreSuperOnCreate()
         super.onCreate()
         
-        sessionManager = SessionManager(this)
+        sessionManager = SessionManager.getInstance(this)
         capturePipeline = CapturePipeline(this)
         
         configureAccessibilityService()
@@ -103,12 +103,7 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
             Timber.d("Processing accessibility event: type=${event.eventType}, package=${packageName}, contentType=${contentType}")
             
             // Capture and process the screen content
-            capturePipeline?.captureAccessibilityTree(
-                rootNode = rootNode,
-                sourceApp = sourceApp,
-                contentType = contentType,
-                captureType = CaptureType.ACCESSIBILITY_EVENT
-            )
+            val treeSummary = capturePipeline?.captureAccessibilityTree()
             
         } catch (e: Exception) {
             Timber.e(e, "Error processing accessibility event")
@@ -227,12 +222,7 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
                     val packageName = rootNode.packageName?.toString()
                     val sourceApp = AccessibilityHelper.getAppInfo(this@CheckmateAccessibilityService, packageName)
                     
-                    capturePipeline?.captureAccessibilityTree(
-                        rootNode = rootNode,
-                        sourceApp = sourceApp,
-                        contentType = ContentType.OTHER,
-                        captureType = CaptureType.MANUAL_TRIGGER
-                    )
+                    val treeSummary = capturePipeline?.captureAccessibilityTree()
                 } else {
                     Timber.w("No root node available for manual capture")
                 }

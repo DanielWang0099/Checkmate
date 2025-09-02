@@ -12,6 +12,37 @@ import timber.log.Timber
  */
 object AccessibilityHelper {
 
+    private var rootNodeProvider: (() -> AccessibilityNodeInfo?)? = null
+    private var currentAppProvider: (() -> AppSourceInfo?)? = null
+
+    /**
+     * Set the root node provider (typically called from accessibility service)
+     */
+    fun setRootNodeProvider(provider: () -> AccessibilityNodeInfo?) {
+        rootNodeProvider = provider
+    }
+
+    /**
+     * Set the current app provider (typically called from accessibility service)
+     */
+    fun setCurrentAppProvider(provider: () -> AppSourceInfo?) {
+        currentAppProvider = provider
+    }
+
+    /**
+     * Get the current root accessibility node
+     */
+    fun getRootNode(): AccessibilityNodeInfo? {
+        return rootNodeProvider?.invoke()
+    }
+
+    /**
+     * Get current app information
+     */
+    fun getCurrentApp(): AppSourceInfo? {
+        return currentAppProvider?.invoke()
+    }
+
     /**
      * Get app information for a given package name
      */

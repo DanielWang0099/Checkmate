@@ -32,7 +32,7 @@ class CapturePipeline(private val context: Context) {
     private var imageReader: ImageReader? = null
     private val textExtractor = TextExtractor(context)
     private val imageClassifier = ImageClassifier(context)
-    private val accessibilityHelper = AccessibilityHelper.getInstance(context)
+    private val accessibilityHelper = AccessibilityHelper
     
     private var lastScreenshot: Bitmap? = null
     private var lastUIChangeTime = System.currentTimeMillis()
@@ -90,7 +90,7 @@ class CapturePipeline(private val context: Context) {
         }
     }
     
-    private suspend fun captureAccessibilityTree(): TreeSummary = withContext(Dispatchers.Main) {
+    internal suspend fun captureAccessibilityTree(): TreeSummary = withContext(Dispatchers.Main) {
         try {
             val rootNode = accessibilityHelper.getRootNode()
             val currentApp = accessibilityHelper.getCurrentApp()
@@ -131,7 +131,7 @@ class CapturePipeline(private val context: Context) {
         }
     }
     
-    private suspend fun captureScreenshot(): Bitmap? = withContext(Dispatchers.IO) {
+    internal suspend fun captureScreenshot(): Bitmap? = withContext(Dispatchers.IO) {
         try {
             if (mediaProjection == null) {
                 Timber.w("MediaProjection not available")
