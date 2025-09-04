@@ -10,7 +10,51 @@ import timber.log.Timber
 /**
  * Helper class for accessibility service operations.
  */
-object AccessibilityHelper {
+class AccessibilityHelper private constructor(private val context: Context) {
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AccessibilityHelper? = null
+        
+        fun getInstance(context: Context): AccessibilityHelper {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: AccessibilityHelper(context.applicationContext).also { INSTANCE = it }
+            }
+        }
+    }
+
+    /**
+     * Get the root accessibility node from the accessibility service
+     */
+    fun getRootNode(): AccessibilityNodeInfo? {
+        return try {
+            com.checkmate.app.services.CheckmateAccessibilityService.instance?.rootInActiveWindow
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting root accessibility node")
+            null
+        }
+    }
+
+    /**
+     * Get current app information
+     */
+    fun getCurrentApp(): AppSourceInfo? {
+        return try {
+            val rootNode = getRootNode()
+            val packageName = rootNode?.packageName?.toString()
+            getAppInfo(context, packageName)
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting current app")
+            null
+        }
+    }
+
+    /**
+     * Get app information for specific package name
+     */
+    fun getCurrentApp(context: Context, packageName: String?): AppSourceInfo? {
+        return getAppInfo(context, packageName)
+    }
 
     /**
      * Get app information for a given package name
@@ -111,5 +155,37 @@ object AccessibilityHelper {
         }
         
         return clickableNodes
+    }
+
+    /**
+     * Check if a node represents important content
+     */
+    fun isImportantContent(node: AccessibilityNodeInfo): Boolean {
+        return try {
+            val text = node.text?.toString() ?: ""
+            val contentDescription = node.contentDescription?.toString() ?: ""
+            val className = node.className?.toString() ?: ""
+            
+            when {
+                // Has meaningful text content
+                text.length > 10 -> true
+                
+                // Is a heading
+                node.isHeading -> true
+                
+                // Is clickable with description
+                node.isClickable && contentDescription.isNotBlank() -> true
+                
+                // Is an important UI element
+                className.contains("Button") && (text.isNotBlank() || contentDescription.isNotBlank()) -> true
+                className.contains("TextView") && text.length > 5 -> true
+                className.contains("EditText") -> true
+                
+                else -> false
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Error checking if content is important")
+            false
+        }
     }
 }

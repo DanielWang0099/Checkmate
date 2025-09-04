@@ -120,40 +120,105 @@ class SessionManager:
         expired_sessions = []
         
         for session_id, memory in self.sessions.items():
-            # Check if session should expire based on settings
-            if memory.settings.session_type.type == SessionType.TIME:
-                if memory.settings.session_type.minutes:
-                    # Check if session has exceeded time limit
-                    # This would require tracking session start time
-                    pass
+            try:
+                # Check if session should expire based on settings
+                if memory.settings.sessionType.type == SessionType.TIME:
+                    if memory.settings.sessionType.minutes:
+                        # Calculate session duration from timeline
+                        if memory.timeline:
+                            first_event_time = memory.timeline[0].get("timestamp")
+                            if first_event_time:
+                                # Parse timestamp and check if expired
+                                session_duration = (current_time - first_event_time).total_seconds() / 60
+                                if session_duration > memory.settings.sessionType.minutes:
+                                    expired_sessions.append(session_id)
+                
+                # Check for inactive sessions (no activity for 24 hours)
+                if memory.timeline:
+                    last_activity = memory.timeline[-1].get("timestamp", current_time)
+                    inactive_hours = (current_time - last_activity).total_seconds() / 3600
+                    if inactive_hours > 24:  # 24 hours of inactivity
+                        expired_sessions.append(session_id)
+                        
+            except Exception as e:
+                print(f"Error checking session expiry for {session_id}: {e}")
+                # Add problematic sessions to expired list
+                expired_sessions.append(session_id)
         
+        # Clean up expired sessions
         for session_id in expired_sessions:
             await self.delete_session(session_id)
-    
+            print(f"Cleaned up expired session: {session_id}")
+
     def should_end_session(self, session_memory: SessionMemory, frame_bundle: FrameBundle) -> bool:
         """Determine if session should end based on settings and activity."""
         settings = session_memory.settings
         
-        if settings.session_type.type == SessionType.MANUAL:
+        if settings.sessionType.type == SessionType.MANUAL:
             return False  # Only end manually
         
-        if settings.session_type.type == SessionType.TIME:
+        if settings.sessionType.type == SessionType.TIME:
             # Check if time limit exceeded
-            if settings.session_type.minutes:
-                # Calculate session duration from timeline
-                if session_memory.timeline:
+            if settings.sessionType.minutes and session_memory.timeline:
+                try:
+                    # Get first timeline entry timestamp
                     first_event = session_memory.timeline[0]
-                    current_time = frame_bundle.timestamp
-                    # Parse first event time and compare
-                    # This would need proper time tracking implementation
-                    pass
+                    start_time = first_event.get("timestamp")
+                    
+                    if start_time:
+                        current_time = frame_bundle.timestamp
+                        # Calculate session duration in minutes
+                        duration_minutes = (current_time - start_time).total_seconds() / 60
+                        
+                        if duration_minutes >= settings.sessionType.minutes:
+                            print(f"Session time limit reached: {duration_minutes:.1f}/{settings.sessionType.minutes} minutes")
+                            return True
+                            
+                except Exception as e:
+                    print(f"Error checking time limit: {e}")
         
-        if settings.session_type.type == SessionType.ACTIVITY:
+        if settings.sessionType.type == SessionType.ACTIVITY:
             # Activity-based ending logic
-            if session_memory.current_activity and session_memory.timeline:
-                # Check for stable new activity ≥90s and no new fact-checkable content in last 60s
-                # This would require more sophisticated analysis
-                pass
+            if session_memory.currentActivity and session_memory.timeline:
+                try:
+                    current_time = frame_bundle.timestamp
+                    
+                    # Check for stable new activity ≥90s and no new fact-checkable content in last 60s
+                    recent_timeline = [
+                        event for event in session_memory.timeline[-10:]  # Last 10 events
+                        if (current_time - event.get("timestamp", current_time)).total_seconds() <= 90
+                    ]
+                    
+                    # Check if current activity is stable (same for ≥90 seconds)
+                    current_app = frame_bundle.treeSummary.appPackage
+                    if session_memory.currentActivity.get("app") != current_app:
+                        # Activity changed, update current activity
+                        session_memory.currentActivity = {
+                            "app": current_app,
+                            "start_time": current_time,
+                            "fact_checkable_content": False
+                        }
+                        return False
+                    
+                    # Check if current activity has been stable for ≥90 seconds
+                    activity_start = session_memory.currentActivity.get("start_time")
+                    if activity_start:
+                        activity_duration = (current_time - activity_start).total_seconds()
+                        
+                        if activity_duration >= 90:
+                            # Check if there's been fact-checkable content in last 60 seconds
+                            has_recent_content = any(
+                                event.get("has_fact_checkable_content", False)
+                                for event in recent_timeline
+                                if (current_time - event.get("timestamp", current_time)).total_seconds() <= 60
+                            )
+                            
+                            if not has_recent_content:
+                                print(f"Activity-based session end: stable activity for {activity_duration:.1f}s, no fact-checkable content in 60s")
+                                return True
+                                
+                except Exception as e:
+                    print(f"Error checking activity-based ending: {e}")
         
         return False
 

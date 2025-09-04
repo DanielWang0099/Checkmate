@@ -4,13 +4,11 @@ import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ServiceLifecycleDispatcher
 import com.checkmate.app.data.AccessibilityConfig
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.CaptureType
 import com.checkmate.app.data.ContentType
-import com.checkmate.app.managers.SessionManager
+import com.checkmate.app.utils.SessionManager
 import com.checkmate.app.utils.AccessibilityHelper
 import com.checkmate.app.utils.CapturePipeline
 import kotlinx.coroutines.*
@@ -19,9 +17,8 @@ import timber.log.Timber
 /**
  * Accessibility service that monitors screen content changes for fact-checking.
  */
-class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
+class CheckmateAccessibilityService : AccessibilityService() {
     
-    private val dispatcher = ServiceLifecycleDispatcher(this)
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     
     private var sessionManager: SessionManager? = null
@@ -30,13 +27,10 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
     private var lastCaptureTime = 0L
     private var isProcessing = false
 
-    override fun getLifecycle() = dispatcher.lifecycle
-
     override fun onCreate() {
-        dispatcher.onServicePreSuperOnCreate()
         super.onCreate()
         
-        sessionManager = SessionManager(this)
+        sessionManager = SessionManager.getInstance(this)
         capturePipeline = CapturePipeline(this)
         
         configureAccessibilityService()
@@ -46,7 +40,6 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-        dispatcher.onServicePreSuperOnStart()
         
         Timber.i("CheckmateAccessibilityService connected")
     }
@@ -83,7 +76,7 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
             }
             
             val packageName = event.packageName?.toString()
-            val sourceApp = AccessibilityHelper.getAppInfo(this, packageName)
+            val sourceApp = AccessibilityHelper.getInstance(this).getCurrentApp(this, packageName)
             
             // Skip if this is our own app or system UI
             if (packageName == this.packageName || 
@@ -206,7 +199,6 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
     }
 
     override fun onDestroy() {
-        dispatcher.onServicePreSuperOnDestroy()
         serviceScope.cancel()
         
         capturePipeline?.cleanup()
@@ -225,7 +217,7 @@ class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
                 val rootNode = rootInActiveWindow
                 if (rootNode != null) {
                     val packageName = rootNode.packageName?.toString()
-                    val sourceApp = AccessibilityHelper.getAppInfo(this@CheckmateAccessibilityService, packageName)
+                    val sourceApp = AccessibilityHelper.getInstance(this@CheckmateAccessibilityService).getCurrentApp(this@CheckmateAccessibilityService, packageName)
                     
                     capturePipeline?.captureAccessibilityTree(
                         rootNode = rootNode,

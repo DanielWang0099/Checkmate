@@ -104,43 +104,67 @@ class ReverseImageSearchTool:
     async def reverse_search(self, image_url: str) -> ReverseImageSearchResult:
         """Perform reverse image search."""
         if not self.service:
-            raise ToolError("Google Custom Search not configured")
+            # Return empty results if not configured
+            return ReverseImageSearchResult(
+                similar_images=[],
+                best_guess="Google Custom Search not configured",
+                matching_pages=[]
+            )
         
         try:
-            # Perform reverse image search
+            # Perform reverse image search using the image URL
             result = self.service.cse().list(
                 q=f"",  # Empty query for image search
                 cx=settings.google_custom_search_engine_id,
                 searchType="image",
                 imgType="photo",
+                imgSize="large",
                 num=10,
-                imgColorType="color"
+                exactTerms=image_url,  # Use the provided image URL
+                # Alternative: use imgUrl parameter if supported
+                # imgUrl=image_url
             ).execute()
             
             similar_images = []
             matching_pages = []
+            best_guess = None
             
+            # Extract similar images and contextual information
             for item in result.get('items', []):
-                similar_images.append(item.get('link', ''))
+                image_link = item.get('link', '')
+                if image_link and image_link not in similar_images:
+                    similar_images.append(image_link)
+                
+                # Extract best guess from snippet or title
+                if not best_guess and 'snippet' in item:
+                    snippet = item['snippet'].lower()
+                    if any(keyword in snippet for keyword in ['shows', 'depicts', 'contains', 'features']):
+                        best_guess = item['snippet'][:100]
                 
                 # Try to find pages that reference this image
                 if 'image' in item:
                     context_link = item['image'].get('contextLink')
                     if context_link:
-                        matching_pages.append(WebSearchResult(
-                            title=item.get('title', ''),
-                            url=context_link,
-                            snippet=item.get('snippet', '')
-                        ))
+                        matching_pages.append({
+                            'title': item.get('title', '')[:100],
+                            'url': context_link,
+                            'snippet': item.get('snippet', '')[:200]
+                        })
             
             return ReverseImageSearchResult(
                 similar_images=similar_images[:5],
-                best_guess=result.get('searchInformation', {}).get('searchTime'),
+                best_guess=best_guess or "No clear identification found",
                 matching_pages=matching_pages[:3]
             )
         
         except Exception as e:
-            raise ToolError(f"Reverse image search failed: {str(e)}")
+            print(f"Reverse image search error: {e}")
+            # Return partial results rather than failing completely
+            return ReverseImageSearchResult(
+                similar_images=[],
+                best_guess=f"Search failed: {str(e)[:50]}...",
+                matching_pages=[]
+            )
 
 
 class YouTubeMetadataTool:

@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.PixelFormat
 import android.hardware.display.DisplayManager
 import android.hardware.display.VirtualDisplay
+import android.media.Image
 import android.media.ImageReader
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
@@ -17,6 +18,7 @@ import com.checkmate.app.data.*
 import com.checkmate.app.ml.ImageClassifier
 import com.checkmate.app.ml.TextExtractor
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
@@ -135,7 +137,7 @@ class CapturePipeline(private val context: Context) {
         try {
             if (mediaProjection == null) {
                 Timber.w("MediaProjection not available")
-                return@withContext null
+                return@withContext lastScreenshot // Return cached screenshot if available
             }
             
             val displayMetrics = context.resources.displayMetrics
@@ -144,26 +146,68 @@ class CapturePipeline(private val context: Context) {
             val density = displayMetrics.densityDpi
             
             if (imageReader == null) {
-                imageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 1)
+                imageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
+                
+                // Set up image listener for real-time capture
+                imageReader?.setOnImageAvailableListener({ reader ->
+                    try {
+                        val image = reader.acquireLatestImage()
+                        if (image != null) {
+                            lastScreenshot = convertImageToBitmap(image)
+                            image.close()
+                        }
+                    } catch (e: Exception) {
+                        Timber.e(e, "Error processing captured image")
+                    }
+                }, null)
             }
             
             if (virtualDisplay == null) {
                 virtualDisplay = mediaProjection?.createVirtualDisplay(
                     "ScreenCapture",
                     width, height, density,
-                    0, // flags
+                    DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
                     imageReader?.surface,
                     null, null
                 )
             }
             
-            // Capture image (simplified - real implementation would need proper synchronization)
-            // This is a placeholder - actual implementation would use ImageReader.OnImageAvailableListener
+            // Wait a bit for the image to be captured
+            delay(100)
             
             return@withContext lastScreenshot
             
         } catch (e: Exception) {
             Timber.e(e, "Error capturing screenshot")
+            lastScreenshot // Return cached version if available
+        }
+    }
+    
+    private fun convertImageToBitmap(image: Image): Bitmap? {
+        return try {
+            val planes = image.planes
+            val buffer = planes[0].buffer
+            val pixelStride = planes[0].pixelStride
+            val rowStride = planes[0].rowStride
+            val rowPadding = rowStride - pixelStride * image.width
+            
+            val bitmap = Bitmap.createBitmap(
+                image.width + rowPadding / pixelStride,
+                image.height,
+                Bitmap.Config.ARGB_8888
+            )
+            
+            bitmap.copyPixelsFromBuffer(buffer)
+            
+            // Crop to actual screen size if there's padding
+            if (rowPadding == 0) {
+                bitmap
+            } else {
+                Bitmap.createBitmap(bitmap, 0, 0, image.width, image.height)
+            }
+            
+        } catch (e: Exception) {
+            Timber.e(e, "Error converting image to bitmap")
             null
         }
     }
@@ -357,9 +401,13 @@ class CapturePipeline(private val context: Context) {
     }
     
     private fun captureAudioDelta(): String {
-        // Placeholder for audio transcription delta
-        // Real implementation would integrate with speech-to-text service
-        return ""
+        // Get audio delta from AudioCaptureService
+        return try {
+            com.checkmate.app.services.AudioCaptureService.getLatestAudioDelta()
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting audio delta")
+            ""
+        }
     }
     
     fun getBatteryLevel(): Float {
@@ -371,7 +419,7 @@ class CapturePipeline(private val context: Context) {
         }
     }
     
-    private fun isPowerSaveMode(): Boolean {
+    fun isPowerSaveMode(): Boolean {
         val powerManager = context.getSystemService<android.os.PowerManager>()
         return powerManager?.isPowerSaveMode ?: false
     }
@@ -391,6 +439,123 @@ class CapturePipeline(private val context: Context) {
     
     fun setMediaProjection(projection: MediaProjection) {
         this.mediaProjection = projection
+    }
+    
+    suspend fun captureScreenshot(
+        bitmap: Bitmap,
+        contentType: ContentType,
+        captureType: CaptureType
+    ) {
+        try {
+            val sessionState = SessionManager.getInstance(context).getCurrentSessionState()
+            val sessionId = sessionState?.sessionId ?: return
+            
+            // Extract OCR text
+            val ocrText = textExtractor.extractText(bitmap).take(AppConfig.MAX_OCR_TEXT_LENGTH)
+            
+            // Classify image content
+            val hasImage = imageClassifier.hasSignificantImage(bitmap)
+            
+            // Get image reference if needed
+            val imageRef = if (hasImage) {
+                saveTemporaryImage(bitmap, sessionId)
+            } else null
+            
+            // Create simplified frame bundle for screenshot
+            val frameBundle = FrameBundle(
+                sessionId = sessionId,
+                timestamp = Date(),
+                treeSummary = TreeSummary(
+                    appPackage = "screenshot",
+                    appReadableName = "Screenshot Capture",
+                    mediaHints = MediaHints(hasText = ocrText.isNotBlank(), hasImage = hasImage),
+                    topNodes = emptyList(),
+                    confidence = 0.5f
+                ),
+                ocrText = ocrText,
+                hasImage = hasImage,
+                imageRef = imageRef,
+                audioTranscriptDelta = "",
+                deviceHints = DeviceHints(
+                    battery = getBatteryLevel(),
+                    powerSaver = isPowerSaveMode()
+                )
+            )
+            
+            // Send to network manager
+            NetworkManager(context).sendFrameBundle(frameBundle)
+            
+        } catch (e: Exception) {
+            Timber.e(e, "Error processing screenshot")
+        }
+    }
+    
+    suspend fun captureAccessibilityTree(
+        rootNode: AccessibilityNodeInfo,
+        sourceApp: AppSourceInfo?,
+        contentType: ContentType,
+        captureType: CaptureType
+    ) {
+        try {
+            val sessionState = SessionManager.getInstance(context).getCurrentSessionState()
+            val sessionId = sessionState?.sessionId ?: return
+            
+            val treeSummary = extractTreeSummaryFromNode(rootNode, sourceApp, contentType)
+            
+            // Capture screenshot if available
+            val screenshot = captureScreenshot()
+            val ocrText = if (screenshot != null) {
+                textExtractor.extractText(screenshot).take(AppConfig.MAX_OCR_TEXT_LENGTH)
+            } else ""
+            
+            val hasImage = if (screenshot != null) {
+                imageClassifier.hasSignificantImage(screenshot)
+            } else false
+            
+            val imageRef = if (hasImage && screenshot != null) {
+                saveTemporaryImage(screenshot, sessionId)
+            } else null
+            
+            val frameBundle = FrameBundle(
+                sessionId = sessionId,
+                timestamp = Date(),
+                treeSummary = treeSummary,
+                ocrText = ocrText,
+                hasImage = hasImage,
+                imageRef = imageRef,
+                audioTranscriptDelta = captureAudioDelta(),
+                deviceHints = DeviceHints(
+                    battery = getBatteryLevel(),
+                    powerSaver = isPowerSaveMode()
+                )
+            )
+            
+            // Send to network manager
+            NetworkManager(context).sendFrameBundle(frameBundle)
+            
+        } catch (e: Exception) {
+            Timber.e(e, "Error processing accessibility tree")
+        }
+    }
+    
+    private suspend fun extractTreeSummaryFromNode(
+        rootNode: AccessibilityNodeInfo,
+        sourceApp: AppSourceInfo?,
+        contentType: ContentType
+    ): TreeSummary {
+        val topNodes = extractTopNodes(rootNode)
+        val mediaHints = analyzeMediaHints(rootNode)
+        
+        return TreeSummary(
+            appPackage = sourceApp?.packageName ?: "unknown",
+            appReadableName = sourceApp?.readableName ?: "Unknown App",
+            mediaHints = mediaHints,
+            topNodes = topNodes,
+            urlOrChannelGuess = extractUrlGuess(rootNode),
+            publisherGuess = extractPublisherGuess(rootNode),
+            topicGuesses = extractTopicGuesses(rootNode),
+            confidence = calculateConfidence(topNodes)
+        )
     }
     
     fun cleanup() {

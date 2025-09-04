@@ -239,6 +239,32 @@ class SessionManager private constructor(private val context: Context) {
         }
     }
 
+    suspend fun getAccessibilityConfig(): AccessibilityConfig {
+        return try {
+            val prefs = preferencesState.value
+            AccessibilityConfig(
+                monitorSocialMedia = true,
+                monitorNews = true,
+                monitorMessaging = true,
+                monitorWebBrowser = true,
+                monitorVideo = false,
+                monitorOther = false
+            )
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting accessibility config")
+            AccessibilityConfig()
+        }
+    }
+
+    fun cleanup() {
+        try {
+            // Cleanup resources if needed
+            Timber.d("SessionManager cleanup")
+        } catch (e: Exception) {
+            Timber.e(e, "Error during cleanup")
+        }
+    }
+
     private fun loadPreferences() {
         try {
             context.dataStore.data

@@ -3,12 +3,11 @@ package com.checkmate.app.ml
 import android.content.Context
 import android.graphics.Bitmap
 import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.support.common.FileUtil
-import org.tensorflow.lite.support.image.ImageProcessor
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
 import timber.log.Timber
 import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import kotlin.math.max
+import kotlin.math.sqrt
 
 /**
  * Image classifier using MobileNetV2 to detect significant images.
@@ -23,9 +22,6 @@ class ImageClassifier(private val context: Context) {
     }
 
     private var interpreter: Interpreter? = null
-    private val imageProcessor = ImageProcessor.Builder()
-        .add(ResizeOp(IMAGE_SIZE, IMAGE_SIZE, ResizeOp.ResizeMethod.BILINEAR))
-        .build()
 
     init {
         loadModel()
@@ -33,11 +29,19 @@ class ImageClassifier(private val context: Context) {
 
     private fun loadModel() {
         try {
-            val modelBuffer = FileUtil.loadMappedFile(context, MODEL_FILE)
+            val assetManager = context.assets
+            val inputStream = assetManager.open(MODEL_FILE)
+            val modelBuffer = ByteBuffer.allocateDirect(inputStream.available())
+            val bytes = ByteArray(inputStream.available())
+            inputStream.read(bytes)
+            modelBuffer.put(bytes)
+            modelBuffer.rewind()
+            
             interpreter = Interpreter(modelBuffer)
             Timber.d("MobileNetV2 model loaded successfully")
         } catch (e: Exception) {
-            Timber.e(e, "Failed to load MobileNetV2 model")
+            Timber.w(e, "Failed to load MobileNetV2 model - using fallback classification")
+            // Model will remain null, fallback classification will be used
         }
     }
 
@@ -47,18 +51,19 @@ class ImageClassifier(private val context: Context) {
      */
     fun hasSignificantImage(bitmap: Bitmap): Boolean {
         return try {
-            val interpreter = this.interpreter ?: return false
+            val interpreter = this.interpreter
             
-            // Preprocess image
-            val tensorImage = TensorImage.fromBitmap(bitmap)
-            val processedImage = imageProcessor.process(tensorImage)
+            if (interpreter == null) {
+                // Fallback: simple heuristic-based classification
+                return performFallbackClassification(bitmap)
+            }
             
-            // Prepare input buffer
-            val inputBuffer = processedImage.buffer
+            // Preprocess image manually
+            val inputBuffer = preprocessBitmap(bitmap)
             
             // Prepare output buffer
             val outputBuffer = ByteBuffer.allocateDirect(4 * 1000) // 1000 classes * 4 bytes
-            outputBuffer.order(java.nio.ByteOrder.nativeOrder())
+            outputBuffer.order(ByteOrder.nativeOrder())
             
             // Run inference
             interpreter.run(inputBuffer, outputBuffer)
@@ -76,7 +81,123 @@ class ImageClassifier(private val context: Context) {
             
         } catch (e: Exception) {
             Timber.e(e, "Error classifying image")
-            false
+            // Fallback to simple heuristic
+            performFallbackClassification(bitmap)
+        }
+    }
+
+    /**
+     * Manually preprocess bitmap for TensorFlow Lite input
+     */
+    private fun preprocessBitmap(bitmap: Bitmap): ByteBuffer {
+        // Resize bitmap to model input size
+        val resizedBitmap = Bitmap.createScaledBitmap(bitmap, IMAGE_SIZE, IMAGE_SIZE, true)
+        
+        // Create ByteBuffer for model input
+        val inputBuffer = ByteBuffer.allocateDirect(4 * IMAGE_SIZE * IMAGE_SIZE * 3) // 4 bytes per float, RGB
+        inputBuffer.order(ByteOrder.nativeOrder())
+        
+        // Convert bitmap to normalized float array
+        val pixels = IntArray(IMAGE_SIZE * IMAGE_SIZE)
+        resizedBitmap.getPixels(pixels, 0, IMAGE_SIZE, 0, 0, IMAGE_SIZE, IMAGE_SIZE)
+        
+        for (pixel in pixels) {
+            // Extract RGB values and normalize to [-1, 1] (MobileNet input range)
+            val r = ((pixel shr 16) and 0xFF) / 127.5f - 1.0f
+            val g = ((pixel shr 8) and 0xFF) / 127.5f - 1.0f  
+            val b = (pixel and 0xFF) / 127.5f - 1.0f
+            
+            inputBuffer.putFloat(r)
+            inputBuffer.putFloat(g)
+            inputBuffer.putFloat(b)
+        }
+        
+        return inputBuffer
+    }
+
+    /**
+     * Simple fallback classification when ML model is not available.
+     */
+    private fun performFallbackClassification(bitmap: Bitmap): Boolean {
+        try {
+            // Simple heuristics based on image properties
+            val width = bitmap.width
+            val height = bitmap.height
+            val area = width * height
+            
+            // Very small images are likely UI elements
+            if (area < 10000) return false
+            
+            // Analyze color diversity as a proxy for image content
+            val colorDiversity = analyzeColorDiversity(bitmap)
+            val aspectRatio = width.toFloat() / height.toFloat()
+            
+            // Score based on multiple factors
+            var score = 0f
+            
+            // Size factor
+            score += (area / 100000f).coerceAtMost(0.3f)
+            
+            // Color diversity factor
+            score += colorDiversity * 0.4f
+            
+            // Aspect ratio factor (photos tend to have certain ratios)
+            if (aspectRatio in 0.5f..2.0f) {
+                score += 0.2f
+            }
+            
+            Timber.d("Fallback image classification score: $score")
+            return score > SIGNIFICANT_IMAGE_THRESHOLD
+            
+        } catch (e: Exception) {
+            Timber.e(e, "Error in fallback classification")
+            return false
+        }
+    }
+
+    /**
+     * Analyze color diversity in the image.
+     */
+    private fun analyzeColorDiversity(bitmap: Bitmap): Float {
+        try {
+            // Sample pixels from the image
+            val sampleSize = 50
+            val stepX = bitmap.width / sampleSize
+            val stepY = bitmap.height / sampleSize
+            
+            val colors = mutableSetOf<Int>()
+            var totalBrightness = 0f
+            var pixelCount = 0
+            
+            for (x in 0 until bitmap.width step stepX) {
+                for (y in 0 until bitmap.height step stepY) {
+                    if (x < bitmap.width && y < bitmap.height) {
+                        val pixel = bitmap.getPixel(x, y)
+                        colors.add(pixel and 0xFFFFFF) // Remove alpha channel
+                        
+                        val r = (pixel shr 16) and 0xFF
+                        val g = (pixel shr 8) and 0xFF
+                        val b = pixel and 0xFF
+                        totalBrightness += (r + g + b) / 3f
+                        pixelCount++
+                    }
+                }
+            }
+            
+            val uniqueColors = colors.size
+            val averageBrightness = if (pixelCount > 0) totalBrightness / pixelCount else 128f
+            
+            // Normalize diversity score
+            val diversityScore = (uniqueColors / (sampleSize * sampleSize).toFloat()).coerceAtMost(1f)
+            
+            // Adjust for brightness variation (very bright or dark images are often text/UI)
+            val brightnessAdjustment = if (averageBrightness < 50 || averageBrightness > 200) 0.7f else 1f
+            
+            return diversityScore * brightnessAdjustment
+            
+        } catch (e: Exception) {
+            Timber.e(e, "Error analyzing color diversity")
+            return 0.5f
         }
     }
 
@@ -120,12 +241,9 @@ class ImageClassifier(private val context: Context) {
         return try {
             val interpreter = this.interpreter ?: return emptyMap()
             
-            val tensorImage = TensorImage.fromBitmap(bitmap)
-            val processedImage = imageProcessor.process(tensorImage)
-            
-            val inputBuffer = processedImage.buffer
+            val inputBuffer = preprocessBitmap(bitmap)
             val outputBuffer = ByteBuffer.allocateDirect(4 * 1000)
-            outputBuffer.order(java.nio.ByteOrder.nativeOrder())
+            outputBuffer.order(ByteOrder.nativeOrder())
             
             interpreter.run(inputBuffer, outputBuffer)
             

@@ -103,8 +103,12 @@ dependencies {
     
     // ML Kit and TensorFlow Lite
     implementation("com.google.mlkit:text-recognition:16.0.0")
-    implementation("org.tensorflow:tensorflow-lite:2.13.0")
-    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite:2.13.0") {
+        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
+    }
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4") {
+        exclude(group = "org.tensorflow", module = "tensorflow-lite-support-api")
+    }
     implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
     
     // Permissions handling

@@ -8,7 +8,7 @@ from botocore.exceptions import ClientError
 from app.core.config import settings
 from app.models.schemas import (
     SessionMemory, FrameBundle, ManagerResponse, FactCheckResult,
-    AgentContext, MediaType
+    AgentContext, MediaType, NotificationColor
 )
 from app.services.tools import tools
 
@@ -365,9 +365,53 @@ class AgentOrchestrator:
                 
                 # Step 3: Manager synthesizes final notifications based on agent results
                 if fact_check_result:
-                    # Update manager response with fact-check results
-                    # This would involve another manager call to synthesize notifications
-                    pass
+                    # Create synthesis prompt for manager
+                    synthesis_prompt = f"""Based on the fact-checking analysis, synthesize the final notification:
+
+Original Manager Assessment:
+{manager_response.model_dump_json(indent=2)}
+
+Fact-Check Results:
+{fact_check_result.model_dump_json(indent=2)}
+
+Please provide a final notification that incorporates both the content analysis and fact-checking results.
+Focus on actionable insights for the user."""
+
+                    try:
+                        synthesis_response = await self.bedrock.invoke_with_tools(
+                            system_prompt=self.manager.SYSTEM_PROMPT,
+                            messages=[{
+                                "role": "user",
+                                "content": synthesis_prompt
+                            }],
+                            tools=[]  # No tools needed for synthesis
+                        )
+                        
+                        # Parse synthesis response and update notifications
+                        if synthesis_response and "response" in synthesis_response:
+                            synthesis_text = synthesis_response["response"]
+                            
+                            # Extract key information from synthesis
+                            if "urgent" in synthesis_text.lower() or "false" in synthesis_text.lower():
+                                # Upgrade notification priority
+                                for notification in manager_response.notifications:
+                                    if notification.color == NotificationColor.YELLOW:
+                                        notification.color = NotificationColor.RED
+                                        notification.shortText = f"⚠️ {notification.shortText}"
+                            
+                            # Add fact-check context to details
+                            if manager_response.notifications:
+                                first_notification = manager_response.notifications[0]
+                                if fact_check_result.summary:
+                                    first_notification.details = f"{first_notification.details}\n\nFact-check: {fact_check_result.summary}"
+                                
+                                # Add sources from fact-checking
+                                if fact_check_result.sources:
+                                    first_notification.sources.extend(fact_check_result.sources)
+                        
+                    except Exception as e:
+                        print(f"Synthesis error: {e}")
+                        # Continue with original manager response
                     
             except Exception as e:
                 print(f"Media agent error: {e}")

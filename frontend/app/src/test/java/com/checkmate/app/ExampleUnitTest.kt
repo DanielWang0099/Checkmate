@@ -1,7 +1,6 @@
-package com.example.checkmate
+package com.checkmate.app
 
 import org.junit.Test
-
 import org.junit.Assert.*
 
 /**

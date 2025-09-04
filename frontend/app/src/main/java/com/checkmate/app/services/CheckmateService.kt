@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.checkmate.app.CheckmateApplication
 import com.checkmate.app.R
 import com.checkmate.app.data.AppConfig
-import com.checkmate.app.managers.SessionManager
+import com.checkmate.app.utils.SessionManager
 import com.checkmate.app.utils.CapturePipeline
 import com.checkmate.app.utils.NetworkManager
 import kotlinx.coroutines.*
@@ -76,6 +76,26 @@ class CheckmateService : LifecycleService() {
             ACTION_STOP_SESSION -> {
                 lifecycleScope.launch {
                     stopCurrentSession()
+                }
+            }
+            ACTION_TOGGLE_MONITORING -> {
+                lifecycleScope.launch {
+                    if (sessionManager.isSessionActive()) {
+                        stopCurrentSession()
+                    } else {
+                        startFactCheckingSession()
+                    }
+                }
+            }
+            ACTION_MANUAL_CAPTURE -> {
+                lifecycleScope.launch {
+                    if (sessionManager.isSessionActive()) {
+                        // Trigger a manual capture
+                        val frameBundle = capturePipeline.captureFrame()
+                        if (frameBundle != null) {
+                            networkManager.sendFrameBundle(frameBundle)
+                        }
+                    }
                 }
             }
             ACTION_STOP_SERVICE -> {
@@ -166,10 +186,11 @@ class CheckmateService : LifecycleService() {
             networkManager.connect()
             
             // Start session with default settings
-            val success = sessionManager.startNewSession()
+            val success = sessionManager?.startNewSession() ?: false
             
             if (success) {
                 startCaptureLoop()
+                startAudioCapture()
                 updateServiceNotification("Session active")
             } else {
                 Timber.e("Failed to start session")
@@ -187,13 +208,38 @@ class CheckmateService : LifecycleService() {
             Timber.d("Stopping current session")
             
             stopCaptureLoop()
-            sessionManager.stopCurrentSession()
+            stopAudioCapture()
+            sessionManager?.stopCurrentSession()
             networkManager.disconnect()
             
             updateServiceNotification("Session stopped")
             
         } catch (e: Exception) {
             Timber.e(e, "Error stopping session")
+        }
+    }
+
+    private fun startAudioCapture() {
+        try {
+            val audioIntent = Intent(this, AudioCaptureService::class.java).apply {
+                action = AudioCaptureService.ACTION_START_CAPTURE
+            }
+            startService(audioIntent)
+            Timber.d("Audio capture started")
+        } catch (e: Exception) {
+            Timber.e(e, "Error starting audio capture")
+        }
+    }
+
+    private fun stopAudioCapture() {
+        try {
+            val audioIntent = Intent(this, AudioCaptureService::class.java).apply {
+                action = AudioCaptureService.ACTION_STOP_CAPTURE
+            }
+            startService(audioIntent)
+            Timber.d("Audio capture stopped")
+        } catch (e: Exception) {
+            Timber.e(e, "Error stopping audio capture")
         }
     }
 
