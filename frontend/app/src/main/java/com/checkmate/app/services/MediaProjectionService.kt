@@ -17,7 +17,7 @@ import androidx.core.content.getSystemService
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.CaptureType
 import com.checkmate.app.data.ContentType
-import com.checkmate.app.managers.SessionManager
+import com.checkmate.app.utils.SessionManager
 import com.checkmate.app.utils.CapturePipeline
 import kotlinx.coroutines.*
 import timber.log.Timber
@@ -47,7 +47,7 @@ class MediaProjectionService : Service() {
     override fun onCreate() {
         super.onCreate()
         
-        sessionManager = SessionManager(this)
+        sessionManager = SessionManager.getInstance(this)
         capturePipeline = CapturePipeline(this)
         
         initializeScreenMetrics()

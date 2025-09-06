@@ -133,12 +133,21 @@ class CheckmateService : LifecycleService() {
         val notification = createServiceNotification()
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(
-                AppConfig.NOTIFICATION_ID_SERVICE,
-                notification,
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION or 
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE
-            )
+            // For now, just use microphone type to avoid media projection permission issues
+            // We'll only use media projection type when actually capturing screen
+            val serviceType = ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE
+            
+            try {
+                startForeground(
+                    AppConfig.NOTIFICATION_ID_SERVICE,
+                    notification,
+                    serviceType
+                )
+            } catch (e: SecurityException) {
+                // Fallback to basic foreground service if permission issues
+                Timber.w(e, "Failed to start with specific service type, falling back to basic foreground service")
+                startForeground(AppConfig.NOTIFICATION_ID_SERVICE, notification)
+            }
         } else {
             startForeground(AppConfig.NOTIFICATION_ID_SERVICE, notification)
         }

@@ -200,8 +200,8 @@ class MainActivity : ComponentActivity() {
         }
     }
     
-    private fun startFactCheckingService() {
-        if (!hasRequiredPermissions) {
+    private fun startFactCheckingService(bypassPermissionCheck: Boolean = false) {
+        if (!bypassPermissionCheck && !hasRequiredPermissions) {
             requestAllPermissions()
             return
         }
@@ -249,6 +249,13 @@ class MainActivity : ComponentActivity() {
                 putExtra(MediaProjectionService.EXTRA_RESULT_DATA, data)
             }
             ContextCompat.startForegroundService(this, intent)
+            
+            // After starting media projection, now start the main checkmate service
+            lifecycleScope.launch {
+                // Give media projection service time to initialize
+                kotlinx.coroutines.delay(1500)
+                startFactCheckingService(bypassPermissionCheck = true)
+            }
             
         } catch (e: Exception) {
             Timber.e(e, "Error starting media projection service")
