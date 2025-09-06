@@ -207,15 +207,24 @@ class MainActivity : ComponentActivity() {
         }
         
         try {
-            val intent = Intent(this, CheckmateService::class.java).apply {
+            // Start the service
+            val serviceIntent = Intent(this, CheckmateService::class.java).apply {
                 action = CheckmateService.ACTION_START_SERVICE
             }
-            ContextCompat.startForegroundService(this, intent)
+            ContextCompat.startForegroundService(this, serviceIntent)
             
             lifecycleScope.launch {
                 // Give the service time to start
                 kotlinx.coroutines.delay(1000)
                 checkServiceStatus()
+                
+                // Now start a fact-checking session
+                val sessionIntent = Intent(this@MainActivity, CheckmateService::class.java).apply {
+                    action = CheckmateService.ACTION_START_SESSION
+                }
+                startService(sessionIntent)
+                
+                Timber.d("Started service and session")
             }
             
         } catch (e: Exception) {
