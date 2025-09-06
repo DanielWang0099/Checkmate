@@ -89,6 +89,12 @@ $installResult = & .\gradlew installDebug
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "APK installed successfully!" -ForegroundColor Green
+    
+    # Launch the app
+    Write-Host "Launching MainActivity..." -ForegroundColor Green
+    $launchResult = adb shell am start -n com.checkmate.app.debug/com.checkmate.app.ui.MainActivity
+    Write-Host "Launch result: $launchResult" -ForegroundColor Gray
+    
     Write-Host "Starting logcat capture..." -ForegroundColor Yellow
     
     # Determine filter based on parameters

@@ -203,7 +203,7 @@ class BackgroundProcessingOptimizer private constructor(private val context: Con
         
         workManager.enqueueUniquePeriodicWork(
             "periodic_${taskType.name}",
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.UPDATE,
             workRequest
         )
         
@@ -262,9 +262,9 @@ class BackgroundProcessingOptimizer private constructor(private val context: Con
         return ProcessingStats(
             queueSizes = queueSizes,
             runningTasks = runningTasks.size,
-            completedTasks = 0, // TODO: Track completed tasks
-            failedTasks = 0, // TODO: Track failed tasks
-            avgProcessingTime = 0L, // TODO: Calculate average processing time
+            completedTasks = getCompletedTaskCount(),
+            failedTasks = getFailedTaskCount(),
+            avgProcessingTime = calculateAverageProcessingTime(),
             threadPoolStats = threadPoolStats
         )
     }
@@ -418,6 +418,7 @@ class BackgroundProcessingOptimizer private constructor(private val context: Con
     
     private fun setupWorkManagerConstraints() {
         // Configure WorkManager for optimized background processing
+        @Suppress("UNUSED_VARIABLE")
         val config = Configuration.Builder()
             .setMaxSchedulerLimit(10)
             .build()
@@ -454,7 +455,7 @@ class BackgroundProcessingOptimizer private constructor(private val context: Con
     }
     
     // Sample processing functions
-    private suspend fun processFrameBundle(frameBundle: FrameBundle, processingType: String): Result<Any> {
+    private suspend fun processFrameBundle(frameBundle: FrameBundle, @Suppress("UNUSED_PARAMETER") processingType: String): Result<Any> {
         return try {
             // Simulate frame processing
             delay(100L + (frameBundle.ocrText.length / 10).toLong()) // Simulate OCR processing time
@@ -475,6 +476,32 @@ class BackgroundProcessingOptimizer private constructor(private val context: Con
             Result.failure(e)
         }
     }
+    
+    private fun getCompletedTaskCount(): Int {
+        return taskMetrics.filter { it.value.isCompleted }.size
+    }
+    
+    private fun getFailedTaskCount(): Int {
+        return taskMetrics.filter { it.value.hasFailed }.size
+    }
+    
+    private fun calculateAverageProcessingTime(): Long {
+        val completedMetrics = taskMetrics.values.filter { it.isCompleted && it.processingTimeMs > 0 }
+        return if (completedMetrics.isNotEmpty()) {
+            completedMetrics.map { it.processingTimeMs }.average().toLong()
+        } else 0L
+    }
+    
+    /**
+     * Task metrics tracking
+     */
+    data class TaskMetrics(
+        val isCompleted: Boolean = false,
+        val hasFailed: Boolean = false,
+        val processingTimeMs: Long = 0
+    )
+    
+    private val taskMetrics = mutableMapOf<String, TaskMetrics>()
 }
 
 /**

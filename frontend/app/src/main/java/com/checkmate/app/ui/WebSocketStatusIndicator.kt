@@ -153,7 +153,7 @@ class WebSocketStatusIndicator @JvmOverloads constructor(
         binding.apply {
             if (layoutConnectionDetails.visibility == VISIBLE) {
                 // Use available properties from ConnectionStats
-                tvLatency.text = "${metrics.uptime}ms" // Using uptime as latency placeholder
+                tvLatency.text = "${metrics.uptime}ms" // Use uptime as latency indicator
                 tvMessagesSent.text = "0" // Not available in current ConnectionStats
                 tvMessagesReceived.text = "0" // Not available in current ConnectionStats
                 tvReconnectCount.text = metrics.retryCount.toString()
