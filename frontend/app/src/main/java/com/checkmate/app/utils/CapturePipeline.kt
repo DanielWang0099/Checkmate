@@ -14,6 +14,7 @@ import android.os.Build
 import android.os.BatteryManager
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.core.content.getSystemService
+import com.checkmate.app.audio.*
 import com.checkmate.app.data.*
 import com.checkmate.app.ml.ImageClassifier
 import com.checkmate.app.ml.TextExtractor
@@ -22,6 +23,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.util.*
 
 /**
@@ -386,13 +388,21 @@ class CapturePipeline(private val context: Context) {
             val timestamp = System.currentTimeMillis()
             val filename = "frame_${sessionId}_$timestamp.jpg"
             
-            // Compress and save to temporary storage
+            // Compress image to bytes
             val stream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, AppConfig.IMAGE_QUALITY, stream)
+            val imageBytes = stream.toByteArray()
             
-            // In a real implementation, you'd upload this to S3 or save locally
-            // For now, return a placeholder reference
-            "temp:///$filename"
+            // Upload to backend for S3 storage
+            val networkManager = NetworkManager(context)
+            val uploadResult = networkManager.uploadImage(imageBytes, sessionId, filename)
+            
+            if (uploadResult != null) {
+                uploadResult
+            } else {
+                // Fallback: save locally and return local reference
+                saveImageLocally(imageBytes, filename)
+            }
             
         } catch (e: Exception) {
             Timber.e(e, "Error saving temporary image")
@@ -400,13 +410,75 @@ class CapturePipeline(private val context: Context) {
         }
     }
     
-    private fun captureAudioDelta(): String {
-        // Get audio delta from AudioCaptureService
+    private suspend fun saveImageLocally(imageBytes: ByteArray, filename: String): String? {
         return try {
-            com.checkmate.app.services.AudioCaptureService.getLatestAudioDelta()
+            val tempDir = File(context.cacheDir, "temp_images")
+            if (!tempDir.exists()) {
+                tempDir.mkdirs()
+            }
+            
+            val imageFile = File(tempDir, filename)
+            imageFile.writeBytes(imageBytes)
+            
+            // Return local file reference
+            "file://${imageFile.absolutePath}"
+            
         } catch (e: Exception) {
-            Timber.e(e, "Error getting audio delta")
-            ""
+            Timber.e(e, "Error saving image locally")
+            null
+        }
+    }
+    
+    /**
+     * Capture audio delta using enhanced audio pipeline when available
+     */
+    private fun captureAudioDelta(): String {
+        return try {
+            val audioService = com.checkmate.app.services.AudioCaptureService.instance
+            
+            if (audioService != null) {
+                val audioStatus = audioService.getAudioCaptureStatus()
+                
+                // If enhanced audio is active, get richer audio information
+                if (audioStatus.vadEnabled && audioStatus.streamingEnabled) {
+                    val legacyDelta = com.checkmate.app.services.AudioCaptureService.getLatestAudioDelta()
+                    
+                    // Enhanced audio provides additional context
+                    if (legacyDelta.isNotBlank()) {
+                        val enhancedInfo = buildString {
+                            append(legacyDelta)
+                            
+                            // Add enhanced audio context
+                            if (audioStatus.voiceDetectionRate > 50.0f) {
+                                append(" [Enhanced: High voice activity]")
+                            }
+                            
+                            when (audioStatus.captureMode) {
+                                AudioCaptureMode.ENHANCED_SYSTEM_AUDIO -> append(" [System Audio]")
+                                AudioCaptureMode.ENHANCED_MICROPHONE -> append(" [Enhanced Mic]")
+                                else -> {} // Legacy mode
+                            }
+                        }
+                        enhancedInfo
+                    } else {
+                        ""
+                    }
+                } else {
+                    // Fallback to legacy audio delta
+                    com.checkmate.app.services.AudioCaptureService.getLatestAudioDelta()
+                }
+            } else {
+                ""
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting enhanced audio delta")
+            // Fallback to legacy method
+            try {
+                com.checkmate.app.services.AudioCaptureService.getLatestAudioDelta()
+            } catch (fallbackError: Exception) {
+                Timber.e(fallbackError, "Error in fallback audio delta")
+                ""
+            }
         }
     }
     

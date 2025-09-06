@@ -8,8 +8,11 @@ import redis.asyncio as aioredis
 from app.core.config import settings
 from app.models.schemas import (
     SessionMemory, FrameBundle, SessionSettings, SessionType,
-    NotificationSettings, SessionTypeConfig
+    NotificationSettings, SessionTypeConfig, ErrorResponse, ErrorType, 
+    ErrorSeverity, SessionOperationResult, WSMessageType, HeartbeatMessage,
+    EnhancedErrorResponse
 )
+from .error_recovery_service import error_recovery_service, RetryConfig
 
 
 class SessionManager:
@@ -34,46 +37,131 @@ class SessionManager:
         session_id: str,
         settings_data: Dict[str, any]
     ) -> SessionMemory:
-        """Create a new fact-checking session."""
+        """Create a new fact-checking session with error recovery."""
         
-        # Parse settings
-        session_settings = SessionSettings(
-            sessionType=SessionTypeConfig(**settings_data.get("sessionType", {"type": "MANUAL"})),
-            strictness=settings_data.get("strictness", 0.5),
-            notify=NotificationSettings(**settings_data.get("notify", {"details": True, "links": True}))
+        async def _create_session_operation():
+            # Parse settings
+            session_settings = SessionSettings(
+                sessionType=SessionTypeConfig(**settings_data.get("sessionType", {"type": "MANUAL"})),
+                strictness=settings_data.get("strictness", 0.5),
+                notify=NotificationSettings(**settings_data.get("notify", {"details": True, "links": True}))
+            )
+            
+            # Create session memory
+            session_memory = SessionMemory(
+                settings=session_settings,
+                timeline=[],
+                currentActivity=None,
+                pastContents={},
+                lastClaimsChecked=[]
+            )
+            
+            # Store session
+            await self._store_session(session_id, session_memory)
+            
+            return session_memory
+        
+        # Use error recovery service for robust session creation
+        retry_config = RetryConfig(max_attempts=3, base_delay=1.0)
+        result = await error_recovery_service.retry_operation(
+            _create_session_operation,
+            "create_session",
+            session_id,
+            retry_config
         )
         
-        # Create session memory
-        session_memory = SessionMemory(
-            settings=session_settings,
-            timeline=[],
-            currentActivity=None,
-            pastContents={},
-            lastClaimsChecked=[]
-        )
+        if isinstance(result, EnhancedErrorResponse):
+            # If all retries failed, still attempt to create session in memory
+            session_settings = SessionSettings(
+                sessionType=SessionTypeConfig(**settings_data.get("sessionType", {"type": "MANUAL"})),
+                strictness=settings_data.get("strictness", 0.5),
+                notify=NotificationSettings(**settings_data.get("notify", {"details": True, "links": True}))
+            )
+            
+            session_memory = SessionMemory(
+                settings=session_settings,
+                timeline=[],
+                currentActivity=None,
+                pastContents={},
+                lastClaimsChecked=[]
+            )
+            
+            # Store in memory as fallback
+            self.sessions[session_id] = session_memory
+            return session_memory
         
-        # Store session
-        await self._store_session(session_id, session_memory)
-        
-        return session_memory
+        return result
     
-    async def get_session(self, session_id: str) -> Optional[SessionMemory]:
-        """Retrieve session memory."""
-        if self.redis:
-            try:
+    async def get_session(self, session_id: str) -> SessionOperationResult:
+        """Retrieve session memory with error recovery."""
+        
+        async def _get_session_operation():
+            if self.redis:
                 data = await self.redis.get(f"session:{session_id}")
                 if data:
                     session_data = json.loads(data)
-                    return SessionMemory(**session_data)
-            except Exception as e:
-                print(f"Redis get error: {e}")
+                    session_memory = SessionMemory(**session_data)
+                    return session_memory
+                else:
+                    # Try fallback to in-memory
+                    session_memory = self.sessions.get(session_id)
+                    if session_memory:
+                        return session_memory
+                    else:
+                        raise Exception(f"Session {session_id} not found")
+            else:
+                # Use in-memory storage
+                session_memory = self.sessions.get(session_id)
+                if session_memory:
+                    return session_memory
+                else:
+                    raise Exception(f"Session {session_id} not found")
         
-        # Fallback to in-memory
-        return self.sessions.get(session_id)
+        try:
+            result = await error_recovery_service.retry_operation(
+                _get_session_operation,
+                "get_session",
+                session_id,
+                RetryConfig(max_attempts=2, base_delay=0.5)
+            )
+            
+            if isinstance(result, EnhancedErrorResponse):
+                return SessionOperationResult.error_result(
+                    ErrorResponse(
+                        error_type=ErrorType.SESSION_NOT_FOUND,
+                        severity=ErrorSeverity.MEDIUM,
+                        message=f"Session {session_id} not found after recovery attempts"
+                    )
+                )
+            
+            return SessionOperationResult.success_result(result)
+            
+        except Exception as e:
+            error_response = await error_recovery_service.handle_error_with_recovery(
+                e, "get_session", session_id
+            )
+            return SessionOperationResult.error_result(
+                ErrorResponse(
+                    error_type=error_response.error_type,
+                    severity=error_response.severity,
+                    message=error_response.message
+                )
+            )
     
-    async def update_session(self, session_id: str, session_memory: SessionMemory):
-        """Update session memory."""
-        await self._store_session(session_id, session_memory)
+    async def update_session(self, session_id: str, session_memory: SessionMemory) -> SessionOperationResult:
+        """Update session memory with proper error handling."""
+        try:
+            await self._store_session(session_id, session_memory)
+            return SessionOperationResult.success_result()
+        except Exception as e:
+            return SessionOperationResult.error_result(
+                ErrorResponse(
+                    error_type=ErrorType.SERVICE_UNAVAILABLE,
+                    severity=ErrorSeverity.HIGH,
+                    message=f"Failed to update session {session_id}",
+                    details=str(e)
+                )
+            )
     
     async def _store_session(self, session_id: str, session_memory: SessionMemory):
         """Store session memory in Redis or in-memory."""
@@ -223,44 +311,148 @@ class SessionManager:
         return False
 
 
+class WebSocketConnection:
+    """Represents a WebSocket connection with health monitoring."""
+    
+    def __init__(self, websocket, session_id: str):
+        self.websocket = websocket
+        self.session_id = session_id
+        self.connected_at = datetime.utcnow()
+        self.last_heartbeat = datetime.utcnow()
+        self.is_alive = True
+        
+    async def send_json(self, message: Dict[str, any]):
+        """Send JSON message with error handling."""
+        try:
+            await self.websocket.send_json(message)
+            return True
+        except Exception as e:
+            print(f"Failed to send message to {self.session_id}: {e}")
+            self.is_alive = False
+            return False
+    
+    def update_heartbeat(self):
+        """Update last heartbeat timestamp."""
+        self.last_heartbeat = datetime.utcnow()
+    
+    def is_stale(self, timeout_seconds: int = 30) -> bool:
+        """Check if connection is stale (no heartbeat for timeout period)."""
+        return (datetime.utcnow() - self.last_heartbeat).total_seconds() > timeout_seconds
+
+
 class WebSocketManager:
-    """Manages WebSocket connections for real-time communication."""
+    """Enhanced WebSocket manager with connection health monitoring."""
     
     def __init__(self):
-        self.connections: Dict[str, any] = {}  # session_id -> websocket
+        self.connections: Dict[str, WebSocketConnection] = {}
+        self.heartbeat_interval = 10  # seconds
+        self.connection_timeout = 30  # seconds
+        self._heartbeat_task = None
+    
+    async def start_heartbeat_monitor(self):
+        """Start the heartbeat monitoring task."""
+        if self._heartbeat_task is None:
+            self._heartbeat_task = asyncio.create_task(self._heartbeat_loop())
+    
+    async def stop_heartbeat_monitor(self):
+        """Stop the heartbeat monitoring task."""
+        if self._heartbeat_task:
+            self._heartbeat_task.cancel()
+            try:
+                await self._heartbeat_task
+            except asyncio.CancelledError:
+                pass
+            self._heartbeat_task = None
+    
+    async def _heartbeat_loop(self):
+        """Background task for connection health monitoring."""
+        while True:
+            try:
+                await asyncio.sleep(self.heartbeat_interval)
+                await self._check_connections()
+                await self._send_heartbeats()
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                print(f"Heartbeat loop error: {e}")
+    
+    async def _check_connections(self):
+        """Check and cleanup stale connections."""
+        stale_sessions = []
+        
+        for session_id, connection in self.connections.items():
+            if not connection.is_alive or connection.is_stale(self.connection_timeout):
+                stale_sessions.append(session_id)
+        
+        for session_id in stale_sessions:
+            await self.disconnect(session_id)
+            print(f"Cleaned up stale connection for session {session_id}")
+    
+    async def _send_heartbeats(self):
+        """Send heartbeat messages to all connections."""
+        heartbeat_msg = HeartbeatMessage()
+        
+        for session_id, connection in list(self.connections.items()):
+            success = await connection.send_json(heartbeat_msg.model_dump(by_alias=True))
+            if not success:
+                await self.disconnect(session_id)
     
     async def connect(self, session_id: str, websocket):
         """Register a WebSocket connection for a session."""
-        self.connections[session_id] = websocket
+        connection = WebSocketConnection(websocket, session_id)
+        self.connections[session_id] = connection
+        
+        # Start heartbeat monitor if this is the first connection
+        if len(self.connections) == 1:
+            await self.start_heartbeat_monitor()
+        
+        print(f"WebSocket connected for session {session_id}")
     
     async def disconnect(self, session_id: str):
         """Remove WebSocket connection."""
-        self.connections.pop(session_id, None)
+        if session_id in self.connections:
+            del self.connections[session_id]
+            print(f"WebSocket disconnected for session {session_id}")
+        
+        # Stop heartbeat monitor if no connections remain
+        if len(self.connections) == 0:
+            await self.stop_heartbeat_monitor()
+    
+    def update_heartbeat(self, session_id: str):
+        """Update heartbeat for a specific session."""
+        if session_id in self.connections:
+            self.connections[session_id].update_heartbeat()
     
     async def send_to_session(self, session_id: str, message: Dict[str, any]):
         """Send message to a specific session."""
         if session_id in self.connections:
-            websocket = self.connections[session_id]
-            try:
-                await websocket.send_json(message)
-            except Exception as e:
-                print(f"Failed to send message to {session_id}: {e}")
-                # Remove dead connection
+            connection = self.connections[session_id]
+            success = await connection.send_json(message)
+            if not success:
                 await self.disconnect(session_id)
+            return success
+        return False
     
     async def broadcast_to_all(self, message: Dict[str, any]):
         """Broadcast message to all connected sessions."""
         disconnected = []
         
-        for session_id, websocket in self.connections.items():
-            try:
-                await websocket.send_json(message)
-            except:
+        for session_id, connection in self.connections.items():
+            success = await connection.send_json(message)
+            if not success:
                 disconnected.append(session_id)
         
         # Clean up dead connections
         for session_id in disconnected:
             await self.disconnect(session_id)
+    
+    def get_connection_count(self) -> int:
+        """Get number of active connections."""
+        return len(self.connections)
+    
+    def get_session_ids(self) -> List[str]:
+        """Get list of connected session IDs."""
+        return list(self.connections.keys())
 
 
 # Global instances

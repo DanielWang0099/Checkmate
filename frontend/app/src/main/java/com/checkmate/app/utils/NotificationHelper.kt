@@ -11,6 +11,8 @@ import com.checkmate.app.R
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.NotificationColor
 import com.checkmate.app.data.NotificationPayload
+import com.checkmate.app.data.ErrorResponse
+import com.checkmate.app.data.ErrorSeverity
 import timber.log.Timber
 
 /**
@@ -116,7 +118,9 @@ object NotificationHelper {
         notification: NotificationPayload
     ) {
         // Dismiss action
-        val dismissIntent = Intent("com.checkmate.app.ACTION_DISMISS_NOTIFICATION")
+        val dismissIntent = Intent("com.checkmate.app.ACTION_DISMISS_NOTIFICATION").apply {
+            setClass(context, com.checkmate.app.receivers.CheckmateBroadcastReceiver::class.java)
+        }
         val dismissPendingIntent = PendingIntent.getBroadcast(
             context, 0, dismissIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
@@ -131,6 +135,7 @@ object NotificationHelper {
         // If there are sources, add "View Sources" action
         if (notification.sources.isNotEmpty()) {
             val sourcesIntent = Intent("com.checkmate.app.ACTION_VIEW_SOURCES").apply {
+                setClass(context, com.checkmate.app.receivers.CheckmateBroadcastReceiver::class.java)
                 putExtra("sources", notification.sources.map { it.url }.toTypedArray())
             }
             val sourcesPendingIntent = PendingIntent.getBroadcast(
@@ -163,6 +168,65 @@ object NotificationHelper {
             
         } catch (e: Exception) {
             Timber.e(e, "Error showing error notification")
+        }
+    }
+    
+    // Enhanced error notification for structured error responses
+    fun showErrorNotification(context: Context, errorResponse: ErrorResponse) {
+        try {
+            val notificationManager = context.getSystemService<NotificationManager>() ?: return
+            
+            val title = when (errorResponse.severity) {
+                ErrorSeverity.LOW -> "Minor Issue"
+                ErrorSeverity.MEDIUM -> "Service Issue"
+                ErrorSeverity.HIGH -> "Connection Problem"
+                ErrorSeverity.CRITICAL -> "Critical Error"
+            }
+            
+            val priority = when (errorResponse.severity) {
+                ErrorSeverity.LOW -> NotificationCompat.PRIORITY_LOW
+                ErrorSeverity.MEDIUM -> NotificationCompat.PRIORITY_DEFAULT
+                ErrorSeverity.HIGH -> NotificationCompat.PRIORITY_HIGH
+                ErrorSeverity.CRITICAL -> NotificationCompat.PRIORITY_MAX
+            }
+            
+            val builder = NotificationCompat.Builder(context, CheckmateApplication.NOTIFICATION_CHANNEL_ERRORS)
+                .setSmallIcon(R.drawable.ic_error)
+                .setContentTitle(title)
+                .setContentText(errorResponse.message)
+                .setPriority(priority)
+                .setAutoCancel(true)
+                .setCategory(NotificationCompat.CATEGORY_ERROR)
+            
+            // Add expanded details if available
+            if (!errorResponse.details.isNullOrBlank()) {
+                val expandedText = "${errorResponse.message}\n\n${errorResponse.details}"
+                builder.setStyle(NotificationCompat.BigTextStyle().bigText(expandedText))
+            }
+            
+            // Add retry action for certain error types
+            if (errorResponse.retryAfter != null && errorResponse.retryAfter > 0) {
+                val retryIntent = Intent("com.checkmate.app.ACTION_RETRY_CONNECTION").apply {
+                    setClass(context, com.checkmate.app.receivers.CheckmateBroadcastReceiver::class.java)
+                }
+                val retryPendingIntent = PendingIntent.getBroadcast(
+                    context, 2, retryIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+                
+                builder.addAction(
+                    R.drawable.ic_checkmate,  // Using existing drawable instead of ic_refresh
+                    "Retry",
+                    retryPendingIntent
+                )
+            }
+            
+            notificationManager.notify(AppConfig.NOTIFICATION_ID_ERROR, builder.build())
+            
+        } catch (e: Exception) {
+            Timber.e(e, "Error showing structured error notification")
+            // Fallback to simple error notification
+            showErrorNotification(context, "Error", errorResponse.message)
         }
     }
 

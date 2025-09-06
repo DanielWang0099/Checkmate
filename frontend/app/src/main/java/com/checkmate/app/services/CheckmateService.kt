@@ -182,16 +182,27 @@ class CheckmateService : LifecycleService() {
         try {
             Timber.d("Starting fact-checking session")
             
-            // Initialize network connection
-            networkManager.connect()
-            
             // Start session with default settings
-            val success = sessionManager?.startNewSession() ?: false
+            val sessionStarted = sessionManager?.startNewSession() ?: false
             
-            if (success) {
-                startCaptureLoop()
-                startAudioCapture()
-                updateServiceNotification("Session active")
+            if (sessionStarted) {
+                // Initialize WebSocket connection
+                val connected = networkManager.connectWebSocket()
+                
+                if (connected) {
+                    // Send session start message over WebSocket
+                    val sessionState = sessionManager.getCurrentSessionState()
+                    sessionState?.settings?.let { settings ->
+                        networkManager.sendSessionStart(settings)
+                    }
+                    
+                    startCaptureLoop()
+                    startAudioCapture()
+                    updateServiceNotification("Session active")
+                } else {
+                    Timber.e("Failed to connect WebSocket")
+                    showErrorNotification("Failed to connect to server")
+                }
             } else {
                 Timber.e("Failed to start session")
                 showErrorNotification("Failed to start session")
@@ -209,8 +220,13 @@ class CheckmateService : LifecycleService() {
             
             stopCaptureLoop()
             stopAudioCapture()
+            
+            // Send session stop message over WebSocket
+            networkManager.sendSessionStop()
+            
+            // Stop session and disconnect
             sessionManager?.stopCurrentSession()
-            networkManager.disconnect()
+            networkManager.disconnectWebSocket()
             
             updateServiceNotification("Session stopped")
             

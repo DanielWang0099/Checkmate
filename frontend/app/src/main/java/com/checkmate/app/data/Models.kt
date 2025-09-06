@@ -160,7 +160,7 @@ data class SessionSettings(
     val notify: NotificationSettings
 )
 
-// WebSocket messages
+// WebSocket messages - Must match backend schemas.py
 enum class WSMessageType {
     @SerializedName("frame_bundle")
     FRAME_BUNDLE,
@@ -168,12 +168,20 @@ enum class WSMessageType {
     NOTIFICATION,
     @SerializedName("session_end")
     SESSION_END,
+    @SerializedName("session_start")
+    SESSION_START,
+    @SerializedName("session_stop")
+    SESSION_STOP,
+    @SerializedName("session_status")
+    SESSION_STATUS,
     @SerializedName("error")
     ERROR,
     @SerializedName("ping")
     PING,
     @SerializedName("pong")
-    PONG
+    PONG,
+    @SerializedName("heartbeat")
+    HEARTBEAT
 }
 
 data class WSMessage(
@@ -197,13 +205,176 @@ data class SessionInfo(
     val active: Boolean
 )
 
-// UI State models
+// Error Response Models - Must match backend schemas.py
+enum class ErrorType {
+    @SerializedName("validation_error")
+    VALIDATION_ERROR,
+    @SerializedName("session_not_found")
+    SESSION_NOT_FOUND,
+    @SerializedName("service_unavailable")
+    SERVICE_UNAVAILABLE,
+    @SerializedName("tool_execution_error")
+    TOOL_EXECUTION_ERROR,
+    @SerializedName("rate_limit_exceeded")
+    RATE_LIMIT_EXCEEDED,
+    @SerializedName("network_error")
+    NETWORK_ERROR,
+    @SerializedName("internal_error")
+    INTERNAL_ERROR,
+    @SerializedName("privacy_block")
+    PRIVACY_BLOCK,
+    // Enhanced error types for testing and extended functionality
+    @SerializedName("memory_error")
+    MEMORY_ERROR,
+    @SerializedName("websocket_error")
+    WEBSOCKET_ERROR,
+    @SerializedName("system_error")
+    SYSTEM_ERROR,
+    @SerializedName("battery_error")
+    BATTERY_ERROR,
+    @SerializedName("thermal_error")
+    THERMAL_ERROR,
+    @SerializedName("storage_error")
+    STORAGE_ERROR,
+    @SerializedName("server_error")
+    SERVER_ERROR,
+    @SerializedName("auth_error")
+    AUTH_ERROR,
+    @SerializedName("rate_limit_error")
+    RATE_LIMIT_ERROR,
+    @SerializedName("data_corruption")
+    DATA_CORRUPTION,
+    @SerializedName("performance_error")
+    PERFORMANCE_ERROR
+}
+
+enum class ErrorSeverity {
+    @SerializedName("low")
+    LOW,      // User can continue, fallback available
+    @SerializedName("medium")
+    MEDIUM,   // Feature degraded but session continues
+    @SerializedName("high")
+    HIGH,     // Session should be paused/stopped
+    @SerializedName("critical")
+    CRITICAL  // Immediate termination required
+}
+
+data class ErrorResponse(
+    @SerializedName("errorType")
+    val errorType: ErrorType,
+    val severity: ErrorSeverity,
+    val message: String,
+    val details: String? = null,
+    val timestamp: Date,
+    @SerializedName("correlationId")
+    val correlationId: String? = null,
+    @SerializedName("retryAfter")
+    val retryAfter: Int? = null // seconds
+)
+
+data class ValidationErrorField(
+    val field: String,
+    val message: String,
+    @SerializedName("invalidValue")
+    val invalidValue: Any? = null
+)
+
+data class ValidationErrorResponse(
+    @SerializedName("errorType")
+    val errorType: ErrorType = ErrorType.VALIDATION_ERROR,
+    val severity: ErrorSeverity,
+    val message: String,
+    val details: String? = null,
+    val timestamp: Date,
+    @SerializedName("correlationId")
+    val correlationId: String? = null,
+    @SerializedName("retryAfter")
+    val retryAfter: Int? = null,
+    @SerializedName("fieldErrors")
+    val fieldErrors: List<ValidationErrorField>
+)
+
+// UI State models - Enhanced with error handling
 data class SessionState(
     val isActive: Boolean = false,
     val sessionId: String? = null,
     val settings: SessionSettings? = null,
     val lastNotification: NotificationPayload? = null,
-    val error: String? = null
+    val error: String? = null,
+    val errorResponse: ErrorResponse? = null,
+    val connectionState: ConnectionState = ConnectionState.DISCONNECTED,
+    val lastHeartbeat: Date? = null,
+    val sessionMemory: SessionMemory? = null,
+    val deviceHints: DeviceHints? = null,
+    val sessionStartTime: Date? = null,
+    val lastActivityTime: Date? = null
+)
+
+enum class ConnectionState {
+    DISCONNECTED,
+    CONNECTING,
+    CONNECTED,
+    RECONNECTING,
+    ERROR
+}
+
+// Session Memory Models (from backend)
+data class TimelineEvent(
+    val t: String, // Time in mm:ss format
+    val event: String // Description of what happened
+)
+
+data class CurrentActivity(
+    val id: String,
+    val app: String,
+    val media: MediaType,
+    @SerializedName("description")
+    val desc: String
+)
+
+data class PastContent(
+    val app: String,
+    val media: MediaType,
+    @SerializedName("description")
+    val desc: String,
+    @SerializedName("hasVideo")
+    val hasVideo: Boolean,
+    @SerializedName("hasAudio")
+    val hasAudio: Boolean,
+    val publisher: String? = null,
+    val topic: String? = null,
+    @SerializedName("contextNotes")
+    val contextNotes: String
+)
+
+enum class ClaimLabel {
+    @SerializedName("supported")
+    SUPPORTED,
+    @SerializedName("contested")
+    CONTESTED,
+    @SerializedName("misleading")
+    MISLEADING,
+    @SerializedName("false")
+    FALSE,
+    @SerializedName("uncertain")
+    UNCERTAIN
+}
+
+data class LastClaimChecked(
+    val claim: String,
+    val status: ClaimLabel,
+    val sources: List<Source> = emptyList()
+)
+
+data class SessionMemory(
+    val settings: SessionSettings,
+    val timeline: List<TimelineEvent> = emptyList(),
+    @SerializedName("currentActivity")
+    val currentActivity: CurrentActivity? = null,
+    @SerializedName("pastContents")
+    val pastContents: Map<String, PastContent> = emptyMap(),
+    @SerializedName("lastClaimsChecked")
+    val lastClaimsChecked: List<LastClaimChecked> = emptyList()
 )
 
 data class PreferencesState(
@@ -275,4 +446,18 @@ data class AppSourceInfo(
     val readableName: String,
     val category: String? = null,
     val isSystemApp: Boolean = false
+)
+
+// Device monitoring models
+data class BatteryStatus(
+    val level: Int,
+    val isCharging: Boolean,
+    val temperature: Int = 0,
+    val isPowerSaving: Boolean = false
+)
+
+data class PerformanceHints(
+    val shouldReduceCapture: Boolean = false,
+    val shouldReduceProcessing: Boolean = false,
+    val suggestedCaptureInterval: Long = 30L
 )

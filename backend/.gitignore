@@ -175,3 +175,6 @@ cython_debug/
 # Local development
 .DS_Store
 Thumbs.db
+
+# Google application credentials
+checkmate-471115-663004e84da7.json

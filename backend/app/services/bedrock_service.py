@@ -2,15 +2,20 @@
 
 import json
 import asyncio
+import logging
 from typing import Dict, Any, List, Optional, Union
 import boto3
 from botocore.exceptions import ClientError
 from app.core.config import settings
 from app.models.schemas import (
     SessionMemory, FrameBundle, ManagerResponse, FactCheckResult,
-    AgentContext, MediaType, NotificationColor
+    AgentContext, TextImageAgentContext, VideoAgentContext, AgentContextUnion,
+    MediaType, NotificationColor, ErrorResponse, ErrorType, ErrorSeverity
 )
 from app.services.tools import tools
+from app.core.config import settings, STRICTNESS_THRESHOLDS, SOURCE_TIERS
+
+logger = logging.getLogger(__name__)  # ✅ CRITICAL FIX: Added missing logger
 
 
 class BedrockService:
@@ -77,25 +82,44 @@ class BedrockService:
             raise Exception(f"Model invocation failed: {e}")
     
     async def process_tool_calls(self, tool_calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Process tool calls and return results."""
+        """Process tool calls and return results with proper error handling."""
         results = []
         
         for tool_call in tool_calls:
             tool_name = tool_call.get("name")
             tool_input = tool_call.get("input", {})
+            tool_use_id = tool_call.get("id")
             
             try:
                 result = await tools.call_tool(tool_name, **tool_input)
                 results.append({
-                    "tool_use_id": tool_call.get("id"),
+                    "tool_use_id": tool_use_id,
                     "type": "tool_result",
-                    "content": json.dumps(result, default=str)
+                    "content": [{"type": "text", "text": json.dumps(result, default=str)}]
                 })
             except Exception as e:
+                # Determine error type based on exception
+                if "network" in str(e).lower() or "timeout" in str(e).lower():
+                    error_type = "network_error"
+                    fallback_message = "Unable to verify now due to network issues. Continuing with local analysis."
+                elif "rate limit" in str(e).lower():
+                    error_type = "rate_limit"
+                    fallback_message = "Rate limit reached. Verification temporarily limited."
+                elif "blocked" in str(e).lower() or "forbidden" in str(e).lower():
+                    error_type = "privacy_block"
+                    fallback_message = "Unable to verify now due to privacy restrictions."
+                else:
+                    error_type = "tool_error"
+                    fallback_message = f"Tool {tool_name} unavailable. Continuing with limited verification."
+                
                 results.append({
-                    "tool_use_id": tool_call.get("id"),
+                    "tool_use_id": tool_use_id,
                     "type": "tool_result",
-                    "content": f"Error: {str(e)}",
+                    "content": [{"type": "text", "text": json.dumps({
+                        "error_type": error_type,
+                        "message": fallback_message,
+                        "details": str(e)
+                    }, default=str)}],
                     "is_error": True
                 })
         
@@ -187,11 +211,55 @@ Return STRICT JSON:
         if content and content[0].get("type") == "text":
             try:
                 result_json = json.loads(content[0]["text"])
+                
+                # Handle polymorphic AgentContext with proper validation
+                if "agentContext" in result_json and result_json["agentContext"]:
+                    route = result_json.get("route")
+                    agent_context_data = result_json["agentContext"]
+                    
+                    # CRITICAL FIX: Validate and construct context based on data structure AND route
+                    validated_context = self._validate_and_construct_agent_context(
+                        route, agent_context_data
+                    )
+                    result_json["agentContext"] = validated_context
+                
                 return ManagerResponse(**result_json)
             except json.JSONDecodeError as e:
                 raise Exception(f"Failed to parse manager response: {e}")
+            except Exception as e:
+                raise Exception(f"Failed to build AgentContext: {e}")
         
         raise Exception("Invalid response format from manager agent")
+    
+    def _validate_and_construct_agent_context(
+        self, route: str, agent_context_data: Dict[str, Any]
+    ) -> AgentContextUnion:
+        """
+        Validate and construct the appropriate AgentContext based on route and data.
+        
+        CRITICAL: This ensures type safety and prevents runtime errors.
+        """
+        # Add context_type discriminator based on route
+        if route == MediaType.TEXT_IMAGE:
+            agent_context_data["contextType"] = "text_image"
+            # Validate required fields
+            if "imageRef" not in agent_context_data:
+                raise ValueError(f"TEXT_IMAGE route requires 'imageRef' field in agent context")
+            return TextImageAgentContext(**agent_context_data)
+            
+        elif route in [MediaType.SHORT_VIDEO, MediaType.LONG_VIDEO]:
+            agent_context_data["contextType"] = "video"
+            # Validate required fields
+            if "transcriptDelta" not in agent_context_data:
+                raise ValueError(f"VIDEO route requires 'transcriptDelta' field in agent context")
+            return VideoAgentContext(**agent_context_data)
+            
+        elif route == MediaType.TEXT:
+            agent_context_data["contextType"] = "text"
+            return AgentContext(**agent_context_data)
+            
+        else:
+            raise ValueError(f"Invalid route '{route}' for agent context construction")
 
 
 class MediaAgent:
@@ -202,9 +270,68 @@ class MediaAgent:
         self.media_type = media_type
         self.tools_config = tools.get_tool_descriptions()
     
-    async def fact_check(self, agent_context: AgentContext) -> FactCheckResult:
-        """Perform fact-checking for the given context."""
+    async def fact_check(self, agent_context: AgentContextUnion, strictness: float = 0.5) -> FactCheckResult:
+        """Perform fact-checking for the given context with strictness policy."""
         raise NotImplementedError("Subclasses must implement fact_check method")
+    
+    def apply_strictness_filter(self, fact_check_result: FactCheckResult, strictness: float) -> FactCheckResult:
+        """Filter and adjust results based on strictness level."""
+        thresholds = STRICTNESS_THRESHOLDS.get(strictness, STRICTNESS_THRESHOLDS[0.5])
+        
+        filtered_claims = []
+        for claim in fact_check_result.claims:
+            # Only include claims that meet strictness confidence threshold
+            if claim.confidence >= thresholds["min_confidence"]:
+                # Check source requirements
+                has_sufficient_sources = self._validate_sources(claim.sources, thresholds)
+                if has_sufficient_sources:
+                    filtered_claims.append(claim)
+        
+        return FactCheckResult(
+            claims=filtered_claims,
+            notes=fact_check_result.notes,
+            summary=fact_check_result.summary,
+            sources=fact_check_result.sources
+        )
+    
+    def _validate_sources(self, sources: List, thresholds: Dict[str, Any]) -> bool:
+        """Validate if sources meet strictness requirements."""
+        if thresholds["min_sources"] == 0:
+            return True
+            
+        tier_a_count = sum(1 for source in sources if source.tier == "A")
+        tier_b_count = sum(1 for source in sources if source.tier == "B") 
+        tier_c_count = sum(1 for source in sources if source.tier == "C")
+        
+        # Check tier A/B requirements
+        if tier_a_count >= 1 or tier_b_count >= 1:
+            return True
+            
+        # Check if tier C is allowed and sufficient
+        if thresholds["tier_c_allowed"] and tier_c_count >= thresholds["min_sources"]:
+            return True
+            
+        return False
+    
+    @staticmethod
+    def classify_source_tier(url: str) -> str:
+        """Classify source tier based on URL domain."""
+        domain = url.lower()
+        
+        for tier_a_domain in SOURCE_TIERS["A"]:
+            if tier_a_domain in domain:
+                return "A"
+                
+        for tier_b_domain in SOURCE_TIERS["B"]:
+            if tier_b_domain in domain:
+                return "B"
+                
+        for tier_c_domain in SOURCE_TIERS["C"]:
+            if tier_c_domain in domain:
+                return "C"
+                
+        # Default to tier B for unknown but established domains
+        return "B"
     
     async def _invoke_with_tools(self, system_prompt: str, user_prompt: str) -> FactCheckResult:
         """Invoke model with tool calling capability."""
@@ -262,13 +389,20 @@ class MediaAgent:
                         except:
                             pass
                     
-                    # Fallback: create empty result
+                    # Fallback: create empty result with all required fields
                     return FactCheckResult(
                         claims=[],
-                        notes=f"Failed to parse agent response: {text_content}"
+                        notes=f"Failed to parse agent response: {text_content}",
+                        summary="Unable to parse fact-check response",
+                        sources=[]
                     )
         
-        return FactCheckResult(claims=[], notes="Maximum tool iterations reached")
+        return FactCheckResult(
+            claims=[], 
+            notes="Maximum tool iterations reached",
+            summary="Fact-checking incomplete due to iteration limit",
+            sources=[]
+        )
 
 
 class TextAgent(MediaAgent):
@@ -281,18 +415,38 @@ Avoid opinions; focus on factual assertions.
 
 TOOLS: web_search, fetch_url, claim_check
 
+SOURCE TIERS:
+- Tier A: Wikipedia, Britannica, Nature, Science.org, WHO, CDC
+- Tier B: Reuters, AP, BBC, NPR, PBS, FactCheck.org, Snopes  
+- Tier C: YouTube, Twitter, Facebook, TikTok
+
 OUTPUT JSON:
-{"claims":[{"text":string,"label":"supported|misleading|false|uncertain","confidence":0..1,"severity":0..1,"sources":[{"title":string,"url":string,"tier":"A|B|C","directQuoteMatch":bool}]}],"notes":string}"""
+{"claims":[{"text":string,"label":"supported|misleading|false|uncertain","confidence":0..1,"severity":0..1,"sources":[{"title":string,"url":string,"tier":"A|B|C","directQuoteMatch":bool}]}],"notes":string,"summary":string,"sources":[{"title":string,"url":string,"tier":"A|B|C"}]}
+
+CRITICAL: Always include 'summary' (brief overview) and 'sources' (all sources used) fields."""
     
     def __init__(self, bedrock_service: BedrockService):
         super().__init__(bedrock_service, MediaType.TEXT)
     
-    async def fact_check(self, agent_context: AgentContext) -> FactCheckResult:
-        user_prompt = f"""Agent context: {agent_context.model_dump_json(by_alias=True, indent=2)}
+    async def fact_check(self, agent_context: AgentContextUnion, strictness: float = 0.5) -> FactCheckResult:
+        """Perform fact-checking for text content with type validation."""
+        # CRITICAL: Validate context type matches agent capability
+        if not isinstance(agent_context, AgentContext) or agent_context.context_type != "text":
+            raise ValueError(f"TextAgent requires AgentContext with context_type='text', got {type(agent_context)} with context_type='{getattr(agent_context, 'context_type', 'unknown')}'")
+        
+        # Add strictness context to prompt
+        strictness_guidance = f"""STRICTNESS LEVEL: {strictness}
+Confidence threshold: {STRICTNESS_THRESHOLDS.get(strictness, STRICTNESS_THRESHOLDS[0.5])['min_confidence']}
+Apply appropriate fact-checking rigor for this strictness level."""
+        
+        user_prompt = f"""{strictness_guidance}
+
+Agent context: {agent_context.model_dump_json(by_alias=True, indent=2)}
 
 Please fact-check the provided text content. Extract factual claims and verify them using available tools."""
         
-        return await self._invoke_with_tools(self.SYSTEM_PROMPT, user_prompt)
+        result = await self._invoke_with_tools(self.SYSTEM_PROMPT, user_prompt)
+        return self.apply_strictness_filter(result, strictness)
 
 
 class TextImageAgent(MediaAgent):
@@ -300,18 +454,61 @@ class TextImageAgent(MediaAgent):
     
     SYSTEM_PROMPT = """You verify text in the presence of an image.
 Check caption-image consistency, prior uses of the image, and numeric/scientific claims.
+Your main concern is that caption of image matches the image and similarity reverse search 
+so that the image used is in the appropriate context.
+
 TOOLS: reverse_image_search, web_search, fetch_url, claim_check
-OUTPUT JSON as in Text agent."""
+
+SOURCE TIERS:
+- Tier A: Wikipedia, Britannica, Nature, Science.org, WHO, CDC
+- Tier B: Reuters, AP, BBC, NPR, PBS, FactCheck.org, Snopes
+- Tier C: YouTube, Twitter, Facebook, TikTok
+
+OUTPUT JSON:
+{"claims":[{"text":string,"label":"supported|misleading|false|uncertain","confidence":0..1,"severity":0..1,"sources":[{"title":string,"url":string,"tier":"A|B|C","directQuoteMatch":bool}]}],"notes":string,"summary":string,"sources":[{"title":string,"url":string,"tier":"A|B|C"}]}
+
+CRITICAL: Always include 'summary' (brief overview) and 'sources' (all sources used) fields."""
     
     def __init__(self, bedrock_service: BedrockService):
         super().__init__(bedrock_service, MediaType.TEXT_IMAGE)
     
-    async def fact_check(self, agent_context: AgentContext) -> FactCheckResult:
-        user_prompt = f"""Agent context: {agent_context.model_dump_json(by_alias=True, indent=2)}
-
-Please fact-check the text content and verify the image consistency. Use reverse image search to check if the image has been used in different contexts."""
+    async def fact_check(self, agent_context: AgentContextUnion, strictness: float = 0.5) -> FactCheckResult:
+        """Perform fact-checking for text+image content with type validation."""
+        # CRITICAL: Validate context type matches agent capability
+        if not isinstance(agent_context, TextImageAgentContext) or agent_context.context_type != "text_image":
+            raise ValueError(f"TextImageAgent requires TextImageAgentContext with context_type='text_image', got {type(agent_context)} with context_type='{getattr(agent_context, 'context_type', 'unknown')}'")
         
-        return await self._invoke_with_tools(self.SYSTEM_PROMPT, user_prompt)
+        # Validate required fields
+        if not agent_context.image_ref:
+            raise ValueError("TextImageAgentContext requires non-empty image_ref field")
+        
+        # ✅ CRITICAL ENHANCEMENT: Get actual image URL from S3 for tool usage
+        try:
+            from app.services.s3_service import s3_service
+            image_url = await s3_service.get_agent_context_url(agent_context.image_ref)
+            logger.info(f"Retrieved image URL for AgentContext: {agent_context.image_ref}")
+        except Exception as e:
+            logger.warning(f"Failed to get S3 URL for image_ref {agent_context.image_ref}: {e}")
+            # Fallback: use image_ref as-is (might be external URL)
+            image_url = agent_context.image_ref
+        
+        # Add strictness context to prompt
+        strictness_guidance = f"""STRICTNESS LEVEL: {strictness}
+Confidence threshold: {STRICTNESS_THRESHOLDS.get(strictness, STRICTNESS_THRESHOLDS[0.5])['min_confidence']}
+Focus on image-text consistency verification with appropriate rigor."""
+        
+        user_prompt = f"""{strictness_guidance}
+
+Agent context: {agent_context.model_dump_json(by_alias=True, indent=2)}
+
+Please fact-check the text content and verify the image consistency. Use reverse image search to check if the image has been used in different contexts.
+Image reference: {agent_context.image_ref}
+Actual image URL for tools: {image_url}
+
+CRITICAL: Use the actual image URL for reverse image search and analysis tools."""
+        
+        result = await self._invoke_with_tools(self.SYSTEM_PROMPT, user_prompt)
+        return self.apply_strictness_filter(result, strictness)
 
 
 class VideoAgent(MediaAgent):
@@ -320,20 +517,52 @@ class VideoAgent(MediaAgent):
     SYSTEM_PROMPT = """You verify claims in video content.
 For short videos: Segment recent content into claims; use platform metadata to avoid satire/fiction false positives.
 For long videos: Use metadata for channel credibility; align transcript to claims; avoid taking quotes out of context.
-Handle rapid topic switches gracefully.
+Handle rapid topic switches gracefully. Focus on extracting as much context as possible: 
+if URL is identified, use tools such as Youtube API to retrieve info about user channel content, 
+hashtags and content type to avoid scenarios such as marking a fact said in a science fiction 
+channel as false (obviously false as it is science fiction). Beware fast content change. 
+Efficiently separate what might be from one short/reel from another one. The LLM should decide 
+if it is in a rapid changing environment (shorts or reels scrolling), or in a long video.
 
 TOOLS: yt_meta, tiktok_meta, web_search, fetch_url, claim_check
-OUTPUT JSON as in Text agent."""
+
+SOURCE TIERS:
+- Tier A: Wikipedia, Britannica, Nature, Science.org, WHO, CDC
+- Tier B: Reuters, AP, BBC, NPR, PBS, FactCheck.org, Snopes
+- Tier C: YouTube, Twitter, Facebook, TikTok
+
+OUTPUT JSON:
+{"claims":[{"text":string,"label":"supported|misleading|false|uncertain","confidence":0..1,"severity":0..1,"sources":[{"title":string,"url":string,"tier":"A|B|C","directQuoteMatch":bool}]}],"notes":string,"summary":string,"sources":[{"title":string,"url":string,"tier":"A|B|C"}]}
+
+CRITICAL: Always include 'summary' (brief overview) and 'sources' (all sources used) fields."""
     
     def __init__(self, bedrock_service: BedrockService):
         super().__init__(bedrock_service, MediaType.LONG_VIDEO)  # Can handle both
     
-    async def fact_check(self, agent_context: AgentContext) -> FactCheckResult:
-        user_prompt = f"""Agent context: {agent_context.model_dump_json(by_alias=True, indent=2)}
-
-Please fact-check the video content. Use platform metadata to understand context and credibility. Be aware of potential rapid content changes in short-form videos."""
+    async def fact_check(self, agent_context: AgentContextUnion, strictness: float = 0.5) -> FactCheckResult:
+        """Perform fact-checking for video content with type validation."""
+        # CRITICAL: Validate context type matches agent capability
+        if not isinstance(agent_context, VideoAgentContext) or agent_context.context_type != "video":
+            raise ValueError(f"VideoAgent requires VideoAgentContext with context_type='video', got {type(agent_context)} with context_type='{getattr(agent_context, 'context_type', 'unknown')}'")
         
-        return await self._invoke_with_tools(self.SYSTEM_PROMPT, user_prompt)
+        # Validate required fields
+        if not agent_context.transcript_delta:
+            raise ValueError("VideoAgentContext requires non-empty transcript_delta field")
+        
+        # Add strictness context to prompt
+        strictness_guidance = f"""STRICTNESS LEVEL: {strictness}
+Confidence threshold: {STRICTNESS_THRESHOLDS.get(strictness, STRICTNESS_THRESHOLDS[0.5])['min_confidence']}
+Apply appropriate fact-checking rigor considering platform context (entertainment vs news)."""
+        
+        user_prompt = f"""{strictness_guidance}
+
+Agent context: {agent_context.model_dump_json(by_alias=True, indent=2)}
+
+Please fact-check the video content. Use platform metadata to understand context and credibility. Be aware of potential rapid content changes in short-form videos.
+Transcript delta: {agent_context.transcript_delta}"""
+        
+        result = await self._invoke_with_tools(self.SYSTEM_PROMPT, user_prompt)
+        return self.apply_strictness_filter(result, strictness)
 
 
 class AgentOrchestrator:
@@ -354,12 +583,15 @@ class AgentOrchestrator:
         # Step 2: Route to appropriate media agent if needed
         if manager_response.route != "none" and manager_response.agent_context:
             try:
+                # Get strictness from session memory
+                strictness = memory.settings.strictness
+                
                 if manager_response.route == MediaType.TEXT:
-                    fact_check_result = await self.text_agent.fact_check(manager_response.agent_context)
+                    fact_check_result = await self.text_agent.fact_check(manager_response.agent_context, strictness)
                 elif manager_response.route == MediaType.TEXT_IMAGE:
-                    fact_check_result = await self.text_image_agent.fact_check(manager_response.agent_context)
+                    fact_check_result = await self.text_image_agent.fact_check(manager_response.agent_context, strictness)
                 elif manager_response.route in [MediaType.SHORT_VIDEO, MediaType.LONG_VIDEO]:
-                    fact_check_result = await self.video_agent.fact_check(manager_response.agent_context)
+                    fact_check_result = await self.video_agent.fact_check(manager_response.agent_context, strictness)
                 else:
                     fact_check_result = None
                 
@@ -378,13 +610,14 @@ Please provide a final notification that incorporates both the content analysis 
 Focus on actionable insights for the user."""
 
                     try:
-                        synthesis_response = await self.bedrock.invoke_with_tools(
+                        synthesis_response = await self.bedrock.invoke_model(
+                            model_id=settings.bedrock_agent_model,
                             system_prompt=self.manager.SYSTEM_PROMPT,
                             messages=[{
                                 "role": "user",
                                 "content": synthesis_prompt
                             }],
-                            tools=[]  # No tools needed for synthesis
+                            tools_config=None  # No tools needed for synthesis
                         )
                         
                         # Parse synthesis response and update notifications

@@ -44,7 +44,8 @@ class Settings(BaseSettings):
     
     # S3 Configuration
     s3_bucket_name: str = "checkmate-temp-images"
-    s3_region: str = "us-east-1"
+    s3_region: str = "us-east-1" 
+    aws_s3_bucket: str = "checkmate-temp-images"  # ✅ CRITICAL FIX: Added for S3Service compatibility
     
     # Rate Limiting
     rate_limit_per_minute: int = 60

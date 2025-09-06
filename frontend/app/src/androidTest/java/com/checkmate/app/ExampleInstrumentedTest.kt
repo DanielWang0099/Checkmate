@@ -19,6 +19,8 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.checkmate.app", appContext.packageName)
+        // Debug builds append .debug to the package name
+        assertTrue("Package name should start with com.checkmate.app", 
+                   appContext.packageName.startsWith("com.checkmate.app"))
     }
 }

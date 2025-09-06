@@ -35,4 +35,24 @@
     <color name="text_primary_dark">#E0E0E0</color>
     <color name="text_secondary_light">#616161</color>
     <color name="text_secondary_dark">#BDBDBD</color>
+    
+    <!-- WebSocket Status Colors (referenced in layouts) -->
+    <color name="success_green">#4CAF50</color>
+    <color name="warning_orange">#FF9800</color>
+    <color name="warning_orange_dark">#F57C00</color>
+    <color name="error_red">#F44336</color>
+    <color name="error_red_dark">#D32F2F</color>
+    <color name="error_red_light">#FFCDD2</color>
+    
+    <!-- Info Colors -->
+    <color name="info_blue">#2196F3</color>
+    <color name="info_blue_light">#E3F2FD</color>
+    <color name="info_blue_dark">#1976D2</color>
+    
+    <!-- UI Element Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#616161</color>
+    <color name="text_tertiary">#9E9E9E</color>
+    <color name="background_secondary">#F5F5F5</color>
+    <color name="border_light">#E0E0E0</color>
 </resources>
