@@ -77,6 +77,13 @@ graph TB
 - **Google Custom Search API** key
 - **YouTube Data API** key
 
+### Backend Requirements
+- **Python 3.11+**
+- **Docker Desktop** (for Redis)
+- **Redis 7.0+** (auto-managed via Docker)
+- **AWS Account** with Bedrock access
+- **Google API Keys** for search services
+
 ### Android Requirements
 - **Android Studio Arctic Fox** or later
 - **Android SDK API 24+** (Android 7.0+)
@@ -91,23 +98,30 @@ git clone https://github.com/DanielWang0099/Checkmate.git
 cd Checkmate
 ```
 
-### 2. Backend Setup
+### 2. Backend Setup (Automatic Redis)
 ```bash
 cd backend
+
+# Install Python dependencies (includes Docker SDK)
 pip install -r requirements.txt
 
 # Configure environment variables
 cp .env.example .env
 # Edit .env with your API keys
 
-# Start Redis server
-redis-server
-
-# Run the backend
+# Start backend (Redis starts automatically!)
 python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### 3. Android Setup
+### 3. Backend Setup (Docker Compose Alternative)
+```bash
+cd backend
+
+# Start everything with Docker Compose
+docker-compose up --build
+```
+
+### 4. Android Setup
 ```bash
 cd frontend
 ./gradlew assembleDebug

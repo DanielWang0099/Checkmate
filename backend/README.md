@@ -32,9 +32,14 @@ graph TB
 
 ### System Requirements
 - **Python 3.11+**
-- **Redis Server 7.0+**
+- **Docker Desktop** (for Redis)
+- **Redis Server 7.0+** (via Docker or local install)
 - **4GB+ RAM** (recommended)
 - **2+ CPU cores** (recommended)
+
+### Required Software
+1. **Docker Desktop**: [Download here](https://www.docker.com/products/docker-desktop/)
+2. **Python 3.11+**: [Download here](https://www.python.org/downloads/)
 
 ### API Services
 - **AWS Account** with Bedrock access
@@ -47,7 +52,31 @@ See `requirements.txt` for complete list of dependencies.
 
 ## 🚀 Installation & Setup
 
-### 1. Environment Setup
+### 1. Docker & Redis Setup
+
+#### Option A: Automatic Redis (Recommended)
+The backend will automatically start Redis when needed:
+```bash
+# Just start your backend - Redis starts automatically!
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+#### Option B: Manual Redis Setup
+```bash
+# Start Redis container manually
+docker run -d --name redis-dev -p 6379:6379 redis:7.0-alpine
+
+# Verify Redis is running
+docker ps
+```
+
+#### Option C: Using Docker Compose
+```bash
+# Start both Redis and backend
+docker-compose up --build
+```
+
+### 2. Environment Setup
 
 ```bash
 # Clone the repository
@@ -58,11 +87,11 @@ cd Checkmate/backend
 python -m venv checkmate-env
 source checkmate-env/bin/activate  # On Windows: checkmate-env\Scripts\activate
 
-# Install dependencies
+# Install dependencies (includes Docker SDK for Redis auto-start)
 pip install -r requirements.txt
 ```
 
-### 2. Configuration
+### 3. Configuration
 
 Create `.env` file in the backend directory:
 

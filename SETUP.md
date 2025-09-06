@@ -9,6 +9,13 @@ This comprehensive guide will walk you through setting up the complete Checkmate
 - **RAM**: 8GB minimum, 16GB recommended
 - **Storage**: 10GB free space
 - **Internet**: Stable broadband connection
+- **Docker Desktop**: Recommended for Redis (alternatively install Redis natively)
+
+### Required Software
+- **Python 3.11+**
+- **Android Studio** (latest stable)
+- **Docker Desktop** (recommended for Redis)
+- **Git**
 
 ### Required Accounts & Services
 - **AWS Account** with Bedrock access
@@ -56,7 +63,14 @@ Required API keys to obtain:
 ### Phase 3: Backend Services (10 minutes)
 
 ```bash
-# 1. Install and start Redis
+# 1. Install Docker Desktop (recommended)
+# Download from: https://www.docker.com/products/docker-desktop/
+# Start Docker Desktop application
+
+# 2. Start the backend (Redis will auto-start!)
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+# Alternative: Manual Redis setup
 # Windows (via Chocolatey)
 choco install redis-64
 redis-server
@@ -68,9 +82,6 @@ brew services start redis
 # Ubuntu/Debian
 sudo apt update && sudo apt install redis-server
 sudo systemctl start redis
-
-# 2. Start the backend
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### Phase 4: Android Setup (5 minutes)
@@ -227,7 +238,30 @@ CLEANUP_INTERVAL=300
 
 ### Step 1.5: Redis Installation & Setup
 
-#### Windows
+#### 🐳 Option A: Docker (Recommended)
+```bash
+# 1. Install Docker Desktop
+# Download from: https://www.docker.com/products/docker-desktop/
+
+# 2. Start Docker Desktop application
+
+# 3. Run Redis container
+docker run -d --name checkmate-redis -p 6379:6379 redis:7-alpine
+
+# 4. Verify Redis is running
+docker exec -it checkmate-redis redis-cli ping
+# Should return: PONG
+
+# 5. (Optional) Use Docker Compose
+cd backend
+docker-compose up -d redis
+```
+
+**✨ Automatic Startup**: The backend will automatically detect and start Redis if Docker is available!
+
+#### Option B: Native Installation
+
+##### Windows
 ```bash
 # Option 1: Chocolatey
 choco install redis-64
@@ -239,7 +273,7 @@ choco install redis-64
 redis-server
 ```
 
-#### macOS
+##### macOS
 ```bash
 # Install via Homebrew
 brew install redis
@@ -251,7 +285,7 @@ brew services start redis
 redis-server
 ```
 
-#### Linux (Ubuntu/Debian)
+##### Linux (Ubuntu/Debian)
 ```bash
 # Install Redis
 sudo apt update
@@ -264,15 +298,6 @@ sudo systemctl enable redis
 # Test Redis
 redis-cli ping
 # Should return: PONG
-```
-
-#### Docker Alternative
-```bash
-# Run Redis in Docker
-docker run -d --name checkmate-redis -p 6379:6379 redis:7-alpine
-
-# Verify
-docker exec -it checkmate-redis redis-cli ping
 ```
 
 ### Step 1.6: Start Backend
