@@ -78,6 +78,16 @@ class MainActivity : ComponentActivity() {
             Timber.w("Notification permission denied")
         }
     }
+    
+    private val recordAudioPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            checkAllPermissions()
+        } else {
+            Timber.w("Record audio permission denied")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,6 +156,10 @@ class MainActivity : ComponentActivity() {
         when {
             !PermissionHelper.hasNotificationPermission(this) -> {
                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+            
+            !PermissionHelper.hasRecordAudioPermission(this) -> {
+                recordAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
             }
             
             !PermissionHelper.isAccessibilityServiceEnabled(this) -> {

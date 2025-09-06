@@ -1,0 +1,270 @@
+--------- beginning of main
+09-06 19:13:07.322 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.357 E/IPCThreadState( 6539): Binder transaction failure. id: 524058, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.362 E/IPCThreadState( 6539): Binder transaction failure. id: 524062, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.368 E/IPCThreadState( 6539): Binder transaction failure. id: 524070, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.370 E/IPCThreadState( 6539): Binder transaction failure. id: 524089, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.377 E/IPCThreadState( 6539): Binder transaction failure. id: 524093, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.379 E/IPCThreadState( 6539): Binder transaction failure. id: 524097, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.380 E/IPCThreadState( 6539): Binder transaction failure. id: 524101, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.382 E/IPCThreadState( 6539): Binder transaction failure. id: 524111, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.385 E/IPCThreadState( 6539): Binder transaction failure. id: 524120, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.385 E/IPCThreadState( 6539): Binder transaction failure. id: 524124, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.387 E/IPCThreadState( 6539): Binder transaction failure. id: 524133, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.387 E/IPCThreadState( 6539): Binder transaction failure. id: 524137, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.387 E/IPCThreadState( 6539): Binder transaction failure. id: 524141, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.388 E/IPCThreadState( 6539): Binder transaction failure. id: 524145, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.394 E/IPCThreadState( 6539): Binder transaction failure. id: 524169, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.395 E/IPCThreadState( 6539): Binder transaction failure. id: 524173, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.396 E/IPCThreadState( 6539): Binder transaction failure. id: 524177, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.397 E/IPCThreadState( 6539): Binder transaction failure. id: 524181, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.397 E/IPCThreadState( 6539): Binder transaction failure. id: 524185, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.398 E/IPCThreadState( 6539): Binder transaction failure. id: 524190, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.399 E/IPCThreadState( 6539): Binder transaction failure. id: 524194, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.400 E/IPCThreadState( 6539): Binder transaction failure. id: 524198, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.401 E/IPCThreadState( 6539): Binder transaction failure. id: 524202, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.401 E/IPCThreadState( 6539): Binder transaction failure. id: 524206, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.402 E/IPCThreadState( 6539): Binder transaction failure. id: 524210, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.403 E/IPCThreadState( 6539): Binder transaction failure. id: 524214, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.404 E/IPCThreadState( 6539): Binder transaction failure. id: 524218, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.413 E/IPCThreadState( 6539): Binder transaction failure. id: 524233, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.414 E/IPCThreadState( 6539): Binder transaction failure. id: 524237, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.415 E/IPCThreadState( 6539): Binder transaction failure. id: 524241, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.415 E/IPCThreadState( 6539): Binder transaction failure. id: 524246, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.416 E/IPCThreadState( 6539): Binder transaction failure. id: 524250, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.417 E/IPCThreadState( 6539): Binder transaction failure. id: 524254, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.417 E/IPCThreadState( 6539): Binder transaction failure. id: 524258, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.418 E/IPCThreadState( 6539): Binder transaction failure. id: 524262, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.419 E/IPCThreadState( 6539): Binder transaction failure. id: 524266, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.420 E/IPCThreadState( 6539): Binder transaction failure. id: 524270, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.427 E/IPCThreadState( 6539): Binder transaction failure. id: 524316, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.428 E/IPCThreadState( 6539): Binder transaction failure. id: 524320, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.431 E/IPCThreadState( 6539): Binder transaction failure. id: 524329, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.432 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.440 E/IPCThreadState( 6539): Binder transaction failure. id: 524374, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.450 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.453 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.455 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.464 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.466 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.467 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.471 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.472 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.483 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.490 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.523 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.526 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.549 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.564 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.566 E/IPCThreadState( 6539): Binder transaction failure. id: 524982, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.570 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.573 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.587 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.590 E/Parcel  ( 6539): Reading a NULL string not supported here.
+09-06 19:13:07.620 E/IPCThreadState( 6539): Binder transaction failure. id: 525480, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.649 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.666 E/IPCThreadState( 6541): Binder transaction failure. id: 525597, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.666 E/IPCThreadState( 6541): Binder transaction failure. id: 525601, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.667 E/IPCThreadState( 6541): Binder transaction failure. id: 525605, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.669 E/IPCThreadState( 6541): Binder transaction failure. id: 525609, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.670 E/IPCThreadState( 6541): Binder transaction failure. id: 525613, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.670 E/IPCThreadState( 6541): Binder transaction failure. id: 525617, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.671 E/IPCThreadState( 6541): Binder transaction failure. id: 525621, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.673 E/IPCThreadState( 6541): Binder transaction failure. id: 525630, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.676 E/IPCThreadState( 6541): Binder transaction failure. id: 525639, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.677 E/IPCThreadState( 6541): Binder transaction failure. id: 525643, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.678 E/IPCThreadState( 6541): Binder transaction failure. id: 525652, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.678 E/IPCThreadState( 6541): Binder transaction failure. id: 525656, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.679 E/IPCThreadState( 6541): Binder transaction failure. id: 525660, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.681 E/IPCThreadState( 6541): Binder transaction failure. id: 525664, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.686 E/IPCThreadState( 6541): Binder transaction failure. id: 525689, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.687 E/IPCThreadState( 6541): Binder transaction failure. id: 525693, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.688 E/IPCThreadState( 6541): Binder transaction failure. id: 525697, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.688 E/IPCThreadState( 6541): Binder transaction failure. id: 525701, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.690 E/IPCThreadState( 6541): Binder transaction failure. id: 525705, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.691 E/IPCThreadState( 6541): Binder transaction failure. id: 525709, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.692 E/IPCThreadState( 6541): Binder transaction failure. id: 525713, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.693 E/IPCThreadState( 6541): Binder transaction failure. id: 525717, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.694 E/IPCThreadState( 6541): Binder transaction failure. id: 525721, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.694 E/IPCThreadState( 6541): Binder transaction failure. id: 525725, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.695 E/IPCThreadState( 6541): Binder transaction failure. id: 525729, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.697 E/IPCThreadState( 6541): Binder transaction failure. id: 525733, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.697 E/IPCThreadState( 6541): Binder transaction failure. id: 525737, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.708 E/IPCThreadState( 6541): Binder transaction failure. id: 525753, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.711 E/IPCThreadState( 6541): Binder transaction failure. id: 525757, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.712 E/IPCThreadState( 6541): Binder transaction failure. id: 525761, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.712 E/IPCThreadState( 6541): Binder transaction failure. id: 525765, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.713 E/IPCThreadState( 6541): Binder transaction failure. id: 525769, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.714 E/IPCThreadState( 6541): Binder transaction failure. id: 525773, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.715 E/IPCThreadState( 6541): Binder transaction failure. id: 525777, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.716 E/IPCThreadState( 6541): Binder transaction failure. id: 525782, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.718 E/IPCThreadState( 6541): Binder transaction failure. id: 525786, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.718 E/IPCThreadState( 6541): Binder transaction failure. id: 525790, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.731 E/IPCThreadState( 6541): Binder transaction failure. id: 525836, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.732 E/IPCThreadState( 6541): Binder transaction failure. id: 525841, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.733 E/IPCThreadState( 6541): Binder transaction failure. id: 525850, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.734 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.743 E/IPCThreadState( 6541): Binder transaction failure. id: 525894, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.750 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.753 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.758 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.771 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.776 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.777 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.786 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.787 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.810 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.815 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.850 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.856 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.874 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.895 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.898 E/IPCThreadState( 6541): Binder transaction failure. id: 526503, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:07.929 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.942 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.961 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.970 E/Parcel  ( 6541): Reading a NULL string not supported here.
+09-06 19:13:07.981 E/IPCThreadState( 6541): Binder transaction failure. id: 527003, BR_*: 29201, error: -1 (Operation not permitted)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): No service published for: persistent_data_block
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): android.os.ServiceManager$ServiceNotFoundException: No service published for: persistent_data_block
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.os.ServiceManager.getServiceOrThrow(ServiceManager.java:203)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1110)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1107)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.app.SystemServiceRegistry$StaticServiceFetcher.getService(SystemServiceRegistry.java:2405)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.app.SystemServiceRegistry.getSystemService(SystemServiceRegistry.java:1918)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.app.ContextImpl.getSystemService(ContextImpl.java:2315)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.content.Context.getSystemService(Context.java:4630)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageInstallerSession.markAsSealed(PackageInstallerSession.java:2449)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageInstallerSession.commit(PackageInstallerSession.java:2198)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.content.pm.PackageInstaller$Session.commit(PackageInstaller.java:1988)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageManagerShellCommand.doCommitSession(PackageManagerShellCommand.java:4316)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageManagerShellCommand.doRunInstall(PackageManagerShellCommand.java:1641)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageManagerShellCommand.runInstall(PackageManagerShellCommand.java:1562)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:246)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.os.ShellCommand.exec(ShellCommand.java:38)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6684)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.os.Binder.shellCommand(Binder.java:1151)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.os.Binder.onTransact(Binder.java:953)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4729)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6668)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.os.Binder.execTransactInternal(Binder.java:1426)
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): 	at android.os.Binder.execTransact(Binder.java:1365)
+--------- beginning of system
+09-06 19:13:10.024 E/SystemServiceRegistry(  712): Manager wrapper not available: persistent_data_block
+09-06 19:13:10.226 E/AppOps  (  712): attributionTag VCN not declared in manifest of android
+09-06 19:13:10.242 E/SmsApplication( 1070): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+09-06 19:13:10.354 E/RoleControllerServiceImpl(  712): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+09-06 19:13:10.379 E/SmsApplication( 1070): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+09-06 19:13:10.382 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=82
+09-06 19:13:10.473 E/SmsApplication( 1070): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+09-06 19:13:10.535 E/RoleControllerServiceImpl(  712): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.WALLET
+09-06 19:13:11.092 E/ashmem  ( 6564): Pinning is deprecated since Android Q. Please use trim or other methods.
+09-06 19:13:11.222 E/AppOps  (  712): attributionTag VCN not declared in manifest of android
+09-06 19:13:38.983 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=83
+09-06 19:13:38.999 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=84
+09-06 19:13:39.016 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=85
+09-06 19:13:39.033 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=86
+09-06 19:13:39.051 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=87
+09-06 19:13:39.066 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=88
+09-06 19:13:39.083 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=89
+09-06 19:13:39.101 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=90
+09-06 19:13:39.116 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=91
+09-06 19:13:39.133 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=92
+09-06 19:13:39.283 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=93
+09-06 19:13:39.349 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=94
+09-06 19:13:39.366 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=95
+09-06 19:13:39.383 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=96
+09-06 19:13:39.466 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=97
+09-06 19:13:39.516 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=98
+09-06 19:13:39.533 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=99
+09-06 19:13:39.583 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=100
+09-06 19:13:39.616 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=101
+09-06 19:13:39.632 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=102
+09-06 19:13:39.649 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=103
+09-06 19:13:39.666 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=104
+09-06 19:13:39.684 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=105
+09-06 19:13:39.699 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=106
+09-06 19:13:39.716 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=107
+09-06 19:13:39.733 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=108
+09-06 19:13:39.749 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=109
+09-06 19:13:39.766 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=110
+09-06 19:13:39.783 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=111
+09-06 19:13:39.799 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=112
+09-06 19:13:39.817 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=113
+09-06 19:13:39.832 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=114
+09-06 19:13:39.850 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=115
+09-06 19:13:39.866 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=116
+09-06 19:13:39.883 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=117
+09-06 19:13:39.900 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=118
+09-06 19:13:39.916 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=119
+09-06 19:13:39.933 E/SurfaceFlinger(  557): Out of order buffers detected for RequestedLayerState{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity#298 parentId=63} producedId=8 frameNumber=121 -> producedId=8 frameNumber=120
+--------- beginning of crash
+09-06 19:13:42.224 E/AndroidRuntime( 6564): FATAL EXCEPTION: main
+09-06 19:13:42.224 E/AndroidRuntime( 6564): Process: com.checkmate.app.debug, PID: 6564
+09-06 19:13:42.224 E/AndroidRuntime( 6564): java.lang.RuntimeException: Unable to start service com.checkmate.app.services.CheckmateService@673bda9 with Intent { act=com.checkmate.app.START_SERVICE xflg=0x4 cmp=com.checkmate.app.debug/com.checkmate.app.services.CheckmateService }: java.lang.SecurityException: Starting FGS with type mediaProjection callerApp=ProcessRecord{22cb608 6564:com.checkmate.app.debug/u0a218} targetSDK=36 requires permissions: all of the permissions allOf=true [android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION] any of the permissions allOf=false [android.permission.CAPTURE_VIDEO_OUTPUT, android:project_media] 
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.ActivityThread.handleServiceArgs(ActivityThread.java:5471)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.ActivityThread.-$$Nest$mhandleServiceArgs(Unknown Source:0)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2647)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.os.Looper.loopOnce(Looper.java:248)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.os.Looper.loop(Looper.java:338)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at java.lang.reflect.Method.invoke(Native Method)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): Caused by: java.lang.SecurityException: Starting FGS with type mediaProjection callerApp=ProcessRecord{22cb608 6564:com.checkmate.app.debug/u0a218} targetSDK=36 requires permissions: all of the permissions allOf=true [android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION] any of the permissions allOf=false [android.permission.CAPTURE_VIDEO_OUTPUT, android:project_media] 
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3340)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.os.Parcel.createException(Parcel.java:3324)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.os.Parcel.readException(Parcel.java:3307)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.os.Parcel.readException(Parcel.java:3249)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.IActivityManager$Stub$Proxy.setServiceForeground(IActivityManager.java:7274)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.Service.startForeground(Service.java:863)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.checkmate.app.services.CheckmateService.startForegroundService(CheckmateService.kt:136)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.checkmate.app.services.CheckmateService.onStartCommand(CheckmateService.kt:106)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.ActivityThread.handleServiceArgs(ActivityThread.java:5453)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	... 9 more
+09-06 19:13:42.224 E/AndroidRuntime( 6564): Caused by: android.os.RemoteException: Remote stack trace:
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.android.server.am.ActiveServices.validateForegroundServiceType(ActiveServices.java:2920)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.android.server.am.ActiveServices.setServiceForegroundInnerLocked(ActiveServices.java:2596)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.android.server.am.ActiveServices.setServiceForegroundLocked(ActiveServices.java:1850)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at com.android.server.am.ActivityManagerService.setServiceForeground(ActivityManagerService.java:13842)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:3640)
+09-06 19:13:42.224 E/AndroidRuntime( 6564): 
+09-06 19:13:42.261 E/InputDispatcher(  712): channel 'dc6691c com.checkmate.app.debug/com.checkmate.app.ui.MainActivity' ~ Channel is unrecoverably broken and will be disposed!
+09-06 19:13:42.765 E/TaskPersister(  712): File error accessing recents directory (directory doesn't exist?).
+09-06 19:13:43.458 E/IPCThreadState(  712): Binder transaction failure. id: 538842, BR_*: 29189, error: -22 (Invalid argument)
+09-06 19:13:43.501 E/BpTransactionCompletedListener(  557): Failed to transact (-32)
+09-06 19:13:43.776 E/ashmem  ( 6674): Pinning is deprecated since Android Q. Please use trim or other methods.
+09-06 19:13:43.947 E/AndroidRuntime( 6674): FATAL EXCEPTION: main
+09-06 19:13:43.947 E/AndroidRuntime( 6674): Process: com.checkmate.app.debug, PID: 6674
+09-06 19:13:43.947 E/AndroidRuntime( 6674): java.lang.RuntimeException: Unable to start service com.checkmate.app.services.CheckmateService@80d947e with Intent { act=com.checkmate.app.START_SERVICE xflg=0x4 cmp=com.checkmate.app.debug/com.checkmate.app.services.CheckmateService }: java.lang.SecurityException: Starting FGS with type mediaProjection callerApp=ProcessRecord{fe7413f 6674:com.checkmate.app.debug/u0a218} targetSDK=36 requires permissions: all of the permissions allOf=true [android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION] any of the permissions allOf=false [android.permission.CAPTURE_VIDEO_OUTPUT, android:project_media] 
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.ActivityThread.handleServiceArgs(ActivityThread.java:5471)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.ActivityThread.-$$Nest$mhandleServiceArgs(Unknown Source:0)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2647)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.os.Looper.loopOnce(Looper.java:248)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.os.Looper.loop(Looper.java:338)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at java.lang.reflect.Method.invoke(Native Method)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): Caused by: java.lang.SecurityException: Starting FGS with type mediaProjection callerApp=ProcessRecord{fe7413f 6674:com.checkmate.app.debug/u0a218} targetSDK=36 requires permissions: all of the permissions allOf=true [android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION] any of the permissions allOf=false [android.permission.CAPTURE_VIDEO_OUTPUT, android:project_media] 
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3340)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.os.Parcel.createException(Parcel.java:3324)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.os.Parcel.readException(Parcel.java:3307)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.os.Parcel.readException(Parcel.java:3249)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.IActivityManager$Stub$Proxy.setServiceForeground(IActivityManager.java:7274)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.Service.startForeground(Service.java:863)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.checkmate.app.services.CheckmateService.startForegroundService(CheckmateService.kt:136)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.checkmate.app.services.CheckmateService.onStartCommand(CheckmateService.kt:106)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.ActivityThread.handleServiceArgs(ActivityThread.java:5453)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	... 9 more
+09-06 19:13:43.947 E/AndroidRuntime( 6674): Caused by: android.os.RemoteException: Remote stack trace:
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.android.server.am.ActiveServices.validateForegroundServiceType(ActiveServices.java:2920)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.android.server.am.ActiveServices.setServiceForegroundInnerLocked(ActiveServices.java:2596)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.android.server.am.ActiveServices.setServiceForegroundLocked(ActiveServices.java:1850)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at com.android.server.am.ActivityManagerService.setServiceForeground(ActivityManagerService.java:13842)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:3640)
+09-06 19:13:43.947 E/AndroidRuntime( 6674): 
+09-06 19:13:46.467 E/TaskPersister(  712): File error accessing recents directory (directory doesn't exist?).

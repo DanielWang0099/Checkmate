@@ -21,7 +21,8 @@ object PermissionHelper {
      */
     fun hasAllRequiredPermissions(context: Context): Boolean {
         return hasNotificationPermission(context) && 
-               isAccessibilityServiceEnabled(context)
+               isAccessibilityServiceEnabled(context) &&
+               hasRecordAudioPermission(context)
     }
 
     /**
@@ -36,6 +37,16 @@ object PermissionHelper {
         } else {
             true // Notifications don't require explicit permission on older versions
         }
+    }
+
+    /**
+     * Check if record audio permission is granted.
+     */
+    fun hasRecordAudioPermission(context: Context): Boolean {
+        return ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.RECORD_AUDIO
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     /**
@@ -85,6 +96,10 @@ object PermissionHelper {
             missingPermissions.add("Notification Permission")
         }
         
+        if (!hasRecordAudioPermission(context)) {
+            missingPermissions.add("Microphone Permission")
+        }
+        
         if (!isAccessibilityServiceEnabled(context)) {
             missingPermissions.add("Accessibility Service")
         }
@@ -98,6 +113,7 @@ object PermissionHelper {
     fun getPermissionDescription(permission: String): String {
         return when (permission) {
             "Notification Permission" -> "Required to show fact-check alerts and notifications"
+            "Microphone Permission" -> "Required for audio capture and speech recognition"
             "Accessibility Service" -> "Required to monitor screen content for fact-checking"
             else -> "Required for app functionality"
         }
