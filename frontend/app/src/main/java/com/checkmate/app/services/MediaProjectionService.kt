@@ -14,6 +14,8 @@ import android.os.IBinder
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.core.content.getSystemService
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ServiceLifecycleDispatcher
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.CaptureType
 import com.checkmate.app.data.ContentType
@@ -26,8 +28,9 @@ import java.nio.ByteBuffer
 /**
  * Service that handles screen capture using MediaProjection API.
  */
-class MediaProjectionService : Service() {
+class MediaProjectionService : Service(), LifecycleOwner {
     
+    private val dispatcher = ServiceLifecycleDispatcher(this)
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     
     private var mediaProjection: MediaProjection? = null
@@ -44,7 +47,10 @@ class MediaProjectionService : Service() {
     private var isCapturing = false
     private var lastCaptureTime = 0L
 
+    override val lifecycle = dispatcher.lifecycle
+
     override fun onCreate() {
+        dispatcher.onServicePreSuperOnCreate()
         super.onCreate()
         
         sessionManager = SessionManager.getInstance(this)
@@ -58,6 +64,8 @@ class MediaProjectionService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        dispatcher.onServicePreSuperOnStart()
+        
         when (intent?.action) {
             ACTION_START_PROJECTION -> {
                 val resultCode = intent.getIntExtra(EXTRA_RESULT_CODE, -1)
@@ -179,11 +187,7 @@ class MediaProjectionService : Service() {
                 
                 if (bitmap != null) {
                     // Process the captured bitmap
-                    capturePipeline?.captureScreenshot(
-                        bitmap = bitmap,
-                        contentType = ContentType.OTHER, // Will be determined by content analysis
-                        captureType = CaptureType.AUTOMATIC_SCREEN
-                    )
+                    val screenshot = capturePipeline?.captureScreenshot()
                 }
             }
         } catch (e: Exception) {
@@ -253,6 +257,7 @@ class MediaProjectionService : Service() {
     }
 
     override fun onDestroy() {
+        dispatcher.onServicePreSuperOnDestroy()
         serviceScope.cancel()
         
         stopScreenProjection()

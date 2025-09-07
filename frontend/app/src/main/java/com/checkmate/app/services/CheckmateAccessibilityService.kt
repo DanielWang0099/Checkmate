@@ -4,6 +4,8 @@ import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ServiceLifecycleDispatcher
 import com.checkmate.app.data.AccessibilityConfig
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.CaptureType
@@ -17,8 +19,9 @@ import timber.log.Timber
 /**
  * Accessibility service that monitors screen content changes for fact-checking.
  */
-class CheckmateAccessibilityService : AccessibilityService() {
+class CheckmateAccessibilityService : AccessibilityService(), LifecycleOwner {
     
+    private val dispatcher = ServiceLifecycleDispatcher(this)
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     
     private var sessionManager: SessionManager? = null
@@ -27,7 +30,10 @@ class CheckmateAccessibilityService : AccessibilityService() {
     private var lastCaptureTime = 0L
     private var isProcessing = false
 
+    override val lifecycle = dispatcher.lifecycle
+
     override fun onCreate() {
+        dispatcher.onServicePreSuperOnCreate()
         super.onCreate()
         
         sessionManager = SessionManager.getInstance(this)
@@ -40,6 +46,7 @@ class CheckmateAccessibilityService : AccessibilityService() {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
+        dispatcher.onServicePreSuperOnStart()
         
         Timber.i("CheckmateAccessibilityService connected")
     }
@@ -76,7 +83,7 @@ class CheckmateAccessibilityService : AccessibilityService() {
             }
             
             val packageName = event.packageName?.toString()
-            val sourceApp = AccessibilityHelper.getInstance(this).getCurrentApp(this, packageName)
+            val sourceApp = AccessibilityHelper.getAppInfo(this, packageName)
             
             // Skip if this is our own app or system UI
             if (packageName == this.packageName || 
@@ -96,12 +103,7 @@ class CheckmateAccessibilityService : AccessibilityService() {
             Timber.d("Processing accessibility event: type=${event.eventType}, package=${packageName}, contentType=${contentType}")
             
             // Capture and process the screen content
-            capturePipeline?.captureAccessibilityTree(
-                rootNode = rootNode,
-                sourceApp = sourceApp,
-                contentType = contentType,
-                captureType = CaptureType.ACCESSIBILITY_EVENT
-            )
+            val treeSummary = capturePipeline?.captureAccessibilityTree()
             
         } catch (e: Exception) {
             Timber.e(e, "Error processing accessibility event")
@@ -199,6 +201,7 @@ class CheckmateAccessibilityService : AccessibilityService() {
     }
 
     override fun onDestroy() {
+        dispatcher.onServicePreSuperOnDestroy()
         serviceScope.cancel()
         
         capturePipeline?.cleanup()
@@ -217,14 +220,9 @@ class CheckmateAccessibilityService : AccessibilityService() {
                 val rootNode = rootInActiveWindow
                 if (rootNode != null) {
                     val packageName = rootNode.packageName?.toString()
-                    val sourceApp = AccessibilityHelper.getInstance(this@CheckmateAccessibilityService).getCurrentApp(this@CheckmateAccessibilityService, packageName)
+                    val sourceApp = AccessibilityHelper.getAppInfo(this@CheckmateAccessibilityService, packageName)
                     
-                    capturePipeline?.captureAccessibilityTree(
-                        rootNode = rootNode,
-                        sourceApp = sourceApp,
-                        contentType = ContentType.OTHER,
-                        captureType = CaptureType.MANUAL_TRIGGER
-                    )
+                    val treeSummary = capturePipeline?.captureAccessibilityTree()
                 } else {
                     Timber.w("No root node available for manual capture")
                 }
