@@ -56,7 +56,7 @@ class CheckmateService : LifecycleService() {
         super.onCreate()
         
         sessionManager = SessionManager.getInstance(this)
-        capturePipeline = CapturePipeline(this)
+        capturePipeline = CapturePipeline.getInstance(this)
         networkManager = NetworkManager(this)
         
         isServiceRunning = true
@@ -120,7 +120,7 @@ class CheckmateService : LifecycleService() {
         
         lifecycleScope.launch {
             stopCurrentSession()
-            capturePipeline.cleanup()
+            // Don't cleanup singleton CapturePipeline here - other services might be using it
             networkManager.cleanup()
         }
         

@@ -243,7 +243,7 @@ class PerformanceBatteryTesting(private val context: Context) {
         val initialBattery = getCurrentBatteryLevel()
         
         return try {
-            val capturePipeline = CapturePipeline(context)
+            val capturePipeline = CapturePipeline.getInstance(context)
             val frameCaptureTimes = mutableListOf<Long>()
             
             // Perform multiple frame captures

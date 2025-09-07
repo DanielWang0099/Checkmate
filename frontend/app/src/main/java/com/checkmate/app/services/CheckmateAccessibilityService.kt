@@ -31,7 +31,7 @@ class CheckmateAccessibilityService : AccessibilityService() {
         super.onCreate()
         
         sessionManager = SessionManager.getInstance(this)
-        capturePipeline = CapturePipeline(this)
+        capturePipeline = CapturePipeline.getInstance(this)
         
         configureAccessibilityService()
         
@@ -201,7 +201,7 @@ class CheckmateAccessibilityService : AccessibilityService() {
     override fun onDestroy() {
         serviceScope.cancel()
         
-        capturePipeline?.cleanup()
+        // Don't cleanup singleton CapturePipeline here - other services might be using it
         sessionManager?.cleanup()
         
         super.onDestroy()

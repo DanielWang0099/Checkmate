@@ -74,12 +74,23 @@ class MainActivity : ComponentActivity() {
     private val mediaProjectionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
+        Timber.d("MainActivity: MediaProjection result received - resultCode: ${result.resultCode}")
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.let { data ->
+                Timber.d("MainActivity: MediaProjection permission granted, starting service")
+                
+                // Mark permission as granted for UI updates
+                MediaProjectionService.markPermissionGranted()
+                
+                // Update permission state immediately
+                checkAllPermissions()
+                
                 startMediaProjectionService(data)
+            } ?: run {
+                Timber.e("MainActivity: MediaProjection result OK but data is null")
             }
         } else {
-            Timber.w("Media projection permission denied")
+            Timber.w("MainActivity: Media projection permission denied - resultCode: ${result.resultCode}")
         }
     }
     
@@ -199,30 +210,49 @@ class MainActivity : ComponentActivity() {
     }
     
     private fun requestAllPermissions() {
+        Timber.d("MainActivity: requestAllPermissions() called")
+        pipelineDebugger.logStageStart(PipelineDebugger.STAGE_PERMISSIONS, mapOf(
+            "notification_granted" to PermissionHelper.hasNotificationPermission(this),
+            "audio_granted" to PermissionHelper.hasRecordAudioPermission(this),
+            "accessibility_enabled" to PermissionHelper.isAccessibilityServiceEnabled(this)
+        ))
+        
         when {
             !PermissionHelper.hasNotificationPermission(this) -> {
+                Timber.d("MainActivity: Requesting notification permission")
                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
             
             !PermissionHelper.hasRecordAudioPermission(this) -> {
+                Timber.d("MainActivity: Requesting audio permission")
                 recordAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
             }
             
             !PermissionHelper.isAccessibilityServiceEnabled(this) -> {
+                Timber.d("MainActivity: Opening accessibility settings")
                 openAccessibilitySettings()
             }
             
             else -> {
+                Timber.d("MainActivity: All basic permissions granted, requesting MediaProjection")
                 requestMediaProjectionPermission()
             }
         }
     }
     
     private fun requestMediaProjectionPermission() {
+        Timber.d("MainActivity: requestMediaProjectionPermission() called")
+        pipelineDebugger.logStageStart(PipelineDebugger.STAGE_MEDIA_PROJECTION, mapOf(
+            "action" to "requesting_permission"
+        ))
+        
         val mediaProjectionManager = getSystemService<MediaProjectionManager>()
         if (mediaProjectionManager != null) {
+            Timber.d("MainActivity: Creating MediaProjection intent")
             val intent = mediaProjectionManager.createScreenCaptureIntent()
             mediaProjectionLauncher.launch(intent)
+        } else {
+            Timber.e("MainActivity: MediaProjectionManager is null!")
         }
     }
     
@@ -325,22 +355,33 @@ class MainActivity : ComponentActivity() {
     
     private fun startMediaProjectionService(data: Intent) {
         try {
+            Timber.d("MainActivity: startMediaProjectionService() called")
+            pipelineDebugger.logStageStart(PipelineDebugger.STAGE_MEDIA_PROJECTION, mapOf(
+                "action" to "starting_service",
+                "data_extras" to (data.extras?.keySet()?.joinToString(",") ?: "none")
+            ))
+
             val intent = Intent(this, MediaProjectionService::class.java).apply {
                 action = MediaProjectionService.ACTION_START_PROJECTION
                 putExtra(MediaProjectionService.EXTRA_RESULT_CODE, Activity.RESULT_OK)
                 putExtra(MediaProjectionService.EXTRA_RESULT_DATA, data)
             }
+            
+            Timber.d("MainActivity: Starting MediaProjectionService with action: ${MediaProjectionService.ACTION_START_PROJECTION}")
             ContextCompat.startForegroundService(this, intent)
             
             // After starting media projection, now start the main checkmate service
             lifecycleScope.launch {
+                Timber.d("MainActivity: Waiting 1.5s for MediaProjection service to initialize")
                 // Give media projection service time to initialize
                 kotlinx.coroutines.delay(1500)
+                Timber.d("MainActivity: Starting fact-checking service with bypass=true")
                 startFactCheckingService(bypassPermissionCheck = true)
             }
             
         } catch (e: Exception) {
-            Timber.e(e, "Error starting media projection service")
+            Timber.e(e, "MainActivity: Error starting media projection service")
+            pipelineDebugger.logError(PipelineDebugger.STAGE_MEDIA_PROJECTION, e, "Error starting media projection service")
         }
     }
     

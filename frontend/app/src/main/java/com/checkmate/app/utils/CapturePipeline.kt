@@ -211,17 +211,29 @@ class CapturePipeline(private val context: Context) {
     
     private suspend fun captureScreenshot(): Bitmap? = withContext(Dispatchers.IO) {
         try {
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "Capturing screen content")
+            
             if (mediaProjection == null) {
+                pipelineDebugger.logWarning(PipelineDebugger.STAGE_SCREEN_CAPTURE, "MediaProjection not available, using cached screenshot")
                 Timber.w("MediaProjection not available")
                 return@withContext lastScreenshot // Return cached screenshot if available
             }
+            
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "MediaProjection available, setting up capture")
             
             val displayMetrics = context.resources.displayMetrics
             val width = displayMetrics.widthPixels
             val height = displayMetrics.heightPixels
             val density = displayMetrics.densityDpi
             
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "Screen metrics", mapOf(
+                "width" to width,
+                "height" to height,
+                "density" to density
+            ))
+            
             if (imageReader == null) {
+                pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "Creating ImageReader")
                 imageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
                 
                 // Set up image listener for real-time capture
@@ -239,6 +251,7 @@ class CapturePipeline(private val context: Context) {
             }
             
             if (virtualDisplay == null) {
+                pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "Creating VirtualDisplay")
                 virtualDisplay = mediaProjection?.createVirtualDisplay(
                     "ScreenCapture",
                     width, height, density,
@@ -246,14 +259,29 @@ class CapturePipeline(private val context: Context) {
                     imageReader?.surface,
                     null, null
                 )
+                
+                if (virtualDisplay != null) {
+                    pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "VirtualDisplay created successfully")
+                } else {
+                    pipelineDebugger.logError(PipelineDebugger.STAGE_SCREEN_CAPTURE, Exception("VirtualDisplay creation failed"), "Failed to create VirtualDisplay")
+                }
             }
             
             // Wait a bit for the image to be captured
             delay(100)
             
+            if (lastScreenshot != null) {
+                pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "Screenshot captured successfully", mapOf(
+                    "screenshot_size" to "${lastScreenshot!!.width}x${lastScreenshot!!.height}"
+                ))
+            } else {
+                pipelineDebugger.logWarning(PipelineDebugger.STAGE_SCREEN_CAPTURE, "No screenshot available after capture attempt")
+            }
+            
             return@withContext lastScreenshot
             
         } catch (e: Exception) {
+            pipelineDebugger.logError(PipelineDebugger.STAGE_SCREEN_CAPTURE, e, "Critical error during screenshot capture")
             Timber.e(e, "Error capturing screenshot")
             lastScreenshot // Return cached version if available
         }

@@ -1,6 +1,7 @@
 package com.checkmate.app.services
 
-import android.app.Service
+import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.PixelFormat
@@ -10,13 +11,17 @@ import android.media.Image
 import android.media.ImageReader
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
+import android.os.Build
 import android.os.IBinder
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
+import com.checkmate.app.R
 import com.checkmate.app.data.AppConfig
 import com.checkmate.app.data.CaptureType
 import com.checkmate.app.data.ContentType
+import com.checkmate.app.ui.MainActivity
 import com.checkmate.app.utils.SessionManager
 import com.checkmate.app.utils.CapturePipeline
 import kotlinx.coroutines.*
@@ -72,6 +77,9 @@ class MediaProjectionService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "onStartCommand: ${intent?.action}")
         
+        // CRITICAL: Start foreground service immediately - required for MediaProjection on Android 14+
+        startForegroundService()
+        
         when (intent?.action) {
             ACTION_START_PROJECTION -> {
                 pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Starting media projection")
@@ -79,7 +87,8 @@ class MediaProjectionService : Service() {
                 val resultCode = intent.getIntExtra(EXTRA_RESULT_CODE, -1)
                 val data = intent.getParcelableExtra<Intent>(EXTRA_RESULT_DATA)
                 
-                if (resultCode != -1 && data != null) {
+                // RESULT_OK is -1, so we check for == -1, not != -1
+                if (resultCode == -1 && data != null) {
                     pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Valid projection data received", mapOf(
                         "result_code" to resultCode,
                         "has_data" to (data != null)
@@ -91,7 +100,7 @@ class MediaProjectionService : Service() {
                         "Invalid media projection intent data",
                         mapOf("result_code" to resultCode, "data_null" to (data == null))
                     )
-                    Timber.e("Invalid media projection intent data")
+                    Timber.e("Invalid media projection intent data - resultCode: $resultCode, data: ${data != null}")
                     stopSelf()
                 }
             }
@@ -155,7 +164,32 @@ class MediaProjectionService : Service() {
                 return
             }
             
-            pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "MediaProjection created, setting up capture")
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "MediaProjection created, registering callback")
+            
+            // CRITICAL: Register callback before creating virtual display (Android 14+ requirement)
+            mediaProjection!!.registerCallback(object : MediaProjection.Callback() {
+                override fun onStop() {
+                    Timber.d("MediaProjection stopped by system")
+                    pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "MediaProjection stopped by system")
+                    stopScreenProjection()
+                }
+                
+                override fun onCapturedContentResize(width: Int, height: Int) {
+                    Timber.d("MediaProjection content resized: ${width}x${height}")
+                    pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Content resized: ${width}x${height}")
+                }
+                
+                override fun onCapturedContentVisibilityChanged(isVisible: Boolean) {
+                    Timber.d("MediaProjection content visibility changed: $isVisible")
+                    pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Content visibility: $isVisible")
+                }
+            }, null)
+            
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "MediaProjection callback registered, sharing with CapturePipeline")
+            
+            // CRITICAL FIX: Share MediaProjection with the singleton CapturePipeline
+            capturePipeline?.setMediaProjection(mediaProjection!!)
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "MediaProjection shared successfully")
             
             setupImageReader()
             setupVirtualDisplay()
@@ -310,6 +344,63 @@ class MediaProjectionService : Service() {
         super.onDestroy()
         Timber.i("MediaProjectionService destroyed")
     }
+    
+    /**
+     * Start foreground service with notification - REQUIRED for MediaProjection on Android 14+
+     */
+    private fun startForegroundService() {
+        try {
+            val notification = createNotification()
+            startForeground(NOTIFICATION_ID, notification)
+            Timber.d("MediaProjectionService started in foreground")
+        } catch (e: Exception) {
+            Timber.e(e, "Error starting foreground service")
+            stopSelf()
+        }
+    }
+    
+    /**
+     * Create notification for foreground service
+     */
+    private fun createNotification(): android.app.Notification {
+        val channelId = "media_projection_channel"
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        
+        // Create notification channel for Android 8.0+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Screen Capture Service",
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                description = "Checkmate screen capture service for fact-checking"
+                setShowBadge(false)
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+        
+        val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.FLAG_IMMUTABLE
+        } else {
+            0
+        }
+        
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            Intent(this, MainActivity::class.java),
+            pendingIntentFlags
+        )
+        
+        return NotificationCompat.Builder(this, channelId)
+            .setContentTitle("Checkmate Screen Capture")
+            .setContentText("Screen capture service is active for fact-checking")
+            .setSmallIcon(android.R.drawable.ic_menu_camera) // Using system camera icon
+            .setContentIntent(pendingIntent)
+            .setOngoing(true)
+            .setSilent(true)
+            .build()
+    }
 
     companion object {
         const val ACTION_START_PROJECTION = "com.checkmate.app.START_PROJECTION"
@@ -319,8 +410,41 @@ class MediaProjectionService : Service() {
         const val EXTRA_RESULT_CODE = "result_code"
         const val EXTRA_RESULT_DATA = "result_data"
         
+        private const val NOTIFICATION_ID = 1001
+        
         var instance: MediaProjectionService? = null
             private set
+            
+        // Track when MediaProjection permission was last granted
+        private var lastPermissionGrantedTime: Long = 0
+        
+        /**
+         * Mark that MediaProjection permission was just granted.
+         */
+        fun markPermissionGranted() {
+            lastPermissionGrantedTime = System.currentTimeMillis()
+            Timber.d("MediaProjection permission marked as granted")
+        }
+        
+        /**
+         * Check if MediaProjection permission was recently granted (within last 30 seconds).
+         */
+        fun hasRecentlyGrantedPermission(): Boolean {
+            val timeSinceGrant = System.currentTimeMillis() - lastPermissionGrantedTime
+            return timeSinceGrant < 30_000 // 30 seconds
+        }
+            
+        /**
+         * Check if MediaProjection permission is granted and active.
+         */
+        fun hasActiveMediaProjection(): Boolean {
+            return try {
+                instance?.mediaProjection != null
+            } catch (e: Exception) {
+                Timber.e(e, "Error checking MediaProjection status")
+                false
+            }
+        }
     }
 
     init {

@@ -9,6 +9,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.core.content.ContextCompat
 import com.checkmate.app.services.CheckmateAccessibilityService
+import com.checkmate.app.services.MediaProjectionService
 import timber.log.Timber
 
 /**
@@ -20,12 +21,11 @@ object PermissionHelper {
      * Check if all required permissions are granted.
      */
     fun hasAllRequiredPermissions(context: Context): Boolean {
-        return hasNotificationPermission(context) && 
-               isAccessibilityServiceEnabled(context) &&
-               hasRecordAudioPermission(context)
-    }
-
-    /**
+        return hasNotificationPermission(context) &&
+                isAccessibilityServiceEnabled(context) &&
+                hasRecordAudioPermission(context) &&
+                hasMediaProjectionPermission(context)
+    }    /**
      * Check if notification permission is granted.
      */
     fun hasNotificationPermission(context: Context): Boolean {
@@ -47,6 +47,23 @@ object PermissionHelper {
             context,
             Manifest.permission.RECORD_AUDIO
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    /**
+     * Check if MediaProjection permission is granted.
+     * MediaProjection permission is different from regular permissions - it's granted through
+     * MediaProjectionManager.createScreenCaptureIntent() and stored in MediaProjectionService.
+     */
+    fun hasMediaProjectionPermission(context: Context): Boolean {
+        return try {
+            // Check if MediaProjectionService has an active MediaProjection OR
+            // if we have recently granted MediaProjection permission (within last 30 seconds)
+            MediaProjectionService.hasActiveMediaProjection() || 
+            MediaProjectionService.hasRecentlyGrantedPermission()
+        } catch (e: Exception) {
+            Timber.e(e, "Error checking MediaProjection permission status")
+            false
+        }
     }
 
     /**
@@ -104,6 +121,10 @@ object PermissionHelper {
             missingPermissions.add("Accessibility Service")
         }
         
+        if (!hasMediaProjectionPermission(context)) {
+            missingPermissions.add("Screen Capture Permission")
+        }
+        
         return missingPermissions
     }
 
@@ -115,6 +136,7 @@ object PermissionHelper {
             "Notification Permission" -> "Required to show fact-check alerts and notifications"
             "Microphone Permission" -> "Required for audio capture and speech recognition"
             "Accessibility Service" -> "Required to monitor screen content for fact-checking"
+            "Screen Capture Permission" -> "Required to capture and analyze screen content"
             else -> "Required for app functionality"
         }
     }

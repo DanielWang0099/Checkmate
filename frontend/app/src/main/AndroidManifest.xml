@@ -99,7 +99,8 @@
         <!-- Media Projection Service -->
         <service
             android:name=".services.MediaProjectionService"
-            android:exported="false">
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection">
         </service>
         
         <!-- Audio Capture Service -->
