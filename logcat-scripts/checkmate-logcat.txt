@@ -1,328 +1,781 @@
 --------- beginning of main
-09-06 22:07:42.132 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.167 E/IPCThreadState(10907): Binder transaction failure. id: 1304959, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.169 E/IPCThreadState(10907): Binder transaction failure. id: 1304963, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.174 E/IPCThreadState(10907): Binder transaction failure. id: 1304968, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.178 E/IPCThreadState(10907): Binder transaction failure. id: 1304972, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.182 E/IPCThreadState(10907): Binder transaction failure. id: 1304976, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.184 E/IPCThreadState(10907): Binder transaction failure. id: 1304980, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.185 E/IPCThreadState(10907): Binder transaction failure. id: 1304985, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.186 E/IPCThreadState(10907): Binder transaction failure. id: 1304994, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.189 E/IPCThreadState(10907): Binder transaction failure. id: 1305003, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.189 E/IPCThreadState(10907): Binder transaction failure. id: 1305007, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.192 E/IPCThreadState(10907): Binder transaction failure. id: 1305016, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.193 E/IPCThreadState(10907): Binder transaction failure. id: 1305020, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.194 E/IPCThreadState(10907): Binder transaction failure. id: 1305024, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.194 E/IPCThreadState(10907): Binder transaction failure. id: 1305028, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.201 E/IPCThreadState(10907): Binder transaction failure. id: 1305052, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.201 E/IPCThreadState(10907): Binder transaction failure. id: 1305057, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.202 E/IPCThreadState(10907): Binder transaction failure. id: 1305061, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.203 E/IPCThreadState(10907): Binder transaction failure. id: 1305065, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.205 E/IPCThreadState(10907): Binder transaction failure. id: 1305069, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.206 E/IPCThreadState(10907): Binder transaction failure. id: 1305073, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.207 E/IPCThreadState(10907): Binder transaction failure. id: 1305077, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.208 E/IPCThreadState(10907): Binder transaction failure. id: 1305081, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.209 E/IPCThreadState(10907): Binder transaction failure. id: 1305085, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.210 E/IPCThreadState(10907): Binder transaction failure. id: 1305089, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.211 E/IPCThreadState(10907): Binder transaction failure. id: 1305093, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.212 E/IPCThreadState(10907): Binder transaction failure. id: 1305097, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.213 E/IPCThreadState(10907): Binder transaction failure. id: 1305101, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.222 E/IPCThreadState(10907): Binder transaction failure. id: 1305117, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.223 E/IPCThreadState(10907): Binder transaction failure. id: 1305121, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.224 E/IPCThreadState(10907): Binder transaction failure. id: 1305125, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.225 E/IPCThreadState(10907): Binder transaction failure. id: 1305129, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.226 E/IPCThreadState(10907): Binder transaction failure. id: 1305133, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.228 E/IPCThreadState(10907): Binder transaction failure. id: 1305137, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.229 E/IPCThreadState(10907): Binder transaction failure. id: 1305141, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.230 E/IPCThreadState(10907): Binder transaction failure. id: 1305145, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.231 E/IPCThreadState(10907): Binder transaction failure. id: 1305149, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.232 E/IPCThreadState(10907): Binder transaction failure. id: 1305153, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.245 E/IPCThreadState(10907): Binder transaction failure. id: 1305200, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.246 E/IPCThreadState(10907): Binder transaction failure. id: 1305204, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.251 E/IPCThreadState(10907): Binder transaction failure. id: 1305213, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.252 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.266 E/IPCThreadState(10907): Binder transaction failure. id: 1305258, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.281 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.285 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.294 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.316 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.324 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.326 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.335 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.337 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.359 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.368 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.405 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.410 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.481 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.503 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.513 E/IPCThreadState(10907): Binder transaction failure. id: 1305877, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.558 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.584 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.623 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.631 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.686 E/IPCThreadState(10907): Binder transaction failure. id: 1306383, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.719 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.725 E/IPCThreadState(10909): Binder transaction failure. id: 1306499, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.725 E/IPCThreadState(10909): Binder transaction failure. id: 1306503, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.725 E/IPCThreadState(10909): Binder transaction failure. id: 1306507, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.725 E/IPCThreadState(10909): Binder transaction failure. id: 1306511, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.726 E/IPCThreadState(10909): Binder transaction failure. id: 1306515, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.726 E/IPCThreadState(10909): Binder transaction failure. id: 1306519, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.726 E/IPCThreadState(10909): Binder transaction failure. id: 1306523, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.727 E/IPCThreadState(10909): Binder transaction failure. id: 1306532, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.728 E/IPCThreadState(10909): Binder transaction failure. id: 1306541, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.729 E/IPCThreadState(10909): Binder transaction failure. id: 1306545, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.729 E/IPCThreadState(10909): Binder transaction failure. id: 1306554, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.730 E/IPCThreadState(10909): Binder transaction failure. id: 1306558, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.730 E/IPCThreadState(10909): Binder transaction failure. id: 1306562, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.730 E/IPCThreadState(10909): Binder transaction failure. id: 1306566, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.733 E/IPCThreadState(10909): Binder transaction failure. id: 1306590, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306594, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306598, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306602, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306607, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306611, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306615, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306619, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306623, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306627, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306631, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306635, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.735 E/IPCThreadState(10909): Binder transaction failure. id: 1306639, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306654, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306658, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306662, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306666, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306670, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306674, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306678, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306682, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306686, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.747 E/IPCThreadState(10909): Binder transaction failure. id: 1306690, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.757 E/IPCThreadState(10909): Binder transaction failure. id: 1306737, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.758 E/IPCThreadState(10909): Binder transaction failure. id: 1306741, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.761 E/IPCThreadState(10909): Binder transaction failure. id: 1306750, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.762 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.772 E/IPCThreadState(10909): Binder transaction failure. id: 1306795, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.783 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.787 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.795 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.814 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.818 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.820 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.828 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.829 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.845 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.855 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.912 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.917 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.953 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.976 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.982 E/IPCThreadState(10909): Binder transaction failure. id: 1307409, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:43.024 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:43.047 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:43.080 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:43.088 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:43.122 E/IPCThreadState(10909): Binder transaction failure. id: 1307913, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): No service published for: persistent_data_block
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): android.os.ServiceManager$ServiceNotFoundException: No service published for: persistent_data_block
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.ServiceManager.getServiceOrThrow(ServiceManager.java:203)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1110)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1107)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$StaticServiceFetcher.getService(SystemServiceRegistry.java:2405)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry.getSystemService(SystemServiceRegistry.java:1918)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.ContextImpl.getSystemService(ContextImpl.java:2315)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.content.Context.getSystemService(Context.java:4630)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.markAsSealed(PackageInstallerSession.java:2449)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.commit(PackageInstallerSession.java:2198)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.content.pm.PackageInstaller$Session.commit(PackageInstaller.java:1988)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doCommitSession(PackageManagerShellCommand.java:4316)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doRunInstall(PackageManagerShellCommand.java:1641)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.runInstall(PackageManagerShellCommand.java:1562)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:246)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.ShellCommand.exec(ShellCommand.java:38)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6684)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.shellCommand(Binder.java:1151)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.onTransact(Binder.java:953)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4729)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6668)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransactInternal(Binder.java:1426)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransact(Binder.java:1365)
+09-07 14:44:24.944 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:24.978 E/IPCThreadState(23971): Binder transaction failure. id: 2894788, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:24.983 E/IPCThreadState(23971): Binder transaction failure. id: 2894792, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:24.987 E/IPCThreadState(23971): Binder transaction failure. id: 2894796, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:24.992 E/IPCThreadState(23971): Binder transaction failure. id: 2894800, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:24.997 E/IPCThreadState(23971): Binder transaction failure. id: 2894805, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:24.999 E/IPCThreadState(23971): Binder transaction failure. id: 2894809, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:24.999 E/IPCThreadState(23971): Binder transaction failure. id: 2894813, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.003 E/IPCThreadState(23971): Binder transaction failure. id: 2894822, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.008 E/IPCThreadState(23971): Binder transaction failure. id: 2894831, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.009 E/IPCThreadState(23971): Binder transaction failure. id: 2894836, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.012 E/IPCThreadState(23971): Binder transaction failure. id: 2894845, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.013 E/IPCThreadState(23971): Binder transaction failure. id: 2894849, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.014 E/IPCThreadState(23971): Binder transaction failure. id: 2894853, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.016 E/IPCThreadState(23971): Binder transaction failure. id: 2894857, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.024 E/IPCThreadState(23971): Binder transaction failure. id: 2894881, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.024 E/IPCThreadState(23971): Binder transaction failure. id: 2894885, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.026 E/IPCThreadState(23971): Binder transaction failure. id: 2894890, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.027 E/IPCThreadState(23971): Binder transaction failure. id: 2894894, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.028 E/IPCThreadState(23971): Binder transaction failure. id: 2894898, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.028 E/IPCThreadState(23971): Binder transaction failure. id: 2894902, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.030 E/IPCThreadState(23971): Binder transaction failure. id: 2894906, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.032 E/IPCThreadState(23971): Binder transaction failure. id: 2894910, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.032 E/IPCThreadState(23971): Binder transaction failure. id: 2894914, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.032 E/IPCThreadState(23971): Binder transaction failure. id: 2894918, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.032 E/IPCThreadState(23971): Binder transaction failure. id: 2894922, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.032 E/IPCThreadState(23971): Binder transaction failure. id: 2894926, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.032 E/IPCThreadState(23971): Binder transaction failure. id: 2894930, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.044 E/IPCThreadState(23971): Binder transaction failure. id: 2894946, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.045 E/IPCThreadState(23971): Binder transaction failure. id: 2894950, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.047 E/IPCThreadState(23971): Binder transaction failure. id: 2894954, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.047 E/IPCThreadState(23971): Binder transaction failure. id: 2894958, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.048 E/IPCThreadState(23971): Binder transaction failure. id: 2894962, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.050 E/IPCThreadState(23971): Binder transaction failure. id: 2894966, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.051 E/IPCThreadState(23971): Binder transaction failure. id: 2894970, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.052 E/IPCThreadState(23971): Binder transaction failure. id: 2894974, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.053 E/IPCThreadState(23971): Binder transaction failure. id: 2894978, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.056 E/IPCThreadState(23971): Binder transaction failure. id: 2894982, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.083 E/IPCThreadState(23971): Binder transaction failure. id: 2895030, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.084 E/IPCThreadState(23971): Binder transaction failure. id: 2895034, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.090 E/IPCThreadState(23971): Binder transaction failure. id: 2895043, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.091 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.130 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.137 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.151 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.182 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.188 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.190 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.202 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.205 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.227 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.240 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.293 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.297 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.337 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.358 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.376 E/IPCThreadState(23971): Binder transaction failure. id: 2895701, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.435 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.459 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.487 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.498 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:25.539 E/IPCThreadState(23971): Binder transaction failure. id: 2896205, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.584 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.622 E/IPCThreadState(23973): Binder transaction failure. id: 2896324, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.623 E/IPCThreadState(23973): Binder transaction failure. id: 2896328, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.625 E/IPCThreadState(23973): Binder transaction failure. id: 2896332, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.627 E/IPCThreadState(23973): Binder transaction failure. id: 2896337, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.627 E/IPCThreadState(23973): Binder transaction failure. id: 2896341, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.629 E/IPCThreadState(23973): Binder transaction failure. id: 2896345, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.630 E/IPCThreadState(23973): Binder transaction failure. id: 2896349, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.633 E/IPCThreadState(23973): Binder transaction failure. id: 2896358, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.636 E/IPCThreadState(23973): Binder transaction failure. id: 2896367, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.637 E/IPCThreadState(23973): Binder transaction failure. id: 2896371, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.639 E/IPCThreadState(23973): Binder transaction failure. id: 2896380, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.639 E/IPCThreadState(23973): Binder transaction failure. id: 2896384, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.640 E/IPCThreadState(23973): Binder transaction failure. id: 2896388, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.642 E/IPCThreadState(23973): Binder transaction failure. id: 2896393, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.649 E/IPCThreadState(23973): Binder transaction failure. id: 2896417, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.651 E/IPCThreadState(23973): Binder transaction failure. id: 2896421, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.651 E/IPCThreadState(23973): Binder transaction failure. id: 2896425, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.653 E/IPCThreadState(23973): Binder transaction failure. id: 2896429, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.654 E/IPCThreadState(23973): Binder transaction failure. id: 2896433, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.655 E/IPCThreadState(23973): Binder transaction failure. id: 2896437, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.656 E/IPCThreadState(23973): Binder transaction failure. id: 2896441, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.657 E/IPCThreadState(23973): Binder transaction failure. id: 2896445, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.659 E/IPCThreadState(23973): Binder transaction failure. id: 2896450, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.660 E/IPCThreadState(23973): Binder transaction failure. id: 2896454, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.662 E/IPCThreadState(23973): Binder transaction failure. id: 2896458, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.662 E/IPCThreadState(23973): Binder transaction failure. id: 2896462, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.663 E/IPCThreadState(23973): Binder transaction failure. id: 2896466, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.679 E/IPCThreadState(23973): Binder transaction failure. id: 2896482, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.680 E/IPCThreadState(23973): Binder transaction failure. id: 2896486, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.681 E/IPCThreadState(23973): Binder transaction failure. id: 2896490, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.683 E/IPCThreadState(23973): Binder transaction failure. id: 2896494, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.684 E/IPCThreadState(23973): Binder transaction failure. id: 2896498, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.686 E/IPCThreadState(23973): Binder transaction failure. id: 2896502, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.687 E/IPCThreadState(23973): Binder transaction failure. id: 2896506, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.688 E/IPCThreadState(23973): Binder transaction failure. id: 2896510, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.689 E/IPCThreadState(23973): Binder transaction failure. id: 2896514, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.691 E/IPCThreadState(23973): Binder transaction failure. id: 2896518, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.711 E/IPCThreadState(23973): Binder transaction failure. id: 2896566, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.711 E/IPCThreadState(23973): Binder transaction failure. id: 2896570, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.713 E/IPCThreadState(23973): Binder transaction failure. id: 2896579, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.713 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.714 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.715 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.715 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.716 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.716 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.716 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.717 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.717 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.720 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.720 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.745 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.751 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.787 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.816 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.825 E/IPCThreadState(23973): Binder transaction failure. id: 2897226, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.885 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.912 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.953 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.963 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:26.029 E/IPCThreadState(23973): Binder transaction failure. id: 2897733, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): No service published for: persistent_data_block
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): android.os.ServiceManager$ServiceNotFoundException: No service published for: persistent_data_block
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.ServiceManager.getServiceOrThrow(ServiceManager.java:203)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1110)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1107)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$StaticServiceFetcher.getService(SystemServiceRegistry.java:2405)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry.getSystemService(SystemServiceRegistry.java:1918)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.ContextImpl.getSystemService(ContextImpl.java:2315)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.content.Context.getSystemService(Context.java:4630)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.markAsSealed(PackageInstallerSession.java:2449)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.commit(PackageInstallerSession.java:2198)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.content.pm.PackageInstaller$Session.commit(PackageInstaller.java:1988)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doCommitSession(PackageManagerShellCommand.java:4316)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doRunInstall(PackageManagerShellCommand.java:1641)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.runInstall(PackageManagerShellCommand.java:1562)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:246)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.ShellCommand.exec(ShellCommand.java:38)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6684)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.shellCommand(Binder.java:1151)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.onTransact(Binder.java:953)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4729)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6668)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransactInternal(Binder.java:1426)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransact(Binder.java:1365)
 --------- beginning of system
-09-06 22:07:45.616 E/SystemServiceRegistry(  695): Manager wrapper not available: persistent_data_block
-09-06 22:07:45.923 E/InputDispatcher(  695): channel '19877dc com.checkmate.app.debug/com.checkmate.app.ui.MainActivity' ~ Channel is unrecoverably broken and will be disposed!
-09-06 22:07:46.112 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
-09-06 22:07:46.144 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
-09-06 22:07:46.274 E/AtomicFile(  695): Failed to rename /data/system/install_sessions.xml.new to /data/system/install_sessions.xml
-09-06 22:07:46.275 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
-09-06 22:07:46.368 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
-09-06 22:07:46.386 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk': I/O error
-09-06 22:07:46.409 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk': I/O error
-09-06 22:07:46.411 E/ResourcesManager( 1494): failed to add asset path '/data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk'
-09-06 22:07:46.411 E/ResourcesManager( 1494): java.io.IOException: Failed to load asset path /data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.nativeLoad(Native Method)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.<init>(ApkAssets.java:322)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.loadFromPath(ApkAssets.java:171)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.loadApkAssets(ResourcesManager.java:618)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager$ApkAssetsSupplier.load(ResourcesManager.java:287)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createAssetManager(ResourcesManager.java:714)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResourcesImpl(ResourcesManager.java:801)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.findOrCreateResourcesImplForKeyLocked(ResourcesManager.java:854)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResources(ResourcesManager.java:1199)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.getResources(ResourcesManager.java:1301)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ActivityThread.getTopLevelResources(ActivityThread.java:2979)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2154)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2140)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getText(ApplicationPackageManager.java:2481)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.ComponentInfo.loadUnsafeLabel(ComponentInfo.java:140)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadSafeLabel(PackageItemInfo.java:273)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadLabel(PackageItemInfo.java:221)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.ResolveInfo.loadLabel(ResolveInfo.java:258)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.createSafetySourceIssue(AccessibilitySourceService.kt:281)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:437)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:457)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter$default(AccessibilitySourceService.kt:449)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.SafetyCenterAccessibilityListener$onAccessibilityServicesStateChanged$1.invokeSuspend(AccessibilitySourceService.kt:966)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:829)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
-09-06 22:07:46.416 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.WALLET
-09-06 22:07:46.418 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
-09-06 22:07:47.111 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
-09-06 22:07:48.303 E/IPCThreadState(  695): Binder transaction failure. id: 1313856, BR_*: 29189, error: -22 (Invalid argument)
-09-06 22:07:48.366 E/SurfaceSyncGroup( 9013): Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[Main]#8) as ready
-09-06 22:07:48.367 E/SurfaceSyncGroup( 9013): Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[Main]#9) as ready
-09-06 22:07:48.369 E/SurfaceSyncGroup( 9013): Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(SurfaceView[com.android.chrome/com.google.android.apps.chrome.Main]#7) as ready
-09-06 22:07:48.370 E/BpTransactionCompletedListener(  553): Failed to transact (-32)
-09-06 22:07:49.017 E/ashmem  (10935): Pinning is deprecated since Android Q. Please use trim or other methods.
-09-06 22:07:49.989 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
-09-06 22:07:50.281 E/cr_CompositorSurfaceMgr( 9013): surfaceDestroyed format : -3
-09-06 22:07:53.559 W/System.err(10935): SLF4J: No SLF4J providers were found.
-09-06 22:07:53.559 W/System.err(10935): SLF4J: Defaulting to no-operation (NOP) logger implementation
-09-06 22:07:53.559 W/System.err(10935): SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.902 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.913 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.915 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:53.967 E/OggOpusEncoder( 4126): Native OggOpusEncoder resources weren't cleaned up. You must call stop()!
-09-06 22:07:53.986 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:54.340 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:54.341 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:54.576 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:54.577 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:56.004 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:56.120 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:56.121 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:56.577 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:56.577 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.617 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.618 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.624 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
-09-06 22:07:56.625 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:56.626 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.626 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:56.626 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.626 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
-09-06 22:07:56.626 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.626 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.626 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.627 E/VoiceSearchConfigUtils( 4126): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
-09-06 22:07:56.637 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:56.658 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:56.658 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:57.151 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:57.151 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:57.822 E/ApiService(10935): Error deleting session
-09-06 22:07:57.822 E/ApiService(10935): kotlinx.coroutines.JobCancellationException: Job was cancelled; job=SupervisorJobImpl{Cancelling}@8206fa6
-09-06 22:07:57.823 E/SessionManager(10935): Failed to stop session on backend
-09-06 22:07:57.981 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:58.095 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:58.096 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:58.613 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:07:58.614 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
-09-06 22:08:00.193 E/TransitionChain(  695): Can't collect into a chain with no transition
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): Manager wrapper not available: persistent_data_block
+09-07 14:44:28.731 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
+09-07 14:44:28.736 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+09-07 14:44:28.832 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+09-07 14:44:28.888 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
+09-07 14:44:28.906 E/AtomicFile(  695): Failed to rename /data/system/install_sessions.xml.new to /data/system/install_sessions.xml
+09-07 14:44:29.064 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk': I/O error
+09-07 14:44:29.071 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk': I/O error
+09-07 14:44:29.072 E/ResourcesManager( 1494): failed to add asset path '/data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk'
+09-07 14:44:29.072 E/ResourcesManager( 1494): java.io.IOException: Failed to load asset path /data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.nativeLoad(Native Method)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.<init>(ApkAssets.java:322)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.loadFromPath(ApkAssets.java:171)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.loadApkAssets(ResourcesManager.java:618)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager$ApkAssetsSupplier.load(ResourcesManager.java:287)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createAssetManager(ResourcesManager.java:714)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResourcesImpl(ResourcesManager.java:801)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.findOrCreateResourcesImplForKeyLocked(ResourcesManager.java:854)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResources(ResourcesManager.java:1199)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.getResources(ResourcesManager.java:1301)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ActivityThread.getTopLevelResources(ActivityThread.java:2979)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2154)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2140)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getText(ApplicationPackageManager.java:2481)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.ComponentInfo.loadUnsafeLabel(ComponentInfo.java:140)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadSafeLabel(PackageItemInfo.java:273)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadLabel(PackageItemInfo.java:221)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.ResolveInfo.loadLabel(ResolveInfo.java:258)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.createSafetySourceIssue(AccessibilitySourceService.kt:281)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:437)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:457)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter$default(AccessibilitySourceService.kt:449)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.SafetyCenterAccessibilityListener$onAccessibilityServicesStateChanged$1.invokeSuspend(AccessibilitySourceService.kt:966)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:829)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+09-07 14:44:29.085 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+09-07 14:44:29.189 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.WALLET
+09-07 14:44:29.298 E/Finsky  (21875): [113] [Counters] attempted to use a non-positive increment for: 4752
+09-07 14:44:29.302 E/Finsky  (21875): [108] [Counters] attempted to use a non-positive increment for: 4753
+09-07 14:44:29.303 E/Finsky  (21875): [118] [Counters] attempted to use a non-positive increment for: 4752
+09-07 14:44:29.309 E/Finsky  (21875): [108] [Counters] attempted to use a non-positive increment for: 4753
+09-07 14:44:29.469 E/Finsky  (21875): [121] [Counters] attempted to use a non-positive increment for: 4752
+09-07 14:44:29.488 E/Finsky  (21875): [113] [Counters] attempted to use a non-positive increment for: 4752
+09-07 14:44:29.488 E/Finsky  (21875): [113] [Counters] attempted to use a non-positive increment for: 4753
+09-07 14:44:29.488 E/Finsky  (21875): [113] [Counters] attempted to use a non-positive increment for: 4753
+09-07 14:44:29.740 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
+09-07 14:44:30.222 E/lowmemorykiller(  237): process_mrelease 20351 failed: No such process
+09-07 14:44:31.678 E/ashmem  (24025): Pinning is deprecated since Android Q. Please use trim or other methods.
+09-07 14:44:32.706 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
+09-07 14:44:36.069 E/OneSignal(21876): Operation execution failed, retrying: [{"name":"track-session-end","appId":"f578e15d-90a7-4733-97d1-c49addfce797","onesignalId":"b8883afc-c7b5-468c-9961-3c3b4f797aea","sessionTime":29,"id":"7bb7384b-7b30-4ea4-ad93-76e5ac9df555"}]
+09-07 14:44:36.069 E/OneSignal(21876): Operations being delay for: 15000 ms
+09-07 14:44:41.228 W/System.err(24025): SLF4J: No SLF4J providers were found.
+09-07 14:44:41.228 W/System.err(24025): SLF4J: Defaulting to no-operation (NOP) logger implementation
+09-07 14:44:41.228 W/System.err(24025): SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:41.691 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:41.692 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.693 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:41.694 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.694 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:41.694 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.694 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.694 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:41.742 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:42.113 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:42.113 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:42.508 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:42.510 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:43.776 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:43.918 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:43.920 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:44.393 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:44.393 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:44.511 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:44.871 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:44.874 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:45.073 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:45.073 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:45.187 E/PagedView( 1057): validateNewPage: failed to find a page > mMinScrollX
+09-07 14:44:45.187 E/PagedView( 1057): validateNewPage: failed to find a page > mMinScrollX
+09-07 14:44:46.106 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.210 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.314 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.422 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.532 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.634 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.737 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.842 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:46.950 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.001 E/LocationSDK(21876): Activity Started: ui.CreateNoteActivity
+09-07 14:44:47.032 E/LocationSDK(21876): LocationSDK >>> START_HANDLER
+09-07 14:44:47.058 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.170 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.219 E/AppOpenManagerNew(21876): Req
+09-07 14:44:47.275 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.381 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.411 E/TransitionChain(  695): Can't collect into a chain with no transition
+09-07 14:44:47.482 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.599 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.702 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.806 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.910 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.013 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.017 E/LocationSDK(21876): LocationSDK >>> START_HANDLER >>> RUN >>> IS_CALL_INSTANT >>> true
+09-07 14:44:48.017 E/LocationSDK(21876): LocationSDK >>> START_HANDLER >>> RUN
+09-07 14:44:48.020 E/LocationSDK(21876): LocationSDK >>> START_HANDLER >>> NO >>> NETWORK >>> LOCATION_PERMISSION >>> NOT_GRANTED
+09-07 14:44:48.118 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.136 E/ImeVisibilityStateComputer(  695): SOFT_INPUT_STATE_VISIBLE is ignored because there is no focused view that also returns true from View#onCheckIsTextEditor()
+09-07 14:44:48.222 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.326 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.430 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.536 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.576 E/ABD     (21876): focus: 
+09-07 14:44:48.641 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.746 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.843 E/GmsCoreLogger( 1252): Missing account for FACET_USAGE_GAIA_UNSAMPLED [CONTEXT service_id=299 ]
+09-07 14:44:48.860 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.963 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:49.045 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:49.070 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:49.870 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
+09-07 14:44:50.159 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:50.164 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.169 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.190 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:50.195 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.196 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:50.196 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.198 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:50.198 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.198 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.198 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:50.203 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:50.217 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): InputConnectionWrapper.waitForInputConnectionFutureInternal():1688 Failed to get the input connection call's result.
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): java.util.concurrent.TimeoutException: Waited 500 milliseconds (plus 81 milliseconds, 621805 nanoseconds delay) for qfs@f61ef90[status=PENDING, info=[task=[running=[RUNNING ON ICWrapper-1], kcg@d111089]]]
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at qcq.get(PG:52)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcs.e(PG:10)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcs.t(PG:85)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kdb.a(PG:87)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kde.i(PG:186)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kca.f(PG:5)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kbe.dT(PG:7)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcg.call(PG:17)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at jyj.n(PG:8)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at jyj.dT(PG:11)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at jya.dT(PG:3)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at hld.x(PG:8)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at hld.w(PG:3)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at hld.n(PG:5)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at git.k(PG:3)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at git.d(PG:65)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.google.android.apps.inputmethod.libs.latin5.LatinIme.n(PG:42)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.google.android.libraries.inputmethod.ime.ImeWrapperImpl.n(PG:8)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at okr.a(PG:129)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kde.l(PG:357)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcs.a(PG:265)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kgn.onUpdateSelection(PG:23)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.InputMethodService$InputMethodSessionImpl.updateSelection(InputMethodService.java:1480)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.IInputMethodSessionWrapper.executeMessage(IInputMethodSessionWrapper.java:115)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.os.Looper.loopOnce(Looper.java:248)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.os.Looper.loop(Looper.java:338)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at java.lang.reflect.Method.invoke(Native Method)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+09-07 14:44:50.586 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:50.590 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:50.814 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:50.816 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): InputConnectionWrapper.waitForInputConnectionFutureInternal():1688 Failed to get the input connection call's result.
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): java.util.concurrent.TimeoutException: Waited 500 milliseconds (plus 1 milliseconds, 13485 nanoseconds delay) for qfs@5fa8b66[status=PENDING, info=[task=[running=[RUNNING ON ICWrapper-1], kcg@90a9ea7]]]
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at qcq.get(PG:52)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kcs.e(PG:10)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kcs.t(PG:85)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kdb.a(PG:87)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kde.j(PG:9)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kde.l(PG:77)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kcs.a(PG:265)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kgn.onUpdateSelection(PG:23)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.InputMethodService$InputMethodSessionImpl.updateSelection(InputMethodService.java:1480)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.IInputMethodSessionWrapper.executeMessage(IInputMethodSessionWrapper.java:115)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.os.Looper.loopOnce(Looper.java:248)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.os.Looper.loop(Looper.java:338)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at java.lang.reflect.Method.invoke(Native Method)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+09-07 14:44:52.203 E/ABD     (21876): Unfocus: 
+09-07 14:44:52.572 E/InputContextChangeTracker(11860): InputContextChangeTracker.getSubSurroundText():1436 Invalid sub surrounding text: contentLength=0, subStringInContent=[0, 0], selectionInContent=[0, 3]
+09-07 14:44:52.806 E/GmsCoreLogger( 1252): Missing account for FACET_USAGE_GAIA_UNSAMPLED [CONTEXT service_id=299 ]
+09-07 14:44:53.090 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.198 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.302 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.405 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.510 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.613 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.718 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.823 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:53.926 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.029 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.134 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.240 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.343 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.446 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.550 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.655 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.763 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.867 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:54.976 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:55.001 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:55.079 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:55.163 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:55.166 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:55.574 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:55.576 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:55.602 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:55.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:55.679 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:56.046 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.050 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.148 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.258 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.258 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.357 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.359 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.364 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.366 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.466 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.474 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.572 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.578 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.674 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.682 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.778 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.791 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.883 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.898 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.003 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.015 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.107 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.107 E/TransitionChain(  695): Can't collect into a chain with no transition
+09-07 14:44:57.122 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.210 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.227 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.281 E/ImeBackDispatcher(24025): Ime callback not found. Ignoring unregisterReceivedCallback. callbackId: 21511613
+09-07 14:44:57.315 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.336 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.418 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.442 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.523 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.550 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.626 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.654 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.730 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.757 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.839 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.862 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.942 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.966 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.036 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:58.069 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:58.146 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.173 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.174 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.251 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.355 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.458 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.561 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.606 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.607 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.667 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.680 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:58.680 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.680 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:58.680 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.680 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:58.681 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.681 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.681 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:44:58.767 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:58.777 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.783 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.785 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:59.103 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.205 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.309 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:59.310 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.310 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:59.411 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
+09-07 14:44:59.415 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.519 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.622 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.730 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.834 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.938 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.046 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.150 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.226 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.253 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.329 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.357 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.433 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.461 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.537 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.566 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.643 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.670 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.746 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.775 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.783 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:45:00.849 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.906 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.930 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:00.934 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.010 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.118 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.221 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.325 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.363 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.364 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.435 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.538 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.550 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:45:01.550 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 22. Ignoring it and its associated features.
+09-07 14:45:01.576 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:45:01.578 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.578 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:45:01.578 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.578 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 22. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 22. Ignoring it and its associated features.
+09-07 14:45:01.913 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.982 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.984 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:02.018 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.122 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.226 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.239 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:02.240 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:02.330 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.434 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.496 E/ApiService(24025): Error deleting session
+09-07 14:45:02.496 E/ApiService(24025): kotlinx.coroutines.JobCancellationException: Job was cancelled; job=SupervisorJobImpl{Cancelling}@c510116
+09-07 14:45:02.497 E/SessionManager(24025): Failed to stop session on backend
+09-07 14:45:02.542 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.627 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:45:02.687 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.800 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.902 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.006 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.110 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.214 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.318 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.423 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.525 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.630 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.733 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.838 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:03.942 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.045 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.150 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.254 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.362 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.467 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.571 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.675 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.779 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.883 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:04.986 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:05.090 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:05.194 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:05.298 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1

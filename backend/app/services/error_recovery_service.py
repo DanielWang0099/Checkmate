@@ -72,9 +72,25 @@ class ErrorRecoveryService:
         self.recovery_callbacks: Dict[str, Callable] = {}
         self.health_check_interval = 30  # seconds
         self.last_health_check = datetime.utcnow()
-        
-        # Start background health monitoring
-        asyncio.create_task(self._health_monitor_loop())
+        self._health_monitor_task = None
+        self._initialized = False
+    
+    async def initialize(self):
+        """Initialize the service - must be called when event loop is running."""
+        if not self._initialized:
+            self._health_monitor_task = asyncio.create_task(self._health_monitor_loop())
+            self._initialized = True
+    
+    def ensure_initialized(self):
+        """Ensure the service is initialized (lazy initialization)."""
+        if not self._initialized:
+            try:
+                # Try to create task if event loop is running
+                self._health_monitor_task = asyncio.create_task(self._health_monitor_loop())
+                self._initialized = True
+            except RuntimeError:
+                # No event loop running, will initialize later
+                pass
     
     async def handle_error_with_recovery(
         self,
@@ -85,6 +101,10 @@ class ErrorRecoveryService:
         auto_recover: bool = True
     ) -> EnhancedErrorResponse:
         """Handle error with automatic recovery attempts."""
+        
+        # Ensure service is initialized
+        if not self._initialized:
+            await self.initialize()
         
         # Create operation context if not exists
         operation_id = f"{operation}_{session_id or 'global'}"

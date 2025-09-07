@@ -22,6 +22,7 @@ import com.checkmate.app.utils.CapturePipeline
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.nio.ByteBuffer
+import com.checkmate.app.debug.PipelineDebugger
 
 /**
  * Service that handles screen capture using MediaProjection API.
@@ -29,6 +30,7 @@ import java.nio.ByteBuffer
 class MediaProjectionService : Service() {
     
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private val pipelineDebugger = PipelineDebugger.getInstance()
     
     private var mediaProjection: MediaProjection? = null
     private var virtualDisplay: VirtualDisplay? = null
@@ -47,10 +49,20 @@ class MediaProjectionService : Service() {
     override fun onCreate() {
         super.onCreate()
         
-        sessionManager = SessionManager.getInstance(this)
-        capturePipeline = CapturePipeline(this)
+        pipelineDebugger.logStageStart(PipelineDebugger.STAGE_MEDIA_PROJECTION, mapOf(
+            "service" to "MediaProjectionService",
+            "thread" to Thread.currentThread().name
+        ))
         
-        initializeScreenMetrics()
+        sessionManager = SessionManager.getInstance(this)
+        capturePipeline = CapturePipeline.getInstance(this)
+        
+        try {
+            initializeScreenMetrics()
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Service created successfully")
+        } catch (e: Exception) {
+            pipelineDebugger.logError(PipelineDebugger.STAGE_MEDIA_PROJECTION, e, "Error during service creation")
+        }
         
         Timber.i("MediaProjectionService created")
     }
@@ -58,29 +70,45 @@ class MediaProjectionService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "onStartCommand: ${intent?.action}")
+        
         when (intent?.action) {
             ACTION_START_PROJECTION -> {
+                pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Starting media projection")
+                
                 val resultCode = intent.getIntExtra(EXTRA_RESULT_CODE, -1)
                 val data = intent.getParcelableExtra<Intent>(EXTRA_RESULT_DATA)
                 
                 if (resultCode != -1 && data != null) {
+                    pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Valid projection data received", mapOf(
+                        "result_code" to resultCode,
+                        "has_data" to (data != null)
+                    ))
                     startScreenProjection(resultCode, data)
                 } else {
+                    pipelineDebugger.logError(PipelineDebugger.STAGE_MEDIA_PROJECTION, 
+                        Exception("Invalid media projection data"), 
+                        "Invalid media projection intent data",
+                        mapOf("result_code" to resultCode, "data_null" to (data == null))
+                    )
                     Timber.e("Invalid media projection intent data")
                     stopSelf()
                 }
             }
             
             ACTION_CAPTURE_SCREEN -> {
+                pipelineDebugger.logInfo(PipelineDebugger.STAGE_SCREEN_CAPTURE, "Manual screen capture requested")
                 captureScreenshot()
             }
             
             ACTION_STOP_PROJECTION -> {
+                pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Stopping projection")
                 stopScreenProjection()
                 stopSelf()
             }
             
             else -> {
+                pipelineDebugger.logWarning(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Unknown action: ${intent?.action}")
                 Timber.w("Unknown action: ${intent?.action}")
                 stopSelf()
             }
@@ -103,27 +131,46 @@ class MediaProjectionService : Service() {
     }
 
     private fun startScreenProjection(resultCode: Int, data: Intent) {
+        pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Setting up screen projection")
+        
         try {
             val mediaProjectionManager = getSystemService<MediaProjectionManager>()
             if (mediaProjectionManager == null) {
+                val error = Exception("MediaProjectionManager not available")
+                pipelineDebugger.logError(PipelineDebugger.STAGE_MEDIA_PROJECTION, error, "MediaProjectionManager service unavailable")
                 Timber.e("MediaProjectionManager not available")
                 stopSelf()
                 return
             }
             
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "Creating MediaProjection")
             mediaProjection = mediaProjectionManager.getMediaProjection(resultCode, data)
             if (mediaProjection == null) {
+                val error = Exception("MediaProjection creation failed")
+                pipelineDebugger.logError(PipelineDebugger.STAGE_MEDIA_PROJECTION, error, "Failed to create MediaProjection", mapOf(
+                    "result_code" to resultCode
+                ))
                 Timber.e("Failed to create MediaProjection")
                 stopSelf()
                 return
             }
             
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_MEDIA_PROJECTION, "MediaProjection created, setting up capture")
+            
             setupImageReader()
             setupVirtualDisplay()
+            
+            pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_MEDIA_PROJECTION, true, mapOf(
+                "screen_width" to screenWidth,
+                "screen_height" to screenHeight,
+                "screen_density" to screenDensity
+            ))
             
             Timber.i("Screen projection started successfully")
             
         } catch (e: Exception) {
+            pipelineDebugger.logError(PipelineDebugger.STAGE_MEDIA_PROJECTION, e, "Critical error starting screen projection")
+            pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_MEDIA_PROJECTION, false, mapOf("error" to (e.message ?: "Unknown error")))
             Timber.e(e, "Error starting screen projection")
             stopSelf()
         }

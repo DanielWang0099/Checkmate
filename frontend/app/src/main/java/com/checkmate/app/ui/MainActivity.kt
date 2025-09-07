@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -41,10 +43,18 @@ import com.checkmate.app.ui.theme.CheckmateTheme
 import com.checkmate.app.utils.PermissionHelper
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import com.checkmate.app.debug.PipelineDebugger
+
+// Navigation screens
+enum class Screen {
+    MAIN,
+    SETTINGS
+}
 
 class MainActivity : ComponentActivity() {
     
     private lateinit var sessionManager: SessionManager
+    private val pipelineDebugger = PipelineDebugger.getInstance()
     
     private var isServiceRunning by mutableStateOf(false)
     private var hasRequiredPermissions by mutableStateOf(false)
@@ -55,6 +65,10 @@ class MainActivity : ComponentActivity() {
     private var lastNotification by mutableStateOf<NotificationPayload?>(null)
     private var batteryStatus by mutableStateOf<BatteryStatus?>(null)
     private var performanceHints by mutableStateOf<PerformanceHints?>(null)
+    
+    // Navigation state
+    private var currentScreen by mutableStateOf(Screen.MAIN)
+    private var preferencesState by mutableStateOf(PreferencesState())
     
     // Permission launchers
     private val mediaProjectionLauncher = registerForActivityResult(
@@ -92,6 +106,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        pipelineDebugger.logStageStart(PipelineDebugger.STAGE_INIT, mapOf(
+            "activity" to "MainActivity",
+            "sdk_version" to android.os.Build.VERSION.SDK_INT,
+            "app_version" to (packageManager.getPackageInfo(packageName, 0).versionName ?: "Unknown")
+        ))
+        
         sessionManager = SessionManager.getInstance(this)
         
         // Observe real-time session state
@@ -100,6 +120,13 @@ class MainActivity : ComponentActivity() {
                 sessionState = state
                 lastNotification = state.lastNotification
                 connectionState = state.connectionState
+            }
+        }
+        
+        // Observe preferences state
+        lifecycleScope.launch {
+            sessionManager.preferences.collect { prefs ->
+                preferencesState = prefs
             }
         }
         
@@ -117,20 +144,39 @@ class MainActivity : ComponentActivity() {
         
         setContent {
             CheckmateTheme {
-                MainScreen(
-                    isServiceRunning = isServiceRunning,
-                    hasRequiredPermissions = hasRequiredPermissions,
-                    sessionState = sessionState,
-                    connectionState = connectionState,
-                    lastNotification = lastNotification,
-                    batteryStatus = batteryStatus,
-                    performanceHints = performanceHints,
-                    onStartService = ::startFactCheckingService,
-                    onStopService = ::stopFactCheckingService,
-                    onRequestPermissions = ::requestAllPermissions,
-                    onOpenSettings = ::openAppSettings,
-                    onClearNotification = ::clearLastNotification
-                )
+                when (currentScreen) {
+                    Screen.MAIN -> MainScreen(
+                        isServiceRunning = isServiceRunning,
+                        hasRequiredPermissions = hasRequiredPermissions,
+                        sessionState = sessionState,
+                        connectionState = connectionState,
+                        lastNotification = lastNotification,
+                        batteryStatus = batteryStatus,
+                        performanceHints = performanceHints,
+                        onStartService = ::startFactCheckingService,
+                        onStopService = ::stopFactCheckingService,
+                        onRequestPermissions = ::requestAllPermissions,
+                        onOpenSettings = ::openAppSettings,
+                        onClearNotification = ::clearLastNotification,
+                        onNavigateToSettings = { currentScreen = Screen.SETTINGS }
+                    )
+                    
+                    Screen.SETTINGS -> SettingsScreen(
+                        preferencesState = preferencesState,
+                        onNavigateBack = { currentScreen = Screen.MAIN },
+                        onUpdatePreferences = { sessionType, durationMinutes, strictness, showDetails, showLinks ->
+                            lifecycleScope.launch {
+                                sessionManager.updatePreferences(
+                                    sessionType = sessionType,
+                                    sessionDurationMinutes = durationMinutes,
+                                    strictness = strictness,
+                                    showDetails = showDetails,
+                                    showLinks = showLinks
+                                )
+                            }
+                        }
+                    )
+                }
             }
         }
         
@@ -201,12 +247,21 @@ class MainActivity : ComponentActivity() {
     }
     
     private fun startFactCheckingService(bypassPermissionCheck: Boolean = false) {
+        pipelineDebugger.logStageStart(PipelineDebugger.STAGE_SESSION_START, mapOf(
+            "bypass_permission_check" to bypassPermissionCheck,
+            "has_permissions" to hasRequiredPermissions
+        ))
+        
         if (!bypassPermissionCheck && !hasRequiredPermissions) {
+            pipelineDebugger.logWarning(PipelineDebugger.STAGE_SESSION_START, "Missing permissions, requesting permissions first")
             requestAllPermissions()
+            pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_SESSION_START, false, mapOf("reason" to "missing_permissions"))
             return
         }
         
         try {
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_SESSION_START, "Starting CheckmateService")
+            
             // Start the service
             val serviceIntent = Intent(this, CheckmateService::class.java).apply {
                 action = CheckmateService.ACTION_START_SERVICE
@@ -214,20 +269,38 @@ class MainActivity : ComponentActivity() {
             ContextCompat.startForegroundService(this, serviceIntent)
             
             lifecycleScope.launch {
-                // Give the service time to start
-                kotlinx.coroutines.delay(1000)
-                checkServiceStatus()
-                
-                // Now start a fact-checking session
-                val sessionIntent = Intent(this@MainActivity, CheckmateService::class.java).apply {
-                    action = CheckmateService.ACTION_START_SESSION
+                try {
+                    pipelineDebugger.logInfo(PipelineDebugger.STAGE_SESSION_START, "Waiting for service to initialize")
+                    
+                    // Give the service time to start
+                    kotlinx.coroutines.delay(1000)
+                    checkServiceStatus()
+                    
+                    pipelineDebugger.logInfo(PipelineDebugger.STAGE_SESSION_START, "Service started, creating session")
+                    
+                    // Now start a fact-checking session
+                    val sessionIntent = Intent(this@MainActivity, CheckmateService::class.java).apply {
+                        action = CheckmateService.ACTION_START_SESSION
+                    }
+                    startService(sessionIntent)
+                    
+                    pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_SESSION_START, true, mapOf(
+                        "service_started" to true,
+                        "session_requested" to true
+                    ))
+                    
+                    Timber.d("Started service and session")
+                    
+                } catch (e: Exception) {
+                    pipelineDebugger.logError(PipelineDebugger.STAGE_SESSION_START, e, "Error during session launch sequence")
+                    pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_SESSION_START, false, mapOf("error" to (e.message ?: "Unknown error") as Any))
+                    throw e
                 }
-                startService(sessionIntent)
-                
-                Timber.d("Started service and session")
             }
             
         } catch (e: Exception) {
+            pipelineDebugger.logError(PipelineDebugger.STAGE_SESSION_START, e, "Error starting fact-checking service")
+            pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_SESSION_START, false, mapOf("error" to (e.message ?: "Unknown error") as Any))
             Timber.e(e, "Error starting fact-checking service")
         }
     }
@@ -292,7 +365,8 @@ fun MainScreen(
     onStopService: () -> Unit,
     onRequestPermissions: () -> Unit,
     onOpenSettings: () -> Unit,
-    onClearNotification: () -> Unit
+    onClearNotification: () -> Unit,
+    onNavigateToSettings: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -302,6 +376,14 @@ fun MainScreen(
                         "Checkmate",
                         fontWeight = FontWeight.Bold
                     ) 
+                },
+                actions = {
+                    IconButton(onClick = onNavigateToSettings) {
+                        Icon(
+                            Icons.Default.Settings,
+                            contentDescription = "Settings"
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -1259,5 +1341,448 @@ fun SessionMemoryCard(sessionMemory: SessionMemory) {
                 }
             }
         }
+    }
+}
+
+/**
+ * Comprehensive Settings Screen for Checkmate
+ * Matches the product requirements with all session types, strictness levels, and notification settings
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SettingsScreen(
+    preferencesState: PreferencesState,
+    onNavigateBack: () -> Unit,
+    onUpdatePreferences: (
+        sessionType: SessionType?,
+        durationMinutes: Int?,
+        strictness: Float?,
+        showDetails: Boolean?,
+        showLinks: Boolean?
+    ) -> Unit
+) {
+    var sessionType by remember { mutableStateOf(preferencesState.sessionType) }
+    var sessionDurationMinutes by remember { mutableStateOf(preferencesState.sessionDurationMinutes) }
+    var strictness by remember { mutableStateOf(preferencesState.strictness) }
+    var showDetails by remember { mutableStateOf(preferencesState.showDetails) }
+    var showLinks by remember { mutableStateOf(preferencesState.showLinks) }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { 
+                    Text(
+                        "Settings",
+                        fontWeight = FontWeight.Bold
+                    ) 
+                },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                )
+            )
+        }
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            
+            // Session Type Section
+            item {
+                SettingsSection(
+                    title = "Session Type",
+                    description = "Determines when your fact-checking session will end"
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        SessionTypeOption(
+                            type = SessionType.MANUAL,
+                            title = "Manual",
+                            description = "Continue until you manually stop",
+                            isSelected = sessionType == SessionType.MANUAL,
+                            onSelect = { 
+                                sessionType = SessionType.MANUAL
+                                onUpdatePreferences(SessionType.MANUAL, null, null, null, null)
+                            }
+                        )
+                        
+                        SessionTypeOption(
+                            type = SessionType.TIME,
+                            title = "Time-boxed",
+                            description = "Automatically stop after a set duration",
+                            isSelected = sessionType == SessionType.TIME,
+                            onSelect = { 
+                                sessionType = SessionType.TIME
+                                onUpdatePreferences(SessionType.TIME, sessionDurationMinutes, null, null, null)
+                            }
+                        )
+                        
+                        SessionTypeOption(
+                            type = SessionType.ACTIVITY,
+                            title = "Activity-based",
+                            description = "Automatically detect when you change activities",
+                            isSelected = sessionType == SessionType.ACTIVITY,
+                            onSelect = { 
+                                sessionType = SessionType.ACTIVITY
+                                onUpdatePreferences(SessionType.ACTIVITY, null, null, null, null)
+                            }
+                        )
+                    }
+                }
+            }
+
+            // Time Duration Slider (only shown when TIME is selected)
+            if (sessionType == SessionType.TIME) {
+                item {
+                    SettingsSection(
+                        title = "Session Duration",
+                        description = "How long should the session run (5 minutes to 3 hours)"
+                    ) {
+                        Column {
+                            Text(
+                                text = "${sessionDurationMinutes} minutes",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            )
+                            
+                            Slider(
+                                value = sessionDurationMinutes.toFloat(),
+                                onValueChange = { value ->
+                                    sessionDurationMinutes = value.toInt()
+                                },
+                                onValueChangeFinished = {
+                                    onUpdatePreferences(null, sessionDurationMinutes, null, null, null)
+                                },
+                                valueRange = 5f..180f, // 5 minutes to 3 hours
+                                steps = 34, // Creates stops at 5, 10, 15, 20, 30, 45, 60, 90, 120, 180 minutes
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = "5 min",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = "3 hrs",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Strictness Level Section
+            item {
+                SettingsSection(
+                    title = "Strictness Level",
+                    description = "How sensitive should fact-checking be to potential misinformation"
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        Text(
+                            text = getStrictnessLabel(strictness),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        
+                        // Discrete strictness levels as per backend config
+                        val strictnessLevels = listOf(0.0f, 0.2f, 0.4f, 0.5f, 0.6f, 0.8f, 1.0f)
+                        val currentIndex = strictnessLevels.indexOfFirst { 
+                            kotlin.math.abs(it - strictness) < 0.01f 
+                        }.takeIf { it >= 0 } ?: 3 // Default to 0.5 if not found
+                        
+                        Slider(
+                            value = currentIndex.toFloat(),
+                            onValueChange = { value ->
+                                val newIndex = value.toInt().coerceIn(0, strictnessLevels.size - 1)
+                                strictness = strictnessLevels[newIndex]
+                            },
+                            onValueChangeFinished = {
+                                onUpdatePreferences(null, null, strictness, null, null)
+                            },
+                            valueRange = 0f..(strictnessLevels.size - 1).toFloat(),
+                            steps = strictnessLevels.size - 2,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Relaxed",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = "Very Strict",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        
+                        // Strictness explanation
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f)
+                            )
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(12.dp)
+                            ) {
+                                Text(
+                                    text = getStrictnessDescription(strictness),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Notification Settings Section
+            item {
+                SettingsSection(
+                    title = "Notification Contents",
+                    description = "Choose what information to include in fact-check notifications"
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = "Show Details",
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = "Include expandable explanation of fact-check results",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Switch(
+                                checked = showDetails,
+                                onCheckedChange = { 
+                                    showDetails = it
+                                    onUpdatePreferences(null, null, null, showDetails, null)
+                                }
+                            )
+                        }
+                        
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = "Show Source Links",
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Text(
+                                    text = "Include links to trusted sources used for verification",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Switch(
+                                checked = showLinks,
+                                onCheckedChange = { 
+                                    showLinks = it
+                                    onUpdatePreferences(null, null, null, null, showLinks)
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Information Section
+            item {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f)
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Default.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+                            Text(
+                                text = "How to Use",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        
+                        Spacer(modifier = Modifier.height(8.dp))
+                        
+                        Text(
+                            text = "• Use the Quick Settings tile to start/stop sessions\n" +
+                                   "• Checkmate monitors your screen and audio in real-time\n" +
+                                   "• Notifications appear when potential misinformation is detected\n" +
+                                   "• Tap notifications to see details (does not open the app)\n" +
+                                   "• Configure settings here to customize your experience",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            lineHeight = MaterialTheme.typography.bodySmall.lineHeight * 1.4
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SettingsSection(
+    title: String,
+    description: String,
+    content: @Composable () -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
+            )
+            
+            content()
+        }
+    }
+}
+
+@Composable
+fun SessionTypeOption(
+    type: SessionType,
+    title: String,
+    description: String,
+    isSelected: Boolean,
+    onSelect: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onSelect() },
+        colors = CardDefaults.cardColors(
+            containerColor = if (isSelected) {
+                MaterialTheme.colorScheme.primaryContainer
+            } else {
+                MaterialTheme.colorScheme.surfaceVariant
+            }
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = if (isSelected) 4.dp else 1.dp
+        )
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = isSelected,
+                onClick = onSelect
+            )
+            
+            Spacer(modifier = Modifier.width(12.dp))
+            
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = if (isSelected) {
+                        MaterialTheme.colorScheme.onPrimaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.onSurface
+                    }
+                )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (isSelected) {
+                        MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    }
+                )
+            }
+        }
+    }
+}
+
+// Helper functions for strictness levels
+fun getStrictnessLabel(strictness: Float): String {
+    return when {
+        strictness <= 0.05f -> "Very Relaxed (0.0)"
+        strictness <= 0.25f -> "Relaxed (0.2)"
+        strictness <= 0.45f -> "Balanced (0.4)"
+        strictness <= 0.55f -> "Standard (0.5)"
+        strictness <= 0.65f -> "Sensitive (0.6)"
+        strictness <= 0.85f -> "Strict (0.8)"
+        else -> "Very Strict (1.0)"
+    }
+}
+
+fun getStrictnessDescription(strictness: Float): String {
+    return when {
+        strictness <= 0.05f -> "Only flags egregious falsehoods with high confidence. Minimal disruption."
+        strictness <= 0.25f -> "Flags clear misinformation with strong evidence. Conservative approach."
+        strictness <= 0.45f -> "Balanced fact-checking with moderate sensitivity to questionable claims."
+        strictness <= 0.55f -> "Standard level - flags most potentially misleading content with reasonable confidence."
+        strictness <= 0.65f -> "More sensitive - flags weaker claims and uses more sources for verification."
+        strictness <= 0.85f -> "Strict fact-checking - proactive flagging of potential misinformation."
+        else -> "Very strict - flags subtle risks and questionable claims with high sensitivity."
     }
 }

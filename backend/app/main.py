@@ -23,6 +23,7 @@ from app.models.schemas import (
 from app.services.session_service import session_manager, websocket_manager
 from app.services.bedrock_service import orchestrator
 from app.services.redis_starter import redis_starter
+from app.services.error_recovery_service import error_recovery_service
 
 
 # Configure logging
@@ -43,6 +44,7 @@ async def lifespan(app: FastAPI):
     redis_starter.ensure_redis_available()
     
     await session_manager.initialize()
+    await error_recovery_service.initialize()
     
     # Background task for session cleanup
     cleanup_task = asyncio.create_task(periodic_cleanup())

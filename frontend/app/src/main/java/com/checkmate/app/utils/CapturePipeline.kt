@@ -25,6 +25,7 @@ import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.*
+import com.checkmate.app.debug.PipelineDebugger
 
 /**
  * Manages the capture pipeline for screen content, text extraction, and image analysis.
@@ -37,31 +38,72 @@ class CapturePipeline(private val context: Context) {
     private val textExtractor = TextExtractor(context)
     private val imageClassifier = ImageClassifier(context)
     private val accessibilityHelper = AccessibilityHelper.getInstance(context)
+    private val pipelineDebugger = PipelineDebugger.getInstance()
     
     private var lastScreenshot: Bitmap? = null
     private var lastUIChangeTime = System.currentTimeMillis()
     private var uiChangeCount = 0
     
     suspend fun captureFrame(): FrameBundle? = withContext(Dispatchers.IO) {
+        val pipelineStartTime = System.currentTimeMillis()
+        
         try {
+            pipelineDebugger.logPipelineStart("frame_capture_${System.currentTimeMillis()}")
+            
             val sessionState = SessionManager.getInstance(context).getCurrentSessionState()
-            val sessionId = sessionState?.sessionId ?: return@withContext null
+            val sessionId = sessionState?.sessionId ?: run {
+                pipelineDebugger.logError(PipelineDebugger.STAGE_PIPELINE_ASSEMBLY, 
+                    Exception("No active session"), "No active session found")
+                return@withContext null
+            }
+            
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_PIPELINE_ASSEMBLY, "Starting frame capture", mapOf(
+                "session_id" to sessionId
+            ))
             
             // Capture accessibility tree
+            pipelineDebugger.logStageStart(PipelineDebugger.STAGE_ACCESSIBILITY_TREE)
             val treeSummary = captureAccessibilityTree()
+            pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_ACCESSIBILITY_TREE, true, mapOf(
+                "app_package" to treeSummary.appPackage,
+                "top_nodes_count" to treeSummary.topNodes.size,
+                "confidence" to treeSummary.confidence
+            ))
             
             // Capture screenshot
+            pipelineDebugger.logStageStart(PipelineDebugger.STAGE_SCREEN_CAPTURE)
             val screenshot = captureScreenshot()
+            pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_SCREEN_CAPTURE, screenshot != null, mapOf(
+                "has_screenshot" to (screenshot != null),
+                "screenshot_size" to if (screenshot != null) "${screenshot.width}x${screenshot.height}" else "null"
+            ))
             
             // Extract OCR text
+            pipelineDebugger.logStageStart(PipelineDebugger.STAGE_OCR_PROCESSING)
             val ocrText = if (screenshot != null) {
-                textExtractor.extractText(screenshot).take(AppConfig.MAX_OCR_TEXT_LENGTH)
-            } else ""
+                val extractedText = textExtractor.extractText(screenshot).take(AppConfig.MAX_OCR_TEXT_LENGTH)
+                pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_OCR_PROCESSING, true, mapOf(
+                    "text_length" to extractedText.length,
+                    "has_content" to extractedText.isNotBlank()
+                ))
+                extractedText
+            } else {
+                pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_OCR_PROCESSING, false, mapOf("reason" to "no_screenshot"))
+                ""
+            }
             
             // Classify image content
+            pipelineDebugger.logStageStart(PipelineDebugger.STAGE_IMAGE_CLASSIFICATION)
             val hasImage = if (screenshot != null) {
-                imageClassifier.hasSignificantImage(screenshot)
-            } else false
+                val result = imageClassifier.hasSignificantImage(screenshot)
+                pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_IMAGE_CLASSIFICATION, true, mapOf(
+                    "has_significant_image" to result
+                ))
+                result
+            } else {
+                pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_IMAGE_CLASSIFICATION, false, mapOf("reason" to "no_screenshot"))
+                false
+            }
             
             // Get image reference if needed
             val imageRef = if (hasImage && screenshot != null) {
@@ -69,7 +111,24 @@ class CapturePipeline(private val context: Context) {
             } else null
             
             // Capture audio transcript delta (placeholder for now)
-            val audioTranscriptDelta = captureAudioDelta()
+            pipelineDebugger.logStageStart(PipelineDebugger.STAGE_AUDIO_CAPTURE)
+            val audioTranscriptDelta = try {
+                captureAudioDelta()
+            } catch (e: Exception) {
+                pipelineDebugger.logError(PipelineDebugger.STAGE_AUDIO_CAPTURE, e, "Audio capture failed")
+                pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_AUDIO_CAPTURE, false, mapOf("error" to (e.message ?: "Unknown error")))
+                ""  // Continue without audio
+            }
+            if (audioTranscriptDelta.isNotEmpty()) {
+                pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_AUDIO_CAPTURE, true, mapOf(
+                    "transcript_length" to audioTranscriptDelta.length
+                ))
+            } else {
+                pipelineDebugger.logStageEnd(PipelineDebugger.STAGE_AUDIO_CAPTURE, true, mapOf(
+                    "transcript_length" to 0,
+                    "note" to "no_new_audio"
+                ))
+            }
             
             // Device hints
             val deviceHints = DeviceHints(
@@ -77,7 +136,7 @@ class CapturePipeline(private val context: Context) {
                 powerSaver = isPowerSaveMode()
             )
             
-            FrameBundle(
+            val frameBundle = FrameBundle(
                 sessionId = sessionId,
                 timestamp = Date(),
                 treeSummary = treeSummary,
@@ -88,7 +147,22 @@ class CapturePipeline(private val context: Context) {
                 deviceHints = deviceHints
             )
             
+            val totalDuration = System.currentTimeMillis() - pipelineStartTime
+            pipelineDebugger.logPipelineEnd("frame_capture", true, totalDuration)
+            
+            pipelineDebugger.logInfo(PipelineDebugger.STAGE_PIPELINE_ASSEMBLY, "Frame capture completed successfully", mapOf(
+                "total_duration_ms" to totalDuration,
+                "ocr_text_length" to ocrText.length,
+                "has_image" to hasImage,
+                "audio_length" to audioTranscriptDelta.length
+            ))
+            
+            frameBundle
+            
         } catch (e: Exception) {
+            val totalDuration = System.currentTimeMillis() - pipelineStartTime
+            pipelineDebugger.logError(PipelineDebugger.STAGE_PIPELINE_ASSEMBLY, e, "Critical error during frame capture")
+            pipelineDebugger.logPipelineEnd("frame_capture", false, totalDuration)
             Timber.e(e, "Error capturing frame")
             null
         }
@@ -639,5 +713,23 @@ class CapturePipeline(private val context: Context) {
         imageReader = null
         mediaProjection = null
         lastScreenshot = null
+    }
+    
+    companion object {
+        @Volatile
+        private var INSTANCE: CapturePipeline? = null
+        
+        fun getInstance(context: Context): CapturePipeline {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: CapturePipeline(context.applicationContext).also { INSTANCE = it }
+            }
+        }
+        
+        fun clearInstance() {
+            synchronized(this) {
+                INSTANCE?.cleanup()
+                INSTANCE = null
+            }
+        }
     }
 }

@@ -1,122 +1,324 @@
 --------- beginning of main
-09-06 22:07:42.132 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.167 to 09-06 22:07:42.251 E/IPCThreadState(10907): Binder transaction failure. id: 1304959, BR_*: 29201, error: -1 (Operation not permitted) [REPEATED 40 times]
-09-06 22:07:42.252 E/Parcel  (10907): Reading a NULL string not supported here.
-09-06 22:07:42.266 E/IPCThreadState(10907): Binder transaction failure. id: 1305258, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.281 to 09-06 22:07:42.503 E/Parcel(10907): Reading a NULL string not supported here. [REPEATED 14 times]
-09-06 22:07:42.513 E/IPCThreadState(10907): Binder transaction failure. id: 1305877, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.558 to 09-06 22:07:42.631 E/Parcel(10907): Reading a NULL string not supported here. [REPEATED 4 times]
-09-06 22:07:42.686 E/IPCThreadState(10907): Binder transaction failure. id: 1306383, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.719 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.725 to 09-06 22:07:42.761 E/IPCThreadState(10909): Binder transaction failure. id: 1306499, BR_*: 29201, error: -1 (Operation not permitted) [REPEATED 40 times]
-09-06 22:07:42.762 E/Parcel  (10909): Reading a NULL string not supported here.
-09-06 22:07:42.772 E/IPCThreadState(10909): Binder transaction failure. id: 1306795, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:42.783 to 09-06 22:07:42.976 E/Parcel(10909): Reading a NULL string not supported here. [REPEATED 14 times]
-09-06 22:07:42.982 E/IPCThreadState(10909): Binder transaction failure. id: 1307409, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:43.024 to 09-06 22:07:43.088 E/Parcel(10909): Reading a NULL string not supported here. [REPEATED 4 times]
-09-06 22:07:43.122 E/IPCThreadState(10909): Binder transaction failure. id: 1307913, BR_*: 29201, error: -1 (Operation not permitted)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): No service published for: persistent_data_block
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): android.os.ServiceManager$ServiceNotFoundException: No service published for: persistent_data_block
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.ServiceManager.getServiceOrThrow(ServiceManager.java:203)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1110)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1107)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$StaticServiceFetcher.getService(SystemServiceRegistry.java:2405)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry.getSystemService(SystemServiceRegistry.java:1918)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.app.ContextImpl.getSystemService(ContextImpl.java:2315)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.content.Context.getSystemService(Context.java:4630)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.markAsSealed(PackageInstallerSession.java:2449)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.commit(PackageInstallerSession.java:2198)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.content.pm.PackageInstaller$Session.commit(PackageInstaller.java:1988)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doCommitSession(PackageManagerShellCommand.java:4316)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doRunInstall(PackageManagerShellCommand.java:1641)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.runInstall(PackageManagerShellCommand.java:1562)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:246)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.ShellCommand.exec(ShellCommand.java:38)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6684)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.shellCommand(Binder.java:1151)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.onTransact(Binder.java:953)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4729)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6668)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransactInternal(Binder.java:1426)
-09-06 22:07:45.615 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransact(Binder.java:1365)
+09-07 14:44:24.944 E/Parcel  (23971): Reading a NULL string not supported here.
+09-07 14:44:24.978 to 09-07 14:44:25.090 E/IPCThreadState(23971): Binder transaction failure. id: 2894788, BR_*: 29201, error: -1 (Operation not permitted) [REPEATED 40 times]
+09-07 14:44:25.091 to 09-07 14:44:25.358 E/Parcel(23971): Reading a NULL string not supported here. [REPEATED 15 times]
+09-07 14:44:25.376 E/IPCThreadState(23971): Binder transaction failure. id: 2895701, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.435 to 09-07 14:44:25.498 E/Parcel(23971): Reading a NULL string not supported here. [REPEATED 4 times]
+09-07 14:44:25.539 E/IPCThreadState(23971): Binder transaction failure. id: 2896205, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.584 E/Parcel  (23973): Reading a NULL string not supported here.
+09-07 14:44:25.622 to 09-07 14:44:25.713 E/IPCThreadState(23973): Binder transaction failure. id: 2896324, BR_*: 29201, error: -1 (Operation not permitted) [REPEATED 40 times]
+09-07 14:44:25.713 to 09-07 14:44:25.816 E/Parcel(23973): Reading a NULL string not supported here. [REPEATED 15 times]
+09-07 14:44:25.825 E/IPCThreadState(23973): Binder transaction failure. id: 2897226, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:25.885 to 09-07 14:44:25.963 E/Parcel(23973): Reading a NULL string not supported here. [REPEATED 4 times]
+09-07 14:44:26.029 E/IPCThreadState(23973): Binder transaction failure. id: 2897733, BR_*: 29201, error: -1 (Operation not permitted)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): No service published for: persistent_data_block
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): android.os.ServiceManager$ServiceNotFoundException: No service published for: persistent_data_block
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.ServiceManager.getServiceOrThrow(ServiceManager.java:203)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1110)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$82.createService(SystemServiceRegistry.java:1107)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry$StaticServiceFetcher.getService(SystemServiceRegistry.java:2405)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.SystemServiceRegistry.getSystemService(SystemServiceRegistry.java:1918)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.app.ContextImpl.getSystemService(ContextImpl.java:2315)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.content.Context.getSystemService(Context.java:4630)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.markAsSealed(PackageInstallerSession.java:2449)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageInstallerSession.commit(PackageInstallerSession.java:2198)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.content.pm.PackageInstaller$Session.commit(PackageInstaller.java:1988)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doCommitSession(PackageManagerShellCommand.java:4316)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.doRunInstall(PackageManagerShellCommand.java:1641)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.runInstall(PackageManagerShellCommand.java:1562)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:246)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.ShellCommand.exec(ShellCommand.java:38)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6684)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.shellCommand(Binder.java:1151)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.onTransact(Binder.java:953)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4729)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6668)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransactInternal(Binder.java:1426)
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): 	at android.os.Binder.execTransact(Binder.java:1365)
 --------- beginning of system
-09-06 22:07:45.616 E/SystemServiceRegistry(  695): Manager wrapper not available: persistent_data_block
-09-06 22:07:45.923 E/InputDispatcher(  695): channel '19877dc com.checkmate.app.debug/com.checkmate.app.ui.MainActivity' ~ Channel is unrecoverably broken and will be disposed!
-09-06 22:07:46.112 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
-09-06 22:07:46.144 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
-09-06 22:07:46.274 E/AtomicFile(  695): Failed to rename /data/system/install_sessions.xml.new to /data/system/install_sessions.xml
-09-06 22:07:46.275 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
-09-06 22:07:46.368 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
-09-06 22:07:46.386 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk': I/O error
-09-06 22:07:46.409 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk': I/O error
-09-06 22:07:46.411 E/ResourcesManager( 1494): failed to add asset path '/data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk'
-09-06 22:07:46.411 E/ResourcesManager( 1494): java.io.IOException: Failed to load asset path /data/app/~~bxqqJA7ycNj78Bf7n3HSTg==/com.checkmate.app.debug-acJc4RC1QO_8E_uWDjh-hw==/base.apk
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.nativeLoad(Native Method)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.<init>(ApkAssets.java:322)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.loadFromPath(ApkAssets.java:171)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.loadApkAssets(ResourcesManager.java:618)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager$ApkAssetsSupplier.load(ResourcesManager.java:287)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createAssetManager(ResourcesManager.java:714)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResourcesImpl(ResourcesManager.java:801)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.findOrCreateResourcesImplForKeyLocked(ResourcesManager.java:854)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResources(ResourcesManager.java:1199)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.getResources(ResourcesManager.java:1301)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ActivityThread.getTopLevelResources(ActivityThread.java:2979)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2154)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2140)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getText(ApplicationPackageManager.java:2481)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.ComponentInfo.loadUnsafeLabel(ComponentInfo.java:140)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadSafeLabel(PackageItemInfo.java:273)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadLabel(PackageItemInfo.java:221)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at android.content.pm.ResolveInfo.loadLabel(ResolveInfo.java:258)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.createSafetySourceIssue(AccessibilitySourceService.kt:281)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:437)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:457)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter$default(AccessibilitySourceService.kt:449)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.SafetyCenterAccessibilityListener$onAccessibilityServicesStateChanged$1.invokeSuspend(AccessibilitySourceService.kt:966)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:829)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
-09-06 22:07:46.411 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
-09-06 22:07:46.416 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.WALLET
-09-06 22:07:46.418 E/SmsApplication( 1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing)
-09-06 22:07:47.111 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
-09-06 22:07:48.303 E/IPCThreadState(  695): Binder transaction failure. id: 1313856, BR_*: 29189, error: -22 (Invalid argument)
-09-06 22:07:48.366 E/SurfaceSyncGroup( 9013): Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[Main]#8) as ready
-09-06 22:07:48.367 E/SurfaceSyncGroup( 9013): Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[Main]#9) as ready
-09-06 22:07:48.369 E/SurfaceSyncGroup( 9013): Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(SurfaceView[com.android.chrome/com.google.android.apps.chrome.Main]#7) as ready
-09-06 22:07:48.370 E/BpTransactionCompletedListener(  553): Failed to transact (-32)
-09-06 22:07:49.017 E/ashmem  (10935): Pinning is deprecated since Android Q. Please use trim or other methods.
-09-06 22:07:49.989 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
-09-06 22:07:50.281 E/cr_CompositorSurfaceMgr( 9013): surfaceDestroyed format : -3
-09-06 22:07:53.559 W/System.err(10935): SLF4J: No SLF4J providers were found.
-09-06 22:07:53.559 W/System.err(10935): SLF4J: Defaulting to no-operation (NOP) logger implementation
-09-06 22:07:53.559 W/System.err(10935): SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
-09-06 22:07:53.901 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:53.901 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:53.902 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:53.913 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:53.913 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:53.915 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:53.967 E/OggOpusEncoder( 4126): Native OggOpusEncoder resources weren't cleaned up. You must call stop()!
-09-06 22:07:53.986 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:54.340 to 09-06 22:07:54.577 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
-09-06 22:07:56.004 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:56.120 to 09-06 22:07:56.577 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
-09-06 22:07:56.617 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:56.617 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:56.618 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:56.624 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:56.625 to 09-06 22:07:56.626 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:56.627 E/VoiceSearchConfigUtils(4126): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
-09-06 22:07:56.637 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:56.658 to 09-06 22:07:57.151 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
-09-06 22:07:57.822 E/ApiService(10935): Error deleting session
-09-06 22:07:57.822 E/ApiService(10935): kotlinx.coroutines.JobCancellationException: Job was cancelled; job=SupervisorJobImpl{Cancelling}@8206fa6
-09-06 22:07:57.823 E/SessionManager(10935): Failed to stop session on backend
-09-06 22:07:57.981 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
-09-06 22:07:58.095 to 09-06 22:07:58.614 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
-09-06 22:08:00.193 E/TransitionChain(  695): Can't collect into a chain with no transition
+09-07 14:44:28.240 E/SystemServiceRegistry(  695): Manager wrapper not available: persistent_data_block
+09-07 14:44:28.731 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
+09-07 14:44:28.736 to 09-07 14:44:28.888 E/SmsApplication(1046): com.google.android.apps.messaging lost android:read_cell_broadcasts:  (fixing) [REPEATED 3 times]
+09-07 14:44:28.906 E/AtomicFile(  695): Failed to rename /data/system/install_sessions.xml.new to /data/system/install_sessions.xml
+09-07 14:44:29.064 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk': I/O error
+09-07 14:44:29.071 E/ssioncontroller( 1494): Failed to open APK '/data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk': I/O error
+09-07 14:44:29.072 E/ResourcesManager( 1494): failed to add asset path '/data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk'
+09-07 14:44:29.072 E/ResourcesManager( 1494): java.io.IOException: Failed to load asset path /data/app/~~6UgLXZ1P2l5SRxAnGNb0TQ==/com.checkmate.app.debug-1BCVSjcWD_GVsQkuUU4KQA==/base.apk
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.nativeLoad(Native Method)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.<init>(ApkAssets.java:322)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.res.ApkAssets.loadFromPath(ApkAssets.java:171)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.loadApkAssets(ResourcesManager.java:618)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager$ApkAssetsSupplier.load(ResourcesManager.java:287)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createAssetManager(ResourcesManager.java:714)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResourcesImpl(ResourcesManager.java:801)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.findOrCreateResourcesImplForKeyLocked(ResourcesManager.java:854)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.createResources(ResourcesManager.java:1199)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ResourcesManager.getResources(ResourcesManager.java:1301)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ActivityThread.getTopLevelResources(ActivityThread.java:2979)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2154)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getResourcesForApplication(ApplicationPackageManager.java:2140)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.app.ApplicationPackageManager.getText(ApplicationPackageManager.java:2481)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.ComponentInfo.loadUnsafeLabel(ComponentInfo.java:140)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadSafeLabel(PackageItemInfo.java:273)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.PackageItemInfo.loadLabel(PackageItemInfo.java:221)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at android.content.pm.ResolveInfo.loadLabel(ResolveInfo.java:258)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.createSafetySourceIssue(AccessibilitySourceService.kt:281)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:437)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter(AccessibilitySourceService.kt:457)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.AccessibilitySourceService.sendIssuesToSafetyCenter$default(AccessibilitySourceService.kt:449)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at com.android.permissioncontroller.privacysources.SafetyCenterAccessibilityListener$onAccessibilityServicesStateChanged$1.invokeSuspend(AccessibilitySourceService.kt:966)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:829)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+09-07 14:44:29.072 E/ResourcesManager( 1494): 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+09-07 14:44:29.085 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION
+09-07 14:44:29.189 E/RoleControllerServiceImpl(  695): Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.WALLET
+09-07 14:44:29.298 E/Finsky  (21875): [113] [Counters] attempted to use a non-positive increment for: 4752
+09-07 14:44:29.302 E/Finsky  (21875): [108] [Counters] attempted to use a non-positive increment for: 4753
+09-07 14:44:29.303 E/Finsky  (21875): [118] [Counters] attempted to use a non-positive increment for: 4752
+09-07 14:44:29.309 E/Finsky  (21875): [108] [Counters] attempted to use a non-positive increment for: 4753
+09-07 14:44:29.469 E/Finsky  (21875): [121] [Counters] attempted to use a non-positive increment for: 4752
+09-07 14:44:29.488 E/Finsky(21875): [113] [Counters] attempted to use a non-positive increment for: 4752 [REPEATED 3 times]
+09-07 14:44:29.740 E/AppOps  (  695): attributionTag VCN not declared in manifest of android
+09-07 14:44:30.222 E/lowmemorykiller(  237): process_mrelease 20351 failed: No such process
+09-07 14:44:31.678 E/ashmem  (24025): Pinning is deprecated since Android Q. Please use trim or other methods.
+09-07 14:44:32.706 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
+09-07 14:44:36.069 E/OneSignal(21876): Operation execution failed, retrying: [{"name":"track-session-end","appId":"f578e15d-90a7-4733-97d1-c49addfce797","onesignalId":"b8883afc-c7b5-468c-9961-3c3b4f797aea","sessionTime":29,"id":"7bb7384b-7b30-4ea4-ad93-76e5ac9df555"}]
+09-07 14:44:36.069 E/OneSignal(21876): Operations being delay for: 15000 ms
+09-07 14:44:41.228 W/System.err(24025): SLF4J: No SLF4J providers were found.
+09-07 14:44:41.228 W/System.err(24025): SLF4J: Defaulting to no-operation (NOP) logger implementation
+09-07 14:44:41.228 W/System.err(24025): SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+09-07 14:44:41.655 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:41.655 to 09-07 14:44:41.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:41.661 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:41.684 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:41.690 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:41.691 to 09-07 14:44:41.694 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:41.742 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:42.113 to 09-07 14:44:42.510 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
+09-07 14:44:43.776 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:43.918 to 09-07 14:44:44.393 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
+09-07 14:44:44.511 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:44.524 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:44.526 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:44.527 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:44.533 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:44.535 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:44.538 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:44.871 to 09-07 14:44:45.073 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
+09-07 14:44:45.187 E/PagedView( 1057): validateNewPage: failed to find a page > mMinScrollX
+09-07 14:44:45.187 E/PagedView( 1057): validateNewPage: failed to find a page > mMinScrollX
+09-07 14:44:46.106 to 09-07 14:44:46.950 E/android.hardware.audio@7.1-impl.ranchu(488): pcmRead:222 failure: -1 [REPEATED 9 times]
+09-07 14:44:47.001 E/LocationSDK(21876): Activity Started: ui.CreateNoteActivity
+09-07 14:44:47.032 E/LocationSDK(21876): LocationSDK >>> START_HANDLER
+09-07 14:44:47.058 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.170 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.219 E/AppOpenManagerNew(21876): Req
+09-07 14:44:47.275 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.381 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:47.411 E/TransitionChain(  695): Can't collect into a chain with no transition
+09-07 14:44:47.482 to 09-07 14:44:48.013 E/android.hardware.audio@7.1-impl.ranchu(488): pcmRead:222 failure: -1 [REPEATED 6 times]
+09-07 14:44:48.017 E/LocationSDK(21876): LocationSDK >>> START_HANDLER >>> RUN >>> IS_CALL_INSTANT >>> true
+09-07 14:44:48.017 E/LocationSDK(21876): LocationSDK >>> START_HANDLER >>> RUN
+09-07 14:44:48.020 E/LocationSDK(21876): LocationSDK >>> START_HANDLER >>> NO >>> NETWORK >>> LOCATION_PERMISSION >>> NOT_GRANTED
+09-07 14:44:48.118 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.136 E/ImeVisibilityStateComputer(  695): SOFT_INPUT_STATE_VISIBLE is ignored because there is no focused view that also returns true from View#onCheckIsTextEditor()
+09-07 14:44:48.222 to 09-07 14:44:48.536 E/android.hardware.audio@7.1-impl.ranchu(488): pcmRead:222 failure: -1 [REPEATED 4 times]
+09-07 14:44:48.576 E/ABD     (21876): focus: 
+09-07 14:44:48.641 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.746 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.843 E/GmsCoreLogger( 1252): Missing account for FACET_USAGE_GAIA_UNSAMPLED [CONTEXT service_id=299 ]
+09-07 14:44:48.860 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:48.963 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:49.045 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:49.070 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:49.870 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
+09-07 14:44:50.159 to 09-07 14:44:50.165 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:50.165 to 09-07 14:44:50.167 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:50.169 to 09-07 14:44:50.171 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:50.190 to 09-07 14:44:50.198 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:50.202 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:50.203 to 09-07 14:44:50.205 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:50.217 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): InputConnectionWrapper.waitForInputConnectionFutureInternal():1688 Failed to get the input connection call's result.
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): java.util.concurrent.TimeoutException: Waited 500 milliseconds (plus 81 milliseconds, 621805 nanoseconds delay) for qfs@f61ef90[status=PENDING, info=[task=[running=[RUNNING ON ICWrapper-1], kcg@d111089]]]
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at qcq.get(PG:52)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcs.e(PG:10)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcs.t(PG:85)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kdb.a(PG:87)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kde.i(PG:186)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kca.f(PG:5)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kbe.dT(PG:7)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcg.call(PG:17)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at jyj.n(PG:8)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at jyj.dT(PG:11)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at jya.dT(PG:3)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at hld.x(PG:8)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at hld.w(PG:3)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at hld.n(PG:5)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at git.k(PG:3)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at git.d(PG:65)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.google.android.apps.inputmethod.libs.latin5.LatinIme.n(PG:42)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.google.android.libraries.inputmethod.ime.ImeWrapperImpl.n(PG:8)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at okr.a(PG:129)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kde.l(PG:357)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kcs.a(PG:265)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at kgn.onUpdateSelection(PG:23)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.InputMethodService$InputMethodSessionImpl.updateSelection(InputMethodService.java:1480)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.IInputMethodSessionWrapper.executeMessage(IInputMethodSessionWrapper.java:115)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.os.Looper.loopOnce(Looper.java:248)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.os.Looper.loop(Looper.java:338)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at java.lang.reflect.Method.invoke(Native Method)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+09-07 14:44:50.562 E/InputConnectionWrapper(11860): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+09-07 14:44:50.586 to 09-07 14:44:50.816 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): InputConnectionWrapper.waitForInputConnectionFutureInternal():1688 Failed to get the input connection call's result.
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): java.util.concurrent.TimeoutException: Waited 500 milliseconds (plus 1 milliseconds, 13485 nanoseconds delay) for qfs@5fa8b66[status=PENDING, info=[task=[running=[RUNNING ON ICWrapper-1], kcg@90a9ea7]]]
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at qcq.get(PG:52)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kcs.e(PG:10)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kcs.t(PG:85)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kdb.a(PG:87)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kde.j(PG:9)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kde.l(PG:77)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kcs.a(PG:265)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at kgn.onUpdateSelection(PG:23)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.InputMethodService$InputMethodSessionImpl.updateSelection(InputMethodService.java:1480)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.inputmethodservice.IInputMethodSessionWrapper.executeMessage(IInputMethodSessionWrapper.java:115)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.os.Handler.dispatchMessage(Handler.java:110)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.os.Looper.loopOnce(Looper.java:248)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.os.Looper.loop(Looper.java:338)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at java.lang.reflect.Method.invoke(Native Method)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+09-07 14:44:52.129 E/InputConnectionWrapper(11860): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+09-07 14:44:52.203 E/ABD     (21876): Unfocus: 
+09-07 14:44:52.572 E/InputContextChangeTracker(11860): InputContextChangeTracker.getSubSurroundText():1436 Invalid sub surrounding text: contentLength=0, subStringInContent=[0, 0], selectionInContent=[0, 3]
+09-07 14:44:52.806 E/GmsCoreLogger( 1252): Missing account for FACET_USAGE_GAIA_UNSAMPLED [CONTEXT service_id=299 ]
+09-07 14:44:53.090 to 09-07 14:44:54.976 E/android.hardware.audio@7.1-impl.ranchu(488): pcmRead:222 failure: -1 [REPEATED 19 times]
+09-07 14:44:55.001 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:55.079 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:55.163 to 09-07 14:44:55.576 E/AppOps(695): attributionTag  not declared in manifest of com.google.android.tts [REPEATED 4 times]
+09-07 14:44:55.602 to 09-07 14:44:55.603 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:55.604 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:55.604 to 09-07 14:44:55.605 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:55.655 to 09-07 14:44:55.656 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:55.661 to 09-07 14:44:55.662 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:55.663 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:55.679 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:56.046 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.050 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.148 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.258 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.258 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.357 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.359 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:56.364 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.366 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.466 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.474 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.572 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.578 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.674 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.682 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.778 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.791 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:56.883 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:56.898 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.003 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.015 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.107 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.107 E/TransitionChain(  695): Can't collect into a chain with no transition
+09-07 14:44:57.122 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.210 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.227 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.281 E/ImeBackDispatcher(24025): Ime callback not found. Ignoring unregisterReceivedCallback. callbackId: 21511613
+09-07 14:44:57.315 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.336 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.418 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.442 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.523 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.550 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.626 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.654 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.730 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.757 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.839 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.862 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:57.942 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:57.966 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.036 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:58.069 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:44:58.146 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.173 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.174 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.251 to 09-07 14:44:58.561 E/android.hardware.audio@7.1-impl.ranchu(488): pcmWrite:260 failure: -1 [REPEATED 4 times]
+09-07 14:44:58.606 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.607 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.667 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.680 to 09-07 14:44:58.681 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:58.698 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:58.701 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:58.746 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:58.746 to 09-07 14:44:58.747 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:44:58.767 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:44:58.777 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:58.783 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:58.785 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:59.103 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.205 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.309 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:59.310 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:44:59.310 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:44:59.411 E/TaskPersister(  695): File error accessing recents directory (directory doesn't exist?).
+09-07 14:44:59.415 to 09-07 14:45:00.150 E/android.hardware.audio@7.1-impl.ranchu(488): pcmWrite:260 failure: -1 [REPEATED 8 times]
+09-07 14:45:00.226 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.253 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.329 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.357 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.433 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.461 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.537 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.566 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.643 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.670 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.746 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.775 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.783 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:45:00.849 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmRead:222 failure: -1
+09-07 14:45:00.906 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:00.930 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:00.934 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.010 to 09-07 14:45:01.325 E/android.hardware.audio@7.1-impl.ranchu(488): pcmWrite:260 failure: -1 [REPEATED 4 times]
+09-07 14:45:01.363 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.364 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.435 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.538 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.549 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:45:01.550 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:45:01.550 to 09-07 14:45:01.551 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:45:01.551 to 09-07 14:45:01.554 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:45:01.573 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3053]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:45:01.576 to 09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3054]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:45:01.579 E/VoiceSearchConfigUtils(22841): Unrecognized recognizer for [ja-JP, 3056]: 23. Ignoring it and its associated features. [REPEATED 8 times]
+09-07 14:45:01.913 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:01.982 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:01.984 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:02.018 to 09-07 14:45:02.226 E/android.hardware.audio@7.1-impl.ranchu(488): pcmWrite:260 failure: -1 [REPEATED 3 times]
+09-07 14:45:02.239 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:02.240 E/AppOps  (  695): attributionTag  not declared in manifest of com.google.android.tts
+09-07 14:45:02.330 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.434 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.496 E/ApiService(24025): Error deleting session
+09-07 14:45:02.496 E/ApiService(24025): kotlinx.coroutines.JobCancellationException: Job was cancelled; job=SupervisorJobImpl{Cancelling}@c510116
+09-07 14:45:02.497 E/SessionManager(24025): Failed to stop session on backend
+09-07 14:45:02.542 E/android.hardware.audio@7.1-impl.ranchu(  488): pcmWrite:260 failure: -1
+09-07 14:45:02.627 E/android.hardware.audio@7.1-impl.ranchu(  488): updateSinkMetadata:387 failure: Result::NOT_SUPPORTED
+09-07 14:45:02.687 to 09-07 14:45:05.298 E/android.hardware.audio@7.1-impl.ranchu(488): pcmWrite:260 failure: -1 [REPEATED 26 times]
